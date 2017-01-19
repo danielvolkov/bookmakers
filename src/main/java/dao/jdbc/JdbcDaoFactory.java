@@ -9,47 +9,80 @@ import dao.interfaces.HorseDao;
 import dao.interfaces.RideDao;
 import dao.interfaces.UserDao;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.ConnectionPoolDataSource;
+import javax.sql.DataSource;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 /**
  * Created by daniel on 05/01/17.
  */
-public class JdbcDaoFactory extends DaoFactory {
+public class JdbcDaoFactory implements DaoFactory {
 
-    private Connection connection;
 
     private static final String DB_URL = "url";
+    private static final String JDBC_SOURCE= "java:comp/env/jdbc/bookmakers";
 
-    private JdbcDaoFactory(){
+    private JdbcDaoFactory(){ }
 
+    private static class LazyHolder {
+        private static DaoFactory INSTANCE;
+        static {
+            try {
+                InputStream inputStream = DaoFactory.class.getResourceAsStream(DB_FILE);
+                Properties dbProps = new Properties();
+                dbProps.load(inputStream);
+                String factoryClass = dbProps.getProperty(DB_FACTORY_CLASS);
+                INSTANCE = (DaoFactory) Class.forName(factoryClass).newInstance();
+            } catch (Exception e){
+                e.printStackTrace();
+                throw new RuntimeException();
+            }
+        }
+
+    }
+
+    public static DaoFactory getInstance() {
+        return LazyHolder.INSTANCE;
     }
 
     @Override
-    public BetDao createBetDao() {
-        return new JdbcBetDao(connection);
+    public BetDao createBetDao(DaoConnection daoConnection) {
+        return new JdbcBetDao( daoConnection.getConnection() );
     }
 
     @Override
-    public HorseDao createHorseDao() {
-        return new JdbcHorseDao(connection);
+    public HorseDao createHorseDao(DaoConnection daoConnection) {
+        return new JdbcHorseDao( daoConnection.getConnection() );
     }
 
     @Override
-    public RideDao createRideDao() {
-        return new JdbcRideDao(connection);
+    public RideDao createRideDao(DaoConnection daoConnection) {
+        return new JdbcRideDao( daoConnection.getConnection() );
     }
 
     @Override
-    public UserDao createUserDao() {
-        return new JdbcUserDao(connection);
+    public UserDao createUserDao(DaoConnection daoConnection) {
+        return new JdbcUserDao( daoConnection.getConnection() );
     }
+
 
     @Override
     public DaoConnection getDaoConnection() {
-        //реализовать здесь коннекшн пул
-        return null;
+        try{
+            InitialContext context = new InitialContext();
+            DataSource dataSource = (DataSource) context.lookup(JDBC_SOURCE);
+            return  new JdbcDaoConnection(dataSource.getConnection());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+
     }
 }

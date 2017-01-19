@@ -4,6 +4,8 @@ import dao.interfaces.UserDao;
 import model.entity.User;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -11,9 +13,11 @@ import java.util.List;
  */
 public class JdbcUserDao implements UserDao {
 
-    private static final String SELECT_FROM_CITY = "SELECT * FROM city";
+    private static final String SELECT_FROM_CITY = "SELECT * FROM users";
     private static final String USER_ID = "user_id";
     private static final String NAME = "name";
+    public static final String CREATE= "INSERT INTO users (name, password, email, role_id) " +
+            "VALUES(?, ?, ?, ?, ?)";
     private Connection connection;
 
     public JdbcUserDao(Connection connection) {
@@ -32,6 +36,20 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public void create(User user) {
+        try{
+            PreparedStatement statement =
+                    connection.prepareStatement(CREATE);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getEmail());
+            statement.setInt(4, user.getRole());
+            statement.executeUpdate();
+            statement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

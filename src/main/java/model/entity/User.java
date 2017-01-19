@@ -11,10 +11,10 @@ public class User {
     private String password;
     private String name;
     private double balance;
-    private String role;
+    private Integer role;
     private Set<Bet> betHistory;
 
-    public User(String email, String password, String name, String role, double balance) {
+    public User(String email, String password, String name, int role, double balance) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -54,13 +54,6 @@ public class User {
         this.balance = balance;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public Set<Bet> getBetHistory() {
         return betHistory;
@@ -68,5 +61,13 @@ public class User {
 
     public void setBetHistory(Set<Bet> betHistory) {
         this.betHistory = betHistory;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }
