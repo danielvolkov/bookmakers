@@ -3,7 +3,7 @@ package util;
 /**
  * Created by daniel on 1/19/17.
  */
-public class ViewHolder {
+public class Pages {
    public static final String PREFFIX =  "WEB-INF/view";
 
     public static final String SIGNUP =  PREFFIX + "/signup.jsp";

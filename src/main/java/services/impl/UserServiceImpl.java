@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService{
             }
 
         } catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 

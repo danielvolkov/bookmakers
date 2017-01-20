@@ -17,6 +17,7 @@
     <%@include file="/bootstrap.css" %>
 </style>
 <body>
+<jsp:include page="/WEB-INF/view/navbar.jsp"/>
 <div class="container ">
     <div class="row">
 
@@ -28,26 +29,26 @@
                 Fill the registration form
                 </h2>
             </div>
-            <form class="center-block" method="post" action="./signup">
+            <form class="center-block" method="post" action="/signup">
                 <div class="form-group">
-                    <label for="name">Enter your name:</label>
-                    <input type="text" class="form-control" id="name">
+                    <label>Enter your name:</label>
+                    <input type="text" class="form-control" name="name">
                 </div>
                 <div class="form-group">
-                    <label for="email">Enter your email address:</label>
-                    <input type="email" class="form-control" id="email">
+                    <label >Enter your email address:</label>
+                    <input type="email" class="form-control" name="email">
                 </div>
                 <div class="form-group">
-                    <label for="pwd">Enter your password:</label>
-                    <input type="password" class="form-control" id="pwd">
+                    <label >Enter your password:</label>
+                    <input type="password" class="form-control" name="password">
                 </div>
                 <div class="form-group">
-                    <label for="pwd">Confirm the password:</label>
-                    <input type="password" class="form-control" id="confirm_pwd">
+                    <label >Confirm the password:</label>
+                    <input type="password" class="form-control" name="confirm_password">
                 </div>
                 <div class="form-group">
-                    <label for="role">Choose your role:</label>
-                    <select class="form-control" id="role">
+                    <label>Choose your role:</label>
+                    <select class="form-control" name="role">
                         <option>Client</option>
                         <option>Bookmaker</option>
                     </select>
@@ -56,6 +57,11 @@
                 <button type="submit" class="btn btn-success">Register</button>
             </div>
             </form>
+            <div class="form-group row text-center">
+                <h4>
+                    If you already have an account, please <a href="/login"> Login</a>
+                </h4>
+            </div>
         </div>
     </div>
 </div>

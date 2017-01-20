@@ -1,6 +1,7 @@
 package controller.commands.holder;
 
 import controller.commands.Command;
+import util.UrlHolder;
 
 import java.util.Map;
 
@@ -17,22 +18,22 @@ public class CommandHolder {
         this.getCommands = getCommands;
     }
 
-    public  Command getPostCommand(String url) {
+    private   Command getPostCommand(String url) {
         return  postCommands.get(url);
     }
-    public  Command getGetCommand(String url) {
+    private   Command getGetCommand(String url) {
         return  getCommands.get(url);
     }
 
 
-    public Map<String, Command> getGetCommand() {
-        return getCommands;
-    }
-
-    public void setGetCommands(Map<String, Command> getCommands) {
-        this.getCommands = getCommands;
-    }
-    public void setPostCommands(Map<String, Command> postCommands) {
-        this.postCommands = postCommands;
+    public Command getCommand(String method, String url)  {
+        Command command;
+        if(method.equals(UrlHolder.POST_METHOD)){
+             command = getPostCommand(url);
+        }
+        else {
+             command = getGetCommand(url);
+        }
+        return command;
     }
 }

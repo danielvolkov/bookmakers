@@ -21,10 +21,5 @@ public interface DaoFactory {
      UserDao createUserDao(DaoConnection daoConnection);
      DaoConnection getDaoConnection();
 
-     String DB_FILE = "/db.properties";
-     String DB_FACTORY_CLASS = "daoFactory.class";
-
-
-
 
 }

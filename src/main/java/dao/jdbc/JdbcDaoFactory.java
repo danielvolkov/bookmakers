@@ -27,25 +27,12 @@ public class JdbcDaoFactory implements DaoFactory {
 
 
     private static final String DB_URL = "url";
-    private static final String JDBC_SOURCE= "java:comp/env/jdbc/bookmakers";
+    private static final String JDBC_SOURCE= "java:comp/env/jdbc/bookmaker";
 
     private JdbcDaoFactory(){ }
 
     private static class LazyHolder {
-        private static DaoFactory INSTANCE;
-        static {
-            try {
-                InputStream inputStream = DaoFactory.class.getResourceAsStream(DB_FILE);
-                Properties dbProps = new Properties();
-                dbProps.load(inputStream);
-                String factoryClass = dbProps.getProperty(DB_FACTORY_CLASS);
-                INSTANCE = (DaoFactory) Class.forName(factoryClass).newInstance();
-            } catch (Exception e){
-                e.printStackTrace();
-                throw new RuntimeException();
-            }
-        }
-
+        private static DaoFactory INSTANCE = new JdbcDaoFactory();
     }
 
     public static DaoFactory getInstance() {
@@ -78,11 +65,10 @@ public class JdbcDaoFactory implements DaoFactory {
         try{
             InitialContext context = new InitialContext();
             DataSource dataSource = (DataSource) context.lookup(JDBC_SOURCE);
-            return  new JdbcDaoConnection(dataSource.getConnection());
+            return new JdbcDaoConnection(dataSource.getConnection());
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException();
         }
-
     }
 }

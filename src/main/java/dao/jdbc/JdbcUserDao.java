@@ -2,10 +2,13 @@ package dao.jdbc;
 
 import dao.interfaces.UserDao;
 import model.entity.User;
+import util.Attributes;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -13,11 +16,12 @@ import java.util.List;
  */
 public class JdbcUserDao implements UserDao {
 
-    private static final String SELECT_FROM_CITY = "SELECT * FROM users";
-    private static final String USER_ID = "user_id";
-    private static final String NAME = "name";
-    public static final String CREATE= "INSERT INTO users (name, password, email, role_id) " +
+
+    public static final String CREATE= "INSERT INTO users (name, password, email, role_id,balance) " +
             "VALUES(?, ?, ?, ?, ?)";
+
+    public static final String SELECT_ALL ="SELECT * FROM users JOIN roles ON users.role_id = roles.role_id";
+    public static final String FIND_BY_EMAIL ="SELECT * FROM users JOIN roles ON users.role_id = roles.role_id WHERE email = ?";
     private Connection connection;
 
     public JdbcUserDao(Connection connection) {
@@ -26,12 +30,30 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public User find(int id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<User> findAll() {
-        return null;
+        List<User> userList = new LinkedList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                String email = resultSet.getString(Attributes.EMAIL);
+                String name = resultSet.getString(Attributes.NAME);
+                int role = resultSet.getInt(Attributes.ROLE);
+                double balance = resultSet.getDouble(Attributes.BALANCE);
+                User user = new User(email,name,role,balance);
+                userList.add(user);
+            }
+            statement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
     }
 
     @Override
@@ -42,14 +64,14 @@ public class JdbcUserDao implements UserDao {
             statement.setString(1, user.getName());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
-            statement.setInt(4, user.getRole());
+            statement.setInt(4, user.getRoleInt());
+            statement.setDouble(5,user.getBalance());
             statement.executeUpdate();
             statement.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -60,16 +82,20 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public void delete(int id) {
-
+        throw new UnsupportedOperationException();
     }
 
-    @Override
-    public List<User> findByRole(String role) {
-        return null;
-    }
 
     @Override
-    public User findByName(String name) {
-        return null;
+    public User findByEmail(String email) {
+        User user = null;
+        try{
+            PreparedStatement statement = connection.prepareStatement(FIND_BY_EMAIL);
+            statement.setString(1, email);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

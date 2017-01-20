@@ -1,7 +1,12 @@
 package controller;
 
 import com.sun.net.httpserver.HttpServer;
-import util.ViewHolder;
+import controller.commands.Command;
+import controller.commands.holder.CommandHolder;
+import controller.commands.init.CommandHolderInit;
+import util.Pages;
+import util.UrlHolder;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,21 +21,35 @@ import java.io.PrintWriter;
  * Created by daniel on 14/01/17.
  */
 public class DispatcherServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-       //RequestDispatcher rd=req.getRequestDispatcher(ViewHolder.LOGIN);
-       // rd.forward(req, resp);
-       doRequest(req,resp);
-    }
+    private CommandHolder commandHolder;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doRequest(req, resp);
+    public void init() throws ServletException {
+        super.init();
+        commandHolder = CommandHolderInit.init();
     }
 
-    private void doRequest(HttpServletRequest req, HttpServletResponse resp) {
-
-
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       doRequest(request,response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doRequest(request, response);
+    }
+
+    private void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Command command = commandHolder.getCommand(request.getMethod(),request.getRequestURI());
+        String view = command.execute(request,response);
+        if(view != null) {
+            request.getRequestDispatcher(view).forward(request, response);
+        } else {
+            request.getRequestDispatcher(Pages.SIGNUP).forward(request,response);
+        }
+    }
+
+
 }

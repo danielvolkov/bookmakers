@@ -1,6 +1,7 @@
 package controller.commands.authorization;
 
 import controller.commands.Command;
+import util.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        return Pages.LOGIN;
     }
 }

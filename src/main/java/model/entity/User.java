@@ -1,6 +1,8 @@
 package model.entity;
 
 
+import util.UserUtil;
+
 import java.util.Set;
 
 /**
@@ -11,14 +13,20 @@ public class User {
     private String password;
     private String name;
     private double balance;
-    private Integer role;
+    private String role;
     private Set<Bet> betHistory;
 
-    public User(String email, String password, String name, int role, double balance) {
+    public User(String email, String password, String name, String role) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.role = role;
+        this.balance = 0;
+    }
+    public User(String email, String name, int role, double balance) {
+        this.email = email;
+        this.name = name;
+        this.role = UserUtil.intToStringRole(role);
         this.balance = balance;
     }
 
@@ -54,7 +62,6 @@ public class User {
         this.balance = balance;
     }
 
-
     public Set<Bet> getBetHistory() {
         return betHistory;
     }
@@ -63,11 +70,7 @@ public class User {
         this.betHistory = betHistory;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
+    public int getRoleInt() {
+        return UserUtil.stringToIntRole(role);
     }
 }
