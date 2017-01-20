@@ -7,6 +7,8 @@ import dao.jdbc.JdbcDaoFactory;
 import model.entity.User;
 import services.UserService;
 
+import java.sql.SQLException;
+
 /**
  * Created by daniel on 14/01/17.
  */
@@ -43,7 +45,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void delete(Integer id) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -51,13 +53,28 @@ public class UserServiceImpl implements UserService{
 
     }
 
-    @Override
-    public User findUser(Integer id) {
-        return null;
-    }
 
     @Override
     public User findUser(String email) {
-        return null;
+        User user = null;
+        try (DaoConnection daoConnection = daoFactory.getDaoConnection()) {
+            UserDao userDao = daoFactory.createUserDao(daoConnection);
+            if (userDao != null){
+                daoConnection.begin();
+                user = userDao.findByEmail(email);
+                daoConnection.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
     }
+
+    @Override
+    public boolean authorizateUser(User user) {
+
+        return false;
+    }
+
+
 }

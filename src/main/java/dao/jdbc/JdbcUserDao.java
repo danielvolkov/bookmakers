@@ -40,11 +40,7 @@ public class JdbcUserDao implements UserDao {
             PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
-                String email = resultSet.getString(Attributes.EMAIL);
-                String name = resultSet.getString(Attributes.NAME);
-                int role = resultSet.getInt(Attributes.ROLE);
-                double balance = resultSet.getDouble(Attributes.BALANCE);
-                User user = new User(email,name,role,balance);
+                User user = getUserByResultSet(resultSet);
                 userList.add(user);
             }
             statement.close();
@@ -92,10 +88,20 @@ public class JdbcUserDao implements UserDao {
         try{
             PreparedStatement statement = connection.prepareStatement(FIND_BY_EMAIL);
             statement.setString(1, email);
-
+            ResultSet resultSet = statement.executeQuery();
+            user = getUserByResultSet(resultSet);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
+    }
+
+    private User getUserByResultSet(ResultSet resultSet) throws SQLException{
+        String email = resultSet.getString(Attributes.EMAIL);
+        String name = resultSet.getString(Attributes.NAME);
+        int role = resultSet.getInt(Attributes.ROLE);
+        double balance = resultSet.getDouble(Attributes.BALANCE);
+        return new User(email,name,role,balance);
     }
 }
