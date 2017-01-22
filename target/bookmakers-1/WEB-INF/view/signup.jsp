@@ -30,6 +30,7 @@
                 </h2>
             </div>
             <form class="center-block" method="post" action="/signup">
+                <label class="label-default">${signupError}</label>
                 <div class="form-group">
                     <label>Enter your name:</label>
                     <input type="text" class="form-control" name="name">

@@ -20,7 +20,6 @@ public class JdbcUserDao implements UserDao {
     public static final String CREATE= "INSERT INTO users (name, password, email, role_id,balance) " +
             "VALUES(?, ?, ?, ?, ?)";
 
-    public static final String SELECT_ALL ="SELECT * FROM users JOIN roles ON users.role_id = roles.role_id";
     public static final String FIND_BY_EMAIL ="SELECT * FROM users JOIN roles ON users.role_id = roles.role_id WHERE email = ?";
     private Connection connection;
 
@@ -35,21 +34,8 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public List<User> findAll() {
-        List<User> userList = new LinkedList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
-                User user = getUserByResultSet(resultSet);
-                userList.add(user);
-            }
-            statement.close();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return userList;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -89,7 +75,9 @@ public class JdbcUserDao implements UserDao {
             PreparedStatement statement = connection.prepareStatement(FIND_BY_EMAIL);
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
-            user = getUserByResultSet(resultSet);
+            if(resultSet != null){
+                user = getUserFromResultSet(resultSet);
+            }
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,11 +85,13 @@ public class JdbcUserDao implements UserDao {
         return user;
     }
 
-    private User getUserByResultSet(ResultSet resultSet) throws SQLException{
+    private User getUserFromResultSet(ResultSet resultSet) throws SQLException{
+        resultSet.next();
         String email = resultSet.getString(Attributes.EMAIL);
         String name = resultSet.getString(Attributes.NAME);
-        int role = resultSet.getInt(Attributes.ROLE);
+        String password = resultSet.getString(Attributes.PWD);
+        String role = resultSet.getString(Attributes.ROLE);
         double balance = resultSet.getDouble(Attributes.BALANCE);
-        return new User(email,name,role,balance);
+        return new User(email, password, name, role, balance);
     }
 }

@@ -1,7 +1,7 @@
 package controller.commands.init;
 
 import controller.commands.Command;
-import controller.commands.PageNotFoundCommand;
+import controller.commands.authorization.PageNotFoundCommand;
 import controller.commands.holder.CommandHolder;
 
 import java.util.Map;

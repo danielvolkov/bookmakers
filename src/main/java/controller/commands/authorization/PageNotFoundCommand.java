@@ -1,5 +1,6 @@
-package controller.commands;
+package controller.commands.authorization;
 
+import controller.commands.Command;
 import util.Pages;
 
 import javax.servlet.http.HttpServletRequest;

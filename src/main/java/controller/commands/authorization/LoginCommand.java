@@ -22,13 +22,31 @@ public class LoginCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-            User user = new LoginPicker(request).getEntity();
-
-
+            User loginUser = new LoginPicker(request).getEntity();
             UserService userService = UserServiceImpl.getInstance();
-            response.sendRedirect(UrlHolder.CABINET);
-            return Pages.CABINET;
 
+            User existingUser;
+            try {
+                existingUser = userService.findUser(loginUser.getEmail());
 
+                if (existingUser != null) {
+                    String logPassword = loginUser.getPassword();
+                    String existPassword = existingUser.getPassword();
+
+                    if (logPassword.equals(existPassword)) {
+                        HttpSession session = request.getSession();
+                        existingUser.setPassword(null);
+                        session.setAttribute(Attributes.User, existingUser);
+
+                        return Pages.CABINET;
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        request.getSession().setAttribute(Attributes.LOGIN_ERROR,Attributes.LOGIN_MSG);
+        return Pages.LOGIN;
     }
 }

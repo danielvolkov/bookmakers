@@ -50,27 +50,17 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void update(User user) {
-
+        throw new UnsupportedOperationException();
     }
 
 
     @Override
-    public User findUser(String email) {
-        User user = null;
+    public User findUser(String email) throws Exception {
         try (DaoConnection daoConnection = daoFactory.getDaoConnection()) {
             UserDao userDao = daoFactory.createUserDao(daoConnection);
-            if (userDao != null){
-                daoConnection.begin();
-                user = userDao.findByEmail(email);
-                daoConnection.commit();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return  userDao.findByEmail(email);
         }
-        return user;
+
     }
-
-
-
 
 }

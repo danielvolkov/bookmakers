@@ -20,7 +20,7 @@ public class GeneralCommands implements InitCommands {
     public Map<String, Command> initGetCommands() {
         Map<String, Command> getCommands = new HashMap<>();
 
-        getCommands.put(UrlHolder.INDEX, new OpenLoginCommand());
+        getCommands.put(UrlHolder.INDEX, new IndexCommand());
         getCommands.put(UrlHolder.LOGIN, new OpenLoginCommand());
         getCommands.put(UrlHolder.LOGOUT, new LogOutCommand());
         getCommands.put(UrlHolder.SIGNUP, new OpenSignupCommand());

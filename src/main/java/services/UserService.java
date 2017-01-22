@@ -2,6 +2,7 @@ package services;
 
 import model.entity.User;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -11,5 +12,5 @@ public interface UserService {
     void create(User user);
     void delete(Integer id);
     void update(User user);
-    User findUser(String email);
+    User findUser(String email) throws Exception;
 }

@@ -10,7 +10,12 @@
 <head>
     <title>Cabinet</title>
 </head>
+<style>
+    <%@include file="/bootstrap.css" %>
+</style>
 <body>
+<jsp:include page="/WEB-INF/view/navbar.jsp"/>
+<h1>Cabinet</h1>
 
 </body>
 </html>

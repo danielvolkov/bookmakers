@@ -8,9 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Rides</title>
 </head>
+<style>
+    <%@include file="/bootstrap.css" %>
+</style>
 <body>
+<jsp:include page="/WEB-INF/view/navbar.jsp"/>
+<h1>Rides</h1>
 
 </body>
 </html>

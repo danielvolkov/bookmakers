@@ -14,4 +14,7 @@ public class Pages {
     public static final String HISTORY = PREFFIX + "/history.jsp";
 
     public static final String PAGE_NOT_FOUND = PREFFIX + "/pageNotFound.jsp";
+
+ public static final String REDIRECTED = "/";
+
 }

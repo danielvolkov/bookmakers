@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LoginPicker implements Picker {
 
-    User user;
+    private User user;
     public LoginPicker(HttpServletRequest request) {
         String email = request.getParameter(Attributes.EMAIL);
         String password = request.getParameter(Attributes.PWD);
+
         user = new User();
         user.setEmail(email);
         user.setPassword(Encryptor.encrypt(password));

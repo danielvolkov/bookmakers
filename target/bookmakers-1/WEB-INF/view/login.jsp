@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -29,13 +30,15 @@
 
                 <form class="center-block" method="post" action="/login">
 
+                    <label class="label-warning"> ${loginError}</label>
+
                     <div class="form-group">
-                        <label for="email">Enter your email address:</label>
-                        <input type="email" class="form-control" id="email">
+                        <label>Enter your email address:</label>
+                        <input type="email" class="form-control" name="email">
                     </div>
                     <div class="form-group">
-                        <label for="pwd">Enter your password:</label>
-                        <input type="password" class="form-control" id="pwd">
+                        <label>Enter your password:</label>
+                        <input type="password" class="form-control" name="password">
                     </div>
 
                     <div class="text-center">

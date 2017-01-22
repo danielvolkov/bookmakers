@@ -16,7 +16,16 @@ public class User implements Entity {
     private String role;
     private Set<Bet> betHistory;
 
+
     public User() {
+    }
+
+    public User(String email, String password, String name, String role, double balance) {
+        this.email = email;
+        this.name = name;
+        this.role = role;
+        this.balance = balance;
+        this.password = password;
     }
 
     public User(String email, String password, String name, String role) {
@@ -25,12 +34,6 @@ public class User implements Entity {
         this.name = name;
         this.role = role;
         this.balance = 0;
-    }
-    public User(String email, String name, int role, double balance) {
-        this.email = email;
-        this.name = name;
-        this.role = UserUtil.intToStringRole(role);
-        this.balance = balance;
     }
 
     public String getEmail() {
@@ -75,5 +78,9 @@ public class User implements Entity {
 
     public int getRoleInt() {
         return UserUtil.stringToIntRole(role);
+    }
+
+    public String getRole() {
+        return role;
     }
 }
