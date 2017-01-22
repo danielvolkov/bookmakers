@@ -271,7 +271,7 @@ lose_id</ColNames>
     </column>
     <column id="64" parent="13" name="balance">
       <Position>6</Position>
-      <DataType>int(11)|0</DataType>
+      <DataType>float|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="65" parent="13" name="email_UNIQUE">

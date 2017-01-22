@@ -25,9 +25,9 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="form-group">
-                <h2>
+                <h1>
                 Fill the registration form
-                </h2>
+                </h1>
             </div>
             <form class="center-block" method="post" action="/signup">
                 <label class="label-default">${signupError}</label>

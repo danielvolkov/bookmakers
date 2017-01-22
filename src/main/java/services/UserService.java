@@ -11,6 +11,6 @@ import java.sql.SQLException;
 public interface UserService {
     void create(User user);
     void delete(Integer id);
-    void update(User user);
+    void updateBalance(User user,double summ) throws Exception;
     User findUser(String email) throws Exception;
 }

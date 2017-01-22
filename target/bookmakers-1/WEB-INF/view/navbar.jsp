@@ -9,7 +9,6 @@
     <nav class="navbar  navbar-static-top navbar-inverse bg-inverse">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <strong>
-
             <ul class="nav navbar-nav navbar-left ">
                 <li><a href="/">Bookmaker`s</a></li>
 

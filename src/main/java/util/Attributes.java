@@ -18,7 +18,14 @@ public class Attributes {
 
     public static final String LOGIN_ERROR = "loginError";
     public static final String SIGNUP_ERROR = "signupError";
+    public static final String CABINET_ERROR=  "errorCabinet";
 
     public static final String LOGIN_MSG = "Email or password is not correct!";
     public static final String SIGNUP_MSG = "This Email is already exist!";
+    public static final String CABINET_MSG=  "error! try again";
+
+
+    public static final String DEPOSITE = "deposite";
+    public static final String WITHDRAW = "withdraw";
+
 }

@@ -1,3 +1,5 @@
+<%@ page import="util.Attributes" %>
+<%@ page import="model.entity.User" %>
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -15,7 +17,36 @@
 </style>
 <body>
 <jsp:include page="/WEB-INF/view/navbar.jsp"/>
-<h1>Cabinet</h1>
+
+<% User user = (User) request.getSession().getAttribute(Attributes.User);%>
+<div class="col-md-4 col-md-offset-4 ">
+    <div class="jumbotron ">
+        <h1>Cabiet</h1>
+        <h3>Hello, <%=user.getName()%></h3>
+        <p class="lead">
+            Your role is <strong><%=user.getRole()%></strong><br>
+            Your email is <strong><%=user.getEmail()%></strong><br>
+            Your current balance is <strong><%=user.getBalance()%> USD </strong><br>
+        </p>
+
+        <form class="form-inline" method="post" action="/deposite">
+            <div class="form-group">
+                <label >Enter deposite summ</label>
+                <input type="text" class="form-control" name="deposite">
+            </div>
+            <button type="submit" class="btn btn-success">Submit deposite summ</button>
+        </form>
+
+        <form class="form-inline" method="post" action="/withdraw">
+            <div class="form-group">
+                <label >Enter withdraw summ</label>
+                <input type="text" class="form-control" name="withdraw">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit withdraw summ</button>
+        </form>
+
+    </div>
+</div>
 
 </body>
 </html>

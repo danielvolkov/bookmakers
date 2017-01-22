@@ -83,4 +83,9 @@ public class User implements Entity {
     public String getRole() {
         return role;
     }
+
+    public void deposite(double money){
+        balance +=money;
+    }
+
 }

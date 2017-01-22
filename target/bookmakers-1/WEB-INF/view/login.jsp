@@ -20,9 +20,9 @@
 <div class="container default-c">
     <div class="col-md-4 col-md-offset-4 panel-default">
        <div class="text-center" style="margin:10%">
-            <h2>
+            <h1>
                 Login page
-            </h2>
+            </h1>
        </div>
         <div class="panel panel-primary">
 

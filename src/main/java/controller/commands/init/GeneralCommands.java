@@ -4,9 +4,7 @@ import controller.commands.Command;
 import controller.commands.authorization.*;
 
 
-import controller.commands.user.OpenCabinetCommand;
-import controller.commands.user.OpenHistoryCommand;
-import controller.commands.user.OpenRidesCommand;
+import controller.commands.user.*;
 import util.UrlHolder;
 
 import java.util.HashMap;
@@ -38,6 +36,8 @@ public class GeneralCommands implements InitCommands {
 
         postCommands.put(UrlHolder.SIGNUP, new SignUpCommand());
         postCommands.put(UrlHolder.LOGIN, new LoginCommand());
+        postCommands.put(UrlHolder.DEPOSITE, new DepositeCommand());
+        postCommands.put(UrlHolder.WITHDRAW, new WithdrawCommand());
 
         return postCommands;
     }
