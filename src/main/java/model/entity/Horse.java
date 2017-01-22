@@ -3,7 +3,7 @@ package model.entity;
 /**
  * Created by daniel on 26/12/16.
  */
-public class Horse {
+public class Horse  implements Entity{
     private int number;
     private String name;
     private String color;

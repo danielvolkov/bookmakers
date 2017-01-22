@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by daniel on 26/12/16.
  */
-public class Ride {
+public class Ride implements Entity {
     private ArrayList<Horse> horses;
     private Horse winner;
     private Horse looser;

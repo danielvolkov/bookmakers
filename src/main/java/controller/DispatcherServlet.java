@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpServer;
 import controller.commands.Command;
 import controller.commands.holder.CommandHolder;
 import controller.commands.init.CommandHolderInit;
+import exceptions.CommandNotFoundException;
 import util.Pages;
 import util.UrlHolder;
 
@@ -41,15 +42,16 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        Command command = commandHolder.getCommand(request.getMethod(),request.getRequestURI());
-        String view = command.execute(request,response);
-        if(view != null) {
-            request.getRequestDispatcher(view).forward(request, response);
-        } else {
-            request.getRequestDispatcher(Pages.SIGNUP).forward(request,response);
+        String view;
+        Command command;
+        try {
+            command = commandHolder.getCommand(request.getMethod(), request.getRequestURI());
+        } catch (CommandNotFoundException e) {
+            command = commandHolder.getPageNotFoundCommand();
         }
-    }
+            view = command.execute(request, response);
+            request.getRequestDispatcher(view).forward(request, response);
 
+    }
 
 }

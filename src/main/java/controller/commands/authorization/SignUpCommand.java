@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SignUpCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        if(request.getMethod().equals(UrlHolder.POST_METHOD)){
+
         String name = request.getParameter(Attributes.NAME);
         String password =request.getParameter(Attributes.PWD);
         String email = request.getParameter(Attributes.EMAIL);
@@ -29,8 +29,6 @@ public class SignUpCommand implements Command {
         userService.create(user);
 
         return Pages.LOGIN;
-        }else{
-            return Pages.SIGNUP;
-        }
+
     }
 }

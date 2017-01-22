@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by daniel on 26/12/16.
  */
-public class Bet {
+public class Bet implements Entity {
     private double betSum;
     private double coefficient;
     private boolean isPassed;

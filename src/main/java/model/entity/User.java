@@ -8,13 +8,16 @@ import java.util.Set;
 /**
  * Created by daniel on 26/12/16.
  */
-public class User {
+public class User implements Entity {
     private String email;
     private String password;
     private String name;
     private double balance;
     private String role;
     private Set<Bet> betHistory;
+
+    public User() {
+    }
 
     public User(String email, String password, String name, String role) {
         this.email = email;

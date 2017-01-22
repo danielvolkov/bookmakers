@@ -12,5 +12,4 @@ public interface UserService {
     void delete(Integer id);
     void update(User user);
     User findUser(String email);
-    boolean authorizateUser(User user);
 }

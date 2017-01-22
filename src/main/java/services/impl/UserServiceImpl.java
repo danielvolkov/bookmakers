@@ -70,11 +70,7 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
-    @Override
-    public boolean authorizateUser(User user) {
 
-        return false;
-    }
 
 
 }
