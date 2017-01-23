@@ -1,14 +1,14 @@
 package controller.commands.authorization;
 
 import controller.commands.Command;
-import controller.pickers.LoginPicker;
 
+
+import controller.parser.LoginParser;
 import model.entity.User;
 import services.UserService;
 import services.impl.UserServiceImpl;
 import util.Attributes;
 import util.Pages;
-import util.UrlHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ public class LoginCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-            User loginUser = new LoginPicker(request).getEntity();
+            User loginUser = new LoginParser(request).getEntity();
             UserService userService = UserServiceImpl.getInstance();
 
             User existingUser;

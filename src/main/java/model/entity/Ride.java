@@ -2,39 +2,63 @@ package model.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by daniel on 26/12/16.
  */
 public class Ride implements Entity {
-    private ArrayList<Horse> horses;
-    private Horse winner;
-    private Horse looser;
+    private Integer rideId;
+    private List<Horse> horses;
+    private Integer winner;
+    private Integer looser;
     private Date startDataTime;
     private boolean finished;
+    private String bookmakerEmail;
+    private Integer bookmakerId;
 
-    public ArrayList<Horse> getHorses() {
+    public Ride(Integer bookmakerId){
+        this.bookmakerId = bookmakerId;
+        this.finished = false;
+        this.startDataTime = new Date();
+    }
+
+    public Ride(Integer rideId, Integer winner, Integer looser,
+                Date startDataTime, boolean finished, String bookmakerEmail) {
+        this.rideId = rideId;
+        this.winner = winner;
+        this.looser = looser;
+        this.startDataTime = startDataTime;
+        this.finished = finished;
+        this.bookmakerEmail = bookmakerEmail;
+    }
+
+    public List<Horse> getHorses() {
         return horses;
     }
 
-    public void setHorses(ArrayList<Horse> horses) {
+    public void setHorses(List<Horse> horses) {
         this.horses = horses;
     }
 
-    public Horse getWinner() {
+    public Integer getWinner() {
         return winner;
     }
 
-    public void setWinner(Horse winner) {
+    public void setWinner(Integer winner) {
         this.winner = winner;
     }
 
-    public Horse getLooser() {
+    public Integer getLooser() {
         return looser;
     }
 
-    public void setLooser(Horse looser) {
+    public void setLooser(Integer looser) {
         this.looser = looser;
+    }
+
+    public void setBookmakerEmail(String bookmakerEmail) {
+        this.bookmakerEmail = bookmakerEmail;
     }
 
     public Date getStartDataTime() {
@@ -51,5 +75,21 @@ public class Ride implements Entity {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public Integer getRideId() {
+        return rideId;
+    }
+
+    public void setRideId(Integer rideId) {
+        this.rideId = rideId;
+    }
+
+    public String getBookmakerEmail() {
+        return bookmakerEmail;
+    }
+
+    public Integer getBookmakerId() {
+        return bookmakerId;
     }
 }

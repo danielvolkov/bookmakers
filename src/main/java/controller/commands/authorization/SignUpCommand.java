@@ -1,14 +1,13 @@
 package controller.commands.authorization;
 
 import controller.commands.Command;
-import controller.pickers.Picker;
-import controller.pickers.SignUpPicker;
+import controller.parser.SignUpParser;
+
 import model.entity.User;
 import services.UserService;
 import services.impl.UserServiceImpl;
 import util.Attributes;
 import util.Pages;
-import util.UrlHolder;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ public class SignUpCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        User user = new SignUpPicker(request).getEntity();
+        User user = new SignUpParser(request).getEntity();
 
         UserService userService = UserServiceImpl.getInstance();
 

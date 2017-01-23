@@ -9,6 +9,7 @@ import java.util.Set;
  * Created by daniel on 26/12/16.
  */
 public class User implements Entity {
+    private Integer userId;
     private String email;
     private String password;
     private String name;
@@ -20,7 +21,8 @@ public class User implements Entity {
     public User() {
     }
 
-    public User(String email, String password, String name, String role, double balance) {
+    public User(Integer userId, String email, String password, String name, String role, double balance) {
+        this.userId = userId;
         this.email = email;
         this.name = name;
         this.role = role;
@@ -88,4 +90,7 @@ public class User implements Entity {
         balance +=money;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
 }

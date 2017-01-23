@@ -98,11 +98,12 @@ public class JdbcUserDao implements UserDao {
 
     private User getUserFromResultSet(ResultSet resultSet) throws SQLException{
         resultSet.next();
+        Integer userId = resultSet.getInt(Attributes.USER_ID);
         String email = resultSet.getString(Attributes.EMAIL);
         String name = resultSet.getString(Attributes.NAME);
         String password = resultSet.getString(Attributes.PWD);
         String role = resultSet.getString(Attributes.ROLE);
         double balance = resultSet.getDouble(Attributes.BALANCE);
-        return new User(email, password, name, role, balance);
+        return new User(userId,email, password, name, role, balance);
     }
 }

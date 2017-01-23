@@ -1,5 +1,6 @@
 package dao.interfaces;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  */
 public interface GenericDao<E> {
     E find(int id);
-    List<E> findAll();
+    List<E> findAll() throws SQLException;
     void create(E e);
     void update(E e);
     void delete(int id);

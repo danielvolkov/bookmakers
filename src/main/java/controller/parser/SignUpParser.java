@@ -1,7 +1,6 @@
-package controller.pickers;
+package controller.parser;
 
 import controller.security.Encryptor;
-import model.entity.Entity;
 import model.entity.User;
 import util.Attributes;
 
@@ -10,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by daniel on 1/21/17.
  */
-public class SignUpPicker implements Picker {
+public class SignUpParser implements Parser {
     private User user;
 
-    public SignUpPicker(HttpServletRequest request) {
+    public SignUpParser(HttpServletRequest request) {
         String name = request.getParameter(Attributes.NAME);
         String password = request.getParameter(Attributes.PWD);
         String email = request.getParameter(Attributes.EMAIL);

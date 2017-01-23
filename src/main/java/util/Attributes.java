@@ -15,6 +15,16 @@ public class Attributes {
     public static final String ROLE = "role";
     public static final String BALANCE = "balance";
 
+    public static final String RIDE_ID = "ride_id";
+    public static final String START_TIME = "start_time";
+    public static final String WINNER_ID = "winner_id";
+    public static final String LOSE_ID = "lose_id";
+    public static final String IS_FINISHED = "is_finished";
+    public static final String BOOKMAKER_ID = "bookmaker_id";
+
+    public static final String RIDE = "ride";
+
+
 
     public static final String LOGIN_ERROR = "loginError";
     public static final String SIGNUP_ERROR = "signupError";
