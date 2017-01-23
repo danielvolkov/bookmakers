@@ -7,6 +7,7 @@ import util.Attributes;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class JdbcRideDao implements RideDao {
 
     public static final String UPDATE_RIDE = "UPDATE users SET balance = ? WHERE email = ?";
 
-    public static final String FIND_ALL = "SELECT * FROM rides JOIN users ON rides.boomaker_id = users.user_id";
+    public static final String FIND_ALL = "SELECT * FROM rides JOIN users ON rides.bookmaker_id = users.user_id";
 
 
     private Connection connection;

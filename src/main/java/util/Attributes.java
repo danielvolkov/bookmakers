@@ -23,17 +23,19 @@ public class Attributes {
     public static final String BOOKMAKER_ID = "bookmaker_id";
 
     public static final String RIDE = "ride";
+    public static final String RIDES = "rides";
 
 
 
     public static final String LOGIN_ERROR = "loginError";
     public static final String SIGNUP_ERROR = "signupError";
-    public static final String CABINET_ERROR=  "errorCabinet";
+    public static final String CABINET_ERROR=  "cabinetError";
+    public static final String RIDES_ERROR = "ridesError";
 
     public static final String LOGIN_MSG = "Email or password is not correct!";
     public static final String SIGNUP_MSG = "This Email is already exist!";
     public static final String CABINET_MSG=  "error! try again";
-
+    public static final String RIDES_MSG = "can not read database";
 
     public static final String DEPOSITE = "deposite";
     public static final String WITHDRAW = "withdraw";

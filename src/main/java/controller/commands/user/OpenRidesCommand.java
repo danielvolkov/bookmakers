@@ -12,6 +12,7 @@ import util.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by daniel on 1/22/17.
@@ -21,14 +22,16 @@ public class OpenRidesCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute(Attributes.User);
         if (user != null){
-            Ride ride =  new RideParser(user).getEntity();
+            //Ride ride =  new RideParser(user).getEntity();
             RideService rideService = RideServiceImpl.getInstance();
             try {
-                rideService.create(ride);
+                List<Ride> rides = rideService.findRides();
+                request.getSession().setAttribute(Attributes.RIDES,rides);
+
             } catch (Exception e) {
                 e.printStackTrace();
+                request.getSession().setAttribute(Attributes.RIDES_ERROR, Attributes.RIDES_MSG);
             }
-
             return Pages.RIDES;
         }
 

@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Login</button>
+                        <button type="submit" class="btn btn-lg btn-success">Login</button>
                     </div>
                 </form>
                 <div class="form-group row text-center">
