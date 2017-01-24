@@ -32,9 +32,10 @@
 <body>
 <jsp:include page="/WEB-INF/view/navbar.jsp"/>
 
-<%  User user = (User) request.getSession().getAttribute(Attributes.User);
+<%  User user = (User) request.getSession().getAttribute(Attributes.USER);
     String action = "";
     String actionMessage = "";
+
     if(user.getRole().equals(Attributes.ADMIN)){
         action = UrlHolder.END_RIDE;
         actionMessage = "Calculate Ride results";
@@ -42,8 +43,8 @@
     if(user.getRole().equals(Attributes.CLIENT)){
         action = UrlHolder.BET;
         actionMessage = "Make Bet";
-    }
 
+    }
 
 %>
 <div class="container">
@@ -58,6 +59,7 @@
                         <div class="row">
                             <div class='col-sm-12'>
                                 <input type='text' class="form-control" id='datetimepicker4' name ="date"/>
+
                                 <button type="submit" class="btn btn-success">Create new Ride</button>
                             </div>
                             <script type="text/javascript">
@@ -84,8 +86,8 @@
             <th>Looser</th>
             <th>Status ( Is finished ? )</th>
             <th>Bookmaker`s Email</th>
-            <% if (!user.getRole().equals(Attributes.BOOKMAKER)){%>
-            <th><%=actionMessage%></th>
+            <% if (user.getRole().equals(Attributes.CLIENT)){%>
+            <th>Show type of Bets</th>
             <%}%>
 
         </tr>
@@ -102,7 +104,9 @@
             <% if (!user.getRole().equals(Attributes.BOOKMAKER)){%>
             <td>
             <c:if test="${!ride.finished}">
-                <form  class="form-inline" method="post" action=".<%=action%>">
+                <form  class="form-inline" method="post" action="<%=action%>">
+                    <input class="hidden" value="<c:out value="${ride.rideId}"/>" name ="ride" >
+
                     <button type="submit" class="btn btn-success"><%=actionMessage%></button>
                 </form>
             </c:if>

@@ -20,9 +20,9 @@ public class JdbcUserDao implements UserDao {
     public static final String CREATE= "INSERT INTO users (name, password, email, role_id,balance) " +
             "VALUES(?, ?, ?, ?, ?)";
 
-    public static final String FIND_BY_EMAIL ="SELECT * FROM users JOIN roles ON users.role_id = roles.role_id WHERE email = ?";
+    public static final String FIND_BY_EMAIL = "SELECT * FROM users JOIN roles ON users.role_id = roles.role_id WHERE email = ?";
 
-    public static final String UPDATE_BALANCE= "UPDATE users SET balance = ? WHERE email = ?";
+    public static final String UPDATE_BALANCE = "UPDATE users SET balance = ? WHERE email = ?";
 
     private Connection connection;
 

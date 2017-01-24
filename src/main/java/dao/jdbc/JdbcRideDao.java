@@ -20,7 +20,7 @@ public class JdbcRideDao implements RideDao {
 
     public static final String FIND_BY_ID = "SELECT * FROM rides JOIN roles ON users.role_id = roles.role_id WHERE email = ?";
 
-    public static final String UPDATE_RIDE = "UPDATE users SET balance = ? WHERE email = ?";
+    public static final String UPDATE_RIDE = "UPDATE rides SET is_finished = ? WHERE ride_id = ?";
 
     public static final String FIND_ALL = "SELECT * FROM rides JOIN users ON rides.bookmaker_id = users.user_id";
 

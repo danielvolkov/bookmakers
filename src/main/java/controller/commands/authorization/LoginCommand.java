@@ -36,7 +36,7 @@ public class LoginCommand implements Command {
                     if (logPassword.equals(existPassword)) {
                         HttpSession session = request.getSession();
                         existingUser.setPassword(null);
-                        session.setAttribute(Attributes.User, existingUser);
+                        session.setAttribute(Attributes.USER, existingUser);
 
                         return Pages.CABINET;
                     }

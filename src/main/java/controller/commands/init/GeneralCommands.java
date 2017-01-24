@@ -27,6 +27,7 @@ public class GeneralCommands implements InitCommands {
         getCommands.put(UrlHolder.HISTORY, new OpenHistoryCommand());
         getCommands.put(UrlHolder.RIDES, new OpenRidesCommand());
 
+
         return getCommands;
     }
 
@@ -39,6 +40,8 @@ public class GeneralCommands implements InitCommands {
         postCommands.put(UrlHolder.DEPOSITE, new DepositeCommand());
         postCommands.put(UrlHolder.WITHDRAW, new WithdrawCommand());
         postCommands.put(UrlHolder.ADD_RIDE, new AddRideCommand());
+        postCommands.put(UrlHolder.MAKE_BET, new MakeBetCommand());
+        postCommands.put(UrlHolder.BET, new OpenBetCommand());
 
         return postCommands;
     }

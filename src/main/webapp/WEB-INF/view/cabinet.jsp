@@ -18,7 +18,7 @@
 <body>
 <jsp:include page="/WEB-INF/view/navbar.jsp"/>
 
-<% User user = (User) request.getSession().getAttribute(Attributes.User);%>
+<% User user = (User) request.getSession().getAttribute(Attributes.USER);%>
 <div class="col-md-6 col-md-offset-3 " >
     <div class="jumbotron " style="padding: 5%">
         <h1>Cabiet</h1>

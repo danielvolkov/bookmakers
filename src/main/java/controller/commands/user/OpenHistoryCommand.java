@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class OpenHistoryCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        if (request.getSession().getAttribute(Attributes.User) != null){
+        if (request.getSession().getAttribute(Attributes.USER) != null){
             return Pages.HISTORY;
         }
 

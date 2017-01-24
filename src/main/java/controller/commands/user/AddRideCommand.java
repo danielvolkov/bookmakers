@@ -20,7 +20,7 @@ import java.util.List;
 public class AddRideCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User bookmaker = (User) request.getSession().getAttribute(Attributes.User);
+        User bookmaker = (User) request.getSession().getAttribute(Attributes.USER);
         if (bookmaker != null){
             Ride ride =  new RideParser(bookmaker,request).getEntity();
             RideService rideService = RideServiceImpl.getInstance();
@@ -31,7 +31,7 @@ public class AddRideCommand implements Command {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                request.getSession().setAttribute(Attributes.RIDES_ERROR, Attributes.RIDES_MSG);
+                request.getSession().setAttribute(Attributes.RIDES_ERROR, Attributes.DATABASE_ERROR);
             }
             return Pages.RIDES;
         }

@@ -20,6 +20,7 @@ public class UrlHolder {
     public static final String ADD_RIDE = RIDES + "/add"; // for bookmaker
     public static final String END_RIDE = RIDES + "/confirm"; //for admin
     public static final String BET = RIDES+ "/bet"; // for client
+    public static final String MAKE_BET = BET+ "/make";
 
     public static final String HISTORY = "/history";
 

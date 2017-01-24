@@ -10,7 +10,9 @@ public class Bet implements Entity {
     private double coefficient;
     private boolean isPassed;
     private String typeOfBet;
+    private String horse_id;
     private Ride ride;
+    private String ride_id;
 
     public double getBetSum() {
         return betSum;

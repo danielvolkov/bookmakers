@@ -15,7 +15,7 @@ public class IndexCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        if (request.getSession().getAttribute(Attributes.User) != null){
+        if (request.getSession().getAttribute(Attributes.USER) != null){
             return Pages.CABINET;
         }
 

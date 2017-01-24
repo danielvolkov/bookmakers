@@ -18,7 +18,7 @@ public class DepositeCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        User user = (User) request.getSession().getAttribute(Attributes.User);
+        User user = (User) request.getSession().getAttribute(Attributes.USER);
         if (user != null){
             UserService userService = UserServiceImpl.getInstance();
             double deposite = Double.parseDouble(request.getParameter(Attributes.DEPOSITE));
@@ -29,7 +29,7 @@ public class DepositeCommand implements Command {
                 request.getSession().setAttribute(Attributes.CABINET_ERROR,Attributes.CABINET_MSG);
                 return Pages.CABINET;
             }
-            request.getSession().setAttribute(Attributes.User,user);
+            request.getSession().setAttribute(Attributes.USER,user);
             return Pages.CABINET;
         }
         return Pages.LOGIN;

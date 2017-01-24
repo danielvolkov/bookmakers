@@ -12,6 +12,7 @@ public class Pages {
     public static final String CABINET = PREFFIX + "/cabinet.jsp";
     public static final String RIDES = PREFFIX + "/rides.jsp";
     public static final String HISTORY = PREFFIX + "/history.jsp";
+    public static final String BET = PREFFIX + "/bet.jsp";
 
     public static final String PAGE_NOT_FOUND = PREFFIX + "/pageNotFound.jsp";
 
