@@ -12,6 +12,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+<script src="http://momentjs.com/downloads/moment.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+
 <html>
 <head>
     <title>Rides</title>
@@ -33,7 +43,7 @@
         action = UrlHolder.BET;
         actionMessage = "Make Bet";
     }
-    //List<Ride> rides = (List) request.getSession().getAttribute(Attributes.RIDES);
+
 
 %>
 <div class="container">
@@ -42,13 +52,24 @@
         <h3>Avialable rides for bet`s</h3>
             <% if (user.getRole().equals(Attributes.BOOKMAKER)){%>
             <div class="row">
-            If dou you have avialabale rides, you can add
-                <form  class="form-inline" method="post" action="/add/ride">
-                    <div class="form-group">
-                    <label >Enter ride date and time</label>
-                    <input type="text" class="form-control" name="">
+            If dou you have avialabale rides, you can add time and waiting for bets
+                <form  class="form-inline" method="post" action="<%=UrlHolder.ADD_RIDE%>">
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-sm-12'>
+                                <input type='text' class="form-control" id='datetimepicker4' name ="date"/>
+                                <button type="submit" class="btn btn-success">Create new Ride</button>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#datetimepicker4').datetimepicker();
+                                });
+                            </script>
+
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Create new Ride</button>
+
+
                 </form>
 
             </div>
@@ -70,18 +91,29 @@
         </tr>
         </thead>
         <tbody>
-
+        <c:forEach  var="ride" items="${rides}">
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><c:out value="${ride.rideId}"/></td>
+            <td><c:out value="${ride.startDataTime}"/></td>
+            <td><c:out value="${ride.winner}"/></td>
+            <td><c:out value="${ride.looser}"/></td>
+            <td><c:out value="${ride.finished}"/></td>
+            <td><c:out value="${ride.bookmakerEmail}"/></td>
+            <% if (!user.getRole().equals(Attributes.BOOKMAKER)){%>
+            <td>
+            <c:if test="${!ride.finished}">
+                <form  class="form-inline" method="post" action=".<%=action%>">
+                    <button type="submit" class="btn btn-success"><%=actionMessage%></button>
+                </form>
+            </c:if>
+            </td>
+            <%}%>
+
         </tr>
+        </c:forEach>
         </tbody>
     </table>
 
 </body>
+
 </html>

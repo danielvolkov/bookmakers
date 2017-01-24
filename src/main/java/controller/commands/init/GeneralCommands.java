@@ -38,6 +38,7 @@ public class GeneralCommands implements InitCommands {
         postCommands.put(UrlHolder.LOGIN, new LoginCommand());
         postCommands.put(UrlHolder.DEPOSITE, new DepositeCommand());
         postCommands.put(UrlHolder.WITHDRAW, new WithdrawCommand());
+        postCommands.put(UrlHolder.ADD_RIDE, new AddRideCommand());
 
         return postCommands;
     }

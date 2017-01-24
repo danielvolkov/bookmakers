@@ -17,8 +17,8 @@ public class UrlHolder {
     public static final String WITHDRAW =  "/withdraw";
 
     public static final String RIDES = "/rides";
-    public static final String ADD_RIDE = RIDES + "/add/ride"; // for bookmaker
-    public static final String END_RIDE = RIDES + "/confirm/ride"; //for admin
+    public static final String ADD_RIDE = RIDES + "/add"; // for bookmaker
+    public static final String END_RIDE = RIDES + "/confirm"; //for admin
     public static final String BET = RIDES+ "/bet"; // for client
 
     public static final String HISTORY = "/history";

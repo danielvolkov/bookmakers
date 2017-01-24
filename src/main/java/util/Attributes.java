@@ -24,6 +24,7 @@ public class Attributes {
 
     public static final String RIDE = "ride";
     public static final String RIDES = "rides";
+    public static final String DATE = "date";
 
 
 

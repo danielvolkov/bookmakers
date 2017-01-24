@@ -1,5 +1,6 @@
 package model.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,10 +18,10 @@ public class Ride implements Entity {
     private String bookmakerEmail;
     private Integer bookmakerId;
 
-    public Ride(Integer bookmakerId){
+    public Ride(Integer bookmakerId, Date dateTime){
         this.bookmakerId = bookmakerId;
         this.finished = false;
-        this.startDataTime = new Date();
+        this.startDataTime = dateTime;
     }
 
     public Ride(Integer rideId, Integer winner, Integer looser,

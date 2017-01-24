@@ -4,11 +4,11 @@ import dao.interfaces.RideDao;
 import model.entity.Ride;
 
 import util.Attributes;
+import util.DateUtil;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 /**
  * Created by daniel on 07/01/17.
@@ -60,7 +60,9 @@ public class JdbcRideDao implements RideDao {
         try {
             PreparedStatement statement =
                     connection.prepareStatement(CREATE);
-            statement.setDate(1, (Date) ride.getStartDataTime());
+
+            statement.setDate(1, new Date(ride.getStartDataTime().getTime()) );
+
             statement.setBoolean(2, ride.isFinished());
             statement.setInt(3, ride.getBookmakerId());
             statement.executeUpdate();
