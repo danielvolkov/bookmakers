@@ -31,7 +31,7 @@ public class MakeBetCommand implements Command {
 
             try {
                 BetService betService = BetServiceImpl.getInstance();
-                betService.create(client,bet);
+                betService.makeBet(client,bet);
                 request.setAttribute(Attributes.SUCCESS, Attributes.SUCCESS_MSG);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -2,6 +2,8 @@ package controller.commands.user;
 
 import controller.commands.Command;
 import model.entity.User;
+import services.UserService;
+import services.impl.UserServiceImpl;
 import util.Attributes;
 import util.Pages;
 
@@ -14,8 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 public class OpenCabinetCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        User user = (User) request.getSession().getAttribute(Attributes.USER);
+        if ( user != null){
+            UserService userService = UserServiceImpl.getInstance();
+            try {
+                user = userService.findUser(user.getEmail());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        if (request.getSession().getAttribute(Attributes.USER) != null){
+            request.getSession().setAttribute(Attributes.USER,user);
             return Pages.CABINET;
         }
 

@@ -61,4 +61,12 @@ public class RideServiceImpl implements RideService {
             return  rideDao.findAll();
         }
     }
+
+    @Override
+    public Ride findRide(Integer rideId) throws Exception {
+        try (DaoConnection daoConnection = daoFactory.getDaoConnection()) {
+            RideDao rideDao = daoFactory.createRideDao(daoConnection);
+            return  rideDao.find(rideId);
+        }
+    }
 }

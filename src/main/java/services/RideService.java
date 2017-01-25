@@ -13,4 +13,5 @@ public interface RideService {
     void delete(Integer id);
     void updateWithConfirm(Ride ride) throws Exception;
     List<Ride> findRides() throws Exception;
+    Ride findRide(Integer rideId) throws Exception;
 }

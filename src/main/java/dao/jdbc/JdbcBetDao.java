@@ -15,10 +15,9 @@ import java.util.List;
  */
 public class JdbcBetDao implements BetDao {
 
-    public static final String CREATE = "INSERT INTO bets (ride_id, summ, bet_type_id, horse_id) " +
-            "VALUES(?, ?, ?, ?)";
-    public static final String CREATE_HISTORY = "INSERT INTO bet_history (user_id, bet_id) " +
-            "VALUES(?, SELECT MAX(bet_id) FROM bets)";
+    public static final String CREATE = "INSERT INTO bets ( ride_id, summ, bet_type_id, horse_id,user_id) " +
+            "VALUES(?, ?, ?, ?,?)";
+
 
     private Connection connection;
 
@@ -36,6 +35,8 @@ public class JdbcBetDao implements BetDao {
         return null;
     }
 
+
+
     @Override
     public void create(Bet bet) {
         try {
@@ -45,6 +46,7 @@ public class JdbcBetDao implements BetDao {
             statement.setInt(2, bet.getBetSum());
             statement.setInt(3, bet.getBetType());
             statement.setInt(4, bet.getHorseId());
+            statement.setInt(5, bet.getUserId());
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
@@ -68,17 +70,4 @@ public class JdbcBetDao implements BetDao {
 
     }
 
-    @Override
-    public void createHistory(User user) {
-        try {
-            PreparedStatement statement =
-                    connection.prepareStatement(CREATE_HISTORY);
-            statement.setInt(1,user.getUserId());
-            statement.executeUpdate();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
 }

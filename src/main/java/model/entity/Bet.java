@@ -15,11 +15,18 @@ public class Bet implements Entity {
     private Ride ride;
     private Integer rideId;
 
-    public Bet(Integer betSum, Integer betType, Integer horseId, Integer rideId) {
+    public Integer getUserId() {
+        return userId;
+    }
+
+    private Integer userId;
+
+    public Bet(Integer betSum, Integer betType, Integer horseId, Integer rideId, Integer userId) {
         this.betSum = betSum;
         this.betType = betType;
         this.horseId = horseId;
         this.rideId = rideId;
+        this.userId = userId;
     }
 
     public Integer getBetSum() {

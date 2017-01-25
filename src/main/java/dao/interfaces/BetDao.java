@@ -10,5 +10,4 @@ import java.util.List;
  */
 public interface BetDao extends GenericDao<Bet> {
     void calculate();
-    void createHistory(User user);
 }

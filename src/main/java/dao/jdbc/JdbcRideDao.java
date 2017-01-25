@@ -18,7 +18,7 @@ public class JdbcRideDao implements RideDao {
     public static final String CREATE = "INSERT INTO rides (start_time, is_finished, bookmaker_id,max_summ,coefficient) " +
             "VALUES(?, ?, ?, ?, ?)";
 
-    public static final String FIND_BY_ID = "SELECT * FROM rides JOIN roles ON users.role_id = roles.role_id WHERE email = ?";
+    public static final String FIND_BY_ID = "SELECT * FROM rides JOIN users ON rides.bookmaker_id = users.user_id WHERE  ride_id = ?";
 
     public static final String UPDATE_RIDE = "UPDATE rides SET is_finished = ? WHERE ride_id = ?";
 
@@ -33,8 +33,21 @@ public class JdbcRideDao implements RideDao {
 
     @Override
     public Ride find(int id) {
+        Ride ride;
+        try {
+            PreparedStatement statement = connection.prepareStatement(FIND_BY_ID);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            ride = getRideFromResultSet(resultSet);
+            statement.close();
 
-        return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+
+        return ride;
     }
 
     @Override
