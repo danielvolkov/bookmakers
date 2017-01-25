@@ -11,9 +11,11 @@ public class Bet implements Entity {
     private boolean isPassed;
     private Integer betSum;
     private Integer betType;
+    private Horse horse;
     private Integer horseId;
     private Ride ride;
     private Integer rideId;
+    private String betTypeString;
 
     public Integer getUserId() {
         return userId;
@@ -27,6 +29,15 @@ public class Bet implements Entity {
         this.horseId = horseId;
         this.rideId = rideId;
         this.userId = userId;
+    }
+
+    public Bet( Double totalSumm, boolean isPassed, Integer betSum, String betTypeString, Integer horseId, Integer rideId) {
+        this.totalSumm = totalSumm;
+        this.isPassed = isPassed;
+        this.betSum = betSum;
+        this.betTypeString = betTypeString;
+        this.horseId = horseId;
+        this.rideId = rideId;
     }
 
     public Integer getBetSum() {
@@ -63,5 +74,9 @@ public class Bet implements Entity {
 
     public Integer getRideId() {
         return rideId;
+    }
+
+    public void setHorse(Horse horse) {
+        this.horse = horse;
     }
 }

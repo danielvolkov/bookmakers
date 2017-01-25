@@ -52,6 +52,14 @@ public class Attributes {
     public static final String MAX_BET = "max_summ";
     public static final String TYPE = "typeOfBet";
     public static final String SUCCESS = "success";
+    public static final String BETS = "bets";
+
+    public static final String BET_SUMM = "summ";
+    public static final String TOTAL_SUMM = "total_summ";
+    public static final String IS_PASSED = "is_passed";
+    public static final String BET_TYPE = "type";
+    public static final String CLIENT_ID = "client_id";
+
 
 
 

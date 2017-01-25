@@ -3,10 +3,12 @@ package services.impl;
 import dao.DaoConnection;
 import dao.factory.DaoFactory;
 import dao.interfaces.BetDao;
+import dao.interfaces.HorseDao;
 import dao.interfaces.RideDao;
 import dao.interfaces.UserDao;
 import dao.jdbc.JdbcDaoFactory;
 import model.entity.Bet;
+import model.entity.Horse;
 import model.entity.Ride;
 import model.entity.User;
 import services.BetService;
@@ -58,11 +60,27 @@ public class BetServiceImpl implements BetService {
         }
     }
 
-
     @Override
-    public List<Bet> findBetsByUserId(Integer userId) throws Exception {
-        throw new UnsupportedOperationException();
+    public List<Bet> findBetsByUser(User user) throws Exception {
+        try(DaoConnection daoConnection = daoFactory.getDaoConnection()) {
+            daoConnection.begin();
+            BetDao betDao = daoFactory.createBetDao(daoConnection);
+            HorseDao horseDao = daoFactory.createHorseDao(daoConnection);
+            List<Bet> bets = betDao.findByUser(user);
+            for (Bet bet: bets ) {
+                bet.setHorse(horseDao.find(bet.getHorseId()));
+                Ride ride = bet.getRide();
+                ride.setWinnerHorse(horseDao.find(ride.getWinnerId()));
+                ride.setLooserHorse(horseDao.find(ride.getLooserId()));
+                bet.setRide(ride);
+            }
+            daoConnection.commit();
+            return betDao.findByUser(user);
+        }
+
     }
+
+
 
     @Override
     public void calculate() {

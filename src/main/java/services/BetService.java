@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface BetService {
     void makeBet(User user,Bet bet);
-    List<Bet> findBetsByUserId(Integer userId) throws Exception;
+    List<Bet> findBetsByUser(User user) throws Exception;
     void calculate();
 }

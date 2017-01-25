@@ -104,7 +104,7 @@ public class JdbcRideDao implements RideDao {
     }
 
 
-    private Ride getRideFromResultSet(ResultSet resultSet) throws SQLException {
+    public static Ride getRideFromResultSet(ResultSet resultSet) throws SQLException {
         Integer rideId = resultSet.getInt(Attributes.RIDE_ID);
         Date startTime = resultSet.getDate(Attributes.START_TIME);
         boolean isFinished = resultSet.getBoolean(Attributes.IS_FINISHED);
