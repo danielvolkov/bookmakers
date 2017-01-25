@@ -15,8 +15,8 @@ import java.util.*;
  */
 public class JdbcRideDao implements RideDao {
 
-    public static final String CREATE = "INSERT INTO rides (start_time, is_finished, bookmaker_id) " +
-            "VALUES(?, ?, ?)";
+    public static final String CREATE = "INSERT INTO rides (start_time, is_finished, bookmaker_id,max_summ,coefficient) " +
+            "VALUES(?, ?, ?, ?, ?)";
 
     public static final String FIND_BY_ID = "SELECT * FROM rides JOIN roles ON users.role_id = roles.role_id WHERE email = ?";
 
@@ -65,6 +65,8 @@ public class JdbcRideDao implements RideDao {
 
             statement.setBoolean(2, ride.isFinished());
             statement.setInt(3, ride.getBookmakerId());
+            statement.setInt(4,ride.getMaxSumm());
+            statement.setDouble(5,ride.getCoefficient());
             statement.executeUpdate();
             statement.close();
 
@@ -96,7 +98,9 @@ public class JdbcRideDao implements RideDao {
         Integer winnerId = resultSet.getInt(Attributes.WINNER_ID);
         Integer loserId =  resultSet.getInt(Attributes.LOSE_ID);
         String bookmakerEmail = resultSet.getString(Attributes.EMAIL);
+        Integer maxSumm = resultSet.getInt(Attributes.MAX_BET);
+        Double coeff =  resultSet.getDouble(Attributes.COEF);
 
-        return new Ride(rideId, winnerId, loserId, startTime, isFinished, bookmakerEmail);
+        return new Ride(rideId, winnerId, loserId, startTime, isFinished, bookmakerEmail,maxSumm,coeff);
     }
 }

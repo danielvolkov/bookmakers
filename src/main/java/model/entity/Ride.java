@@ -17,21 +17,27 @@ public class Ride implements Entity {
     private boolean finished;
     private String bookmakerEmail;
     private Integer bookmakerId;
+    private Integer maxSumm;
+    private Double coefficient;
 
-    public Ride(Integer bookmakerId, Date dateTime){
+    public Ride(Integer bookmakerId, Date dateTime, Integer maxSumm, Double coefficient){
         this.bookmakerId = bookmakerId;
         this.finished = false;
         this.startDataTime = dateTime;
+        this.maxSumm = maxSumm;
+        this.coefficient = coefficient;
     }
 
     public Ride(Integer rideId, Integer winner, Integer looser,
-                Date startDataTime, boolean finished, String bookmakerEmail) {
+                Date startDataTime, boolean finished, String bookmakerEmail,Integer maxSumm ,Double coefficient) {
         this.rideId = rideId;
         this.winner = winner;
         this.looser = looser;
         this.startDataTime = startDataTime;
         this.finished = finished;
         this.bookmakerEmail = bookmakerEmail;
+        this.maxSumm = maxSumm;
+        this.coefficient = coefficient;
     }
 
     public List<Horse> getHorses() {
@@ -92,5 +98,13 @@ public class Ride implements Entity {
 
     public Integer getBookmakerId() {
         return bookmakerId;
+    }
+
+    public Integer getMaxSumm() {
+        return maxSumm;
+    }
+
+    public Double getCoefficient() {
+        return coefficient;
     }
 }

@@ -22,7 +22,7 @@
 <div class="col-md-6 col-md-offset-3 " >
     <div class="jumbotron " style="padding: 5%">
         <h1>Cabiet</h1>
-        <h3>Hello, <%=user.getName()%></h3>
+        <h3>Hello, <strong><%=user.getName()%></strong></h3>
         <p class="lead">
             Your role is <strong><%=user.getRole()%></strong><br>
             Your email is <strong><%=user.getEmail()%></strong><br>

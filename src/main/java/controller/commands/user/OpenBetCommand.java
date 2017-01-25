@@ -23,6 +23,9 @@ public class OpenBetCommand implements Command{
 
         if (client.getRole().equals(Attributes.CLIENT)){
             request.getSession().setAttribute(Attributes.RIDE, request.getParameter(Attributes.RIDE));
+            request.getSession().setAttribute(Attributes.MAX_BET, request.getParameter(Attributes.MAX_BET));
+            request.getSession().setAttribute(Attributes.COEF, request.getParameter(Attributes.COEF));
+
             HorseService horseService = HorseServiceImpl.getInstance();
 
             try {

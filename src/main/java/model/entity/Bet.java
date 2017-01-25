@@ -6,28 +6,24 @@ import java.util.Date;
  * Created by daniel on 26/12/16.
  */
 public class Bet implements Entity {
-    private double betSum;
-    private double coefficient;
+    private Integer betId;
+    private Double totalSumm;
     private boolean isPassed;
-    private String typeOfBet;
-    private String horse_id;
+    private Integer betSum;
+    private Integer betType;
+    private Integer horseId;
     private Ride ride;
-    private String ride_id;
+    private Integer rideId;
 
-    public double getBetSum() {
-        return betSum;
-    }
-
-    public void setBetSum(double betSum) {
+    public Bet(Integer betSum, Integer betType, Integer horseId, Integer rideId) {
         this.betSum = betSum;
+        this.betType = betType;
+        this.horseId = horseId;
+        this.rideId = rideId;
     }
 
-    public double getCoefficient() {
-        return coefficient;
-    }
-
-    public void setCoefficient(double coefficient) {
-        this.coefficient = coefficient;
+    public Integer getBetSum() {
+        return betSum;
     }
 
     public boolean isPassed() {
@@ -38,19 +34,27 @@ public class Bet implements Entity {
         isPassed = passed;
     }
 
-    public String getTypeOfBet() {
-        return typeOfBet;
-    }
-
-    public void setTypeOfBet(String typeOfBet) {
-        this.typeOfBet = typeOfBet;
-    }
-
     public Ride getRide() {
         return ride;
     }
 
     public void setRide(Ride ride) {
         this.ride = ride;
+    }
+
+    public Integer getBetId() {
+        return betId;
+    }
+
+    public Integer getBetType() {
+        return betType;
+    }
+
+    public Integer getHorseId() {
+        return horseId;
+    }
+
+    public Integer getRideId() {
+        return rideId;
     }
 }

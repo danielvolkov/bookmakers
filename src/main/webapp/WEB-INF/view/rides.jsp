@@ -52,29 +52,7 @@
         <h1 >Rides</h1>
         <h3>Avialable rides for bet`s</h3>
             <% if (user.getRole().equals(Attributes.BOOKMAKER)){%>
-            <div class="row">
-            If dou you have avialabale rides, you can add time and waiting for bets
-                <form  class="form-inline" method="post" action="<%=UrlHolder.ADD_RIDE%>">
-                    <div class="container">
-                        <div class="row">
-                            <div class='col-sm-12'>
-                                <input type='text' class="form-control" id='datetimepicker4' name ="date"/>
-
-                                <button type="submit" class="btn btn-success">Create new Ride</button>
-                            </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker4').datetimepicker();
-                                });
-                            </script>
-
-                        </div>
-                    </div>
-
-
-                </form>
-
-            </div>
+                <jsp:include page="/WEB-INF/view/bookmakerRide.jsp"/>
             <%}%>
     </div>
     <table class="table table-bordered">
@@ -84,11 +62,10 @@
             <th>Start Time</th>
             <th>Winner</th>
             <th>Looser</th>
-            <th>Status ( Is finished ? )</th>
+            <th>Is finished?</th>
             <th>Bookmaker`s Email</th>
-            <% if (user.getRole().equals(Attributes.CLIENT)){%>
-            <th>Show type of Bets</th>
-            <%}%>
+            <th>Max bet</th>
+            <th>Factor</th>
 
         </tr>
         </thead>
@@ -97,16 +74,19 @@
         <tr>
             <td><c:out value="${ride.rideId}"/></td>
             <td><c:out value="${ride.startDataTime}"/></td>
-            <td><c:out value="${ride.winner}"/></td>
-            <td><c:out value="${ride.looser}"/></td>
+            <td>#<c:out value="${ride.winner}"/></td>
+            <td>#<c:out value="${ride.looser}"/></td>
             <td><c:out value="${ride.finished}"/></td>
             <td><c:out value="${ride.bookmakerEmail}"/></td>
+            <td><c:out value="${ride.maxSumm}"/> USD</td>
+            <td><c:out value="${ride.coefficient}"/></td>
             <% if (!user.getRole().equals(Attributes.BOOKMAKER)){%>
             <td>
             <c:if test="${!ride.finished}">
                 <form  class="form-inline" method="post" action="<%=action%>">
-                    <input class="hidden" value="<c:out value="${ride.rideId}"/>" name ="ride" >
-
+                    <input class="hidden" value="<c:out value="${ride.rideId}"/>" name ="<%=Attributes.RIDE%>" >
+                    <input class="hidden" value="<c:out value="${ride.maxSumm}"/>" name ="<%=Attributes.MAX_BET%>" >
+                    <input class="hidden" value="<c:out value="${ride.coefficient}"/>" name ="<%=Attributes.COEF%>" >
                     <button type="submit" class="btn btn-success"><%=actionMessage%></button>
                 </form>
             </c:if>

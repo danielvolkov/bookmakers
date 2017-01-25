@@ -7,13 +7,12 @@ public class Horse  implements Entity{
     private Integer number;
     private String name;
     private String color;
-    private Double coefficent;
 
-    public Horse(Integer number, String name, String color, Double coefficent) {
+
+    public Horse(Integer number, String name, String color) {
         this.number = number;
         this.name = name;
         this.color = color;
-        this.coefficent = coefficent;
     }
 
     public int getNumber() {
@@ -44,7 +43,6 @@ public class Horse  implements Entity{
     public String toString() {
         return  "#" + number +
                 " name:" + name  +
-                " color:" + color +
-                " coeff:" + coefficent;
+                " color:" + color;
     }
 }

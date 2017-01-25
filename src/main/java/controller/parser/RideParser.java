@@ -18,8 +18,10 @@ public class RideParser implements Parser {
     public RideParser(User user, HttpServletRequest request) {
 
         String dateString = request.getParameter(Attributes.DATE);
+        Integer maxSumm = Integer.parseInt(request.getParameter(Attributes.MAX_BET));
+        Double coeff = Double.parseDouble(request.getParameter(Attributes.COEF));
         Date date = DateUtil.dateParser(dateString);
-        this.ride = new Ride(user.getUserId(),date);
+        this.ride = new Ride(user.getUserId(),date, maxSumm,coeff);
 
     }
 

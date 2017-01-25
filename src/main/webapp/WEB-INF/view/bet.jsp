@@ -18,6 +18,7 @@
 </style>
 <body>
 <jsp:include page="/WEB-INF/view/navbar.jsp"/>
+<% String successMsg = (String) request.getAttribute(Attributes.SUCCESS);%>
 <div class="container default-c">
     <div class="col-md-4 col-md-offset-4 panel-default">
         <div class="text-center" style="margin:10%">
@@ -25,41 +26,45 @@
                 Bet Page
             </h1>
         </div>
-        <div class="container">
 
-                <form class="center-block" method="post" action="<%=UrlHolder.MAKE_BET%>">
+        <form class="center-block" method="post" action="<%=UrlHolder.MAKE_BET%>">
 
-                    <label class="label-warning"> </label>
+            <label class="label-warning"> </label>
 
-                    <div class="form-group">
-                        <label>Choose type of Bet:</label>
-                        <select class="form-control" name="type">
-                            <option>Winner</option>
-                            <option>Looser</option>
-                        </select>
-                    </div>
+            <div class="form-group">
+                <label>Choose type of Bet: (For all bets factor is <%=request.getSession().getAttribute(Attributes.COEF)%>)</label>
+                <select class="form-control" name="<%=Attributes.TYPE%>">
+                    <option value="1">Winner</option>
+                    <option value="2">Looser</option>
+                </select>
+            </div>
 
-                    <div class="form-group">
-                        <label>Choose Horse:</label>
-                        <select class="form-control" name="horse">
-                            <c:forEach  var="horse" items="${horses}">
-                                <option value="<c:out value="${horse.number}"/>"><c:out value="${horse.toString()}"/></option>
-                            </c:forEach>
-                        </select>
-                    </div>
+            <div class="form-group">
+                <label>Choose Horse:</label>
+                <select class="form-control" name="<%=Attributes.HORSE_ID%>">
+                    <c:forEach  var="horse" items="${horses}">
+                        <option value="<c:out value="${horse.number}"/>"><c:out value="${horse.toString()}"/></option>
+                    </c:forEach>
+                </select>
+            </div>
 
-                    <div class="form-group">
-                        <label>Enter Summ:</label>
-                        <input type="text" class="form-control" name="<%=Attributes.SUMM%>">
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-lg btn-success">Make Bet</button>
-                    </div>
+            <div class="form-group">
+                <label>Enter Summ: (MAX SUMM IS <%=request.getSession().getAttribute(Attributes.MAX_BET)%> USD)</label>
+                <input type="text" class="form-control" name="<%=Attributes.SUMM%>">
+            </div>
+            <div class="text-center">
+                <%if ( successMsg == null) {%>
+                <button type="submit" class="btn btn-lg btn-primary">Make Bet</button>
+                <%}%>
+            </div>
 
-                </form>
+        </form>
 
-        </div>
-
+            <%if ( successMsg != null) {%>
+            <div class="text-center">
+            <a href="<%=UrlHolder.RIDES%>"><button type="submit" class="btn btn-lg btn-success"><%=successMsg%></button></a>
+            </div>
+            <%}%>
     </div>
 
 </div>

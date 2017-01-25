@@ -17,6 +17,7 @@ import java.util.List;
 public class JdbcHorseDao implements HorseDao {
 
     public static final String SELECT_ALL ="SELECT * FROM horses";
+    public static final String SELECT_BY_ID ="SELECT * FROM horses WHERE horse_id = ?";
     private Connection connection;
 
     public JdbcHorseDao(Connection connection) {
@@ -25,7 +26,19 @@ public class JdbcHorseDao implements HorseDao {
 
     @Override
     public Horse find(int id) {
-        return null;
+        Horse horse;
+        try {
+            PreparedStatement statement = connection.prepareStatement(SELECT_BY_ID);
+            statement.setInt(1, id);
+            ResultSet resultSet =  statement.executeQuery();
+            resultSet.next();
+            horse = getHorseFromResultSet(resultSet);
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return horse;
     }
 
     @Override
@@ -60,11 +73,6 @@ public class JdbcHorseDao implements HorseDao {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public Horse findByName(String name) {
-
-        throw  new UnsupportedOperationException();
-    }
 
     private Horse getHorseFromResultSet(ResultSet resultSet) throws SQLException{
         Integer horseId = resultSet.getInt(Attributes.HORSE_ID);

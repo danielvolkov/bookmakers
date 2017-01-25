@@ -13,11 +13,12 @@ public class BetParser implements Parser {
     Bet bet;
 
     public BetParser(HttpServletRequest request) {
-        String ride_id = (String) request.getSession().getAttribute(Attributes.RIDE);
-        String coeficient = request.getParameter(Attributes.COEF);
-        String betSumm = request.getParameter(Attributes.SUMM);
-
-        bet = new Bet();
+        Integer rideId = Integer.parseInt ((String) request.getSession()
+                .getAttribute(Attributes.RIDE));
+        Integer betSumm = Integer.parseInt(request.getParameter(Attributes.SUMM));
+        Integer horseId = Integer.parseInt(request.getParameter(Attributes.HORSE_ID));
+        Integer betType = Integer.parseInt(request.getParameter(Attributes.TYPE));
+        bet = new Bet(betSumm,betType,horseId,rideId);
     }
 
     @Override

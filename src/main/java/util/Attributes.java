@@ -40,13 +40,18 @@ public class Attributes {
     public static final String SIGNUP_MSG = "This Email is already exist!";
     public static final String CABINET_MSG=  "error! try again";
     public static final String DATABASE_ERROR = "can not read database";
+    public static final String SUCCESS_MSG = "Success!!! Go back to Rides";
 
 
     public static final String DEPOSITE = "deposite";
     public static final String WITHDRAW = "withdraw";
 
-    public static final String COEF = "coef";
+    public static final String COEF = "coefficient";
     public static final String SUMM = "betSumm";
+
+    public static final String MAX_BET = "max_summ";
+    public static final String TYPE = "typeOfBet";
+    public static final String SUCCESS = "success";
 
 
 

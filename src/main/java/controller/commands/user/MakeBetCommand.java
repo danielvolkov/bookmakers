@@ -5,7 +5,9 @@ import controller.parser.BetParser;
 import model.entity.Bet;
 import model.entity.Horse;
 import model.entity.User;
+import services.BetService;
 import services.HorseService;
+import services.impl.BetServiceImpl;
 import services.impl.HorseServiceImpl;
 import util.Attributes;
 import util.Pages;
@@ -27,13 +29,14 @@ public class MakeBetCommand implements Command {
 
             Bet bet = new BetParser(request).getEntity();
 
-            /*try {
-
-                //request.getSession().setAttribute(Attributes.HORSES,horses);
+            try {
+                BetService betService = BetServiceImpl.getInstance();
+                betService.create(client,bet);
+                request.setAttribute(Attributes.SUCCESS, Attributes.SUCCESS_MSG);
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute(Attributes.ERROR, Attributes.DATABASE_ERROR);
-            }*/
+            }
             return Pages.BET;
         }
 
