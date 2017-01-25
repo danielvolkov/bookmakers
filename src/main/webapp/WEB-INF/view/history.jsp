@@ -35,16 +35,14 @@
     <tbody>
     <c:forEach  var="bet" items="${bets}">
         <tr>
-            <td><c:out value="${ride.rideId}"/></td>
-            <td><c:out value="${ride.startDataTime}"/></td>
-            <td>#<c:out value="${ride.winner}"/></td>
-            <td>#<c:out value="${ride.looser}"/></td>
-            <td><c:out value="${ride.finished}"/></td>
-            <td><c:out value="${ride.bookmakerEmail}"/></td>
-            <td><c:out value="${ride.maxSumm}"/> USD</td>
-            <td><c:out value="${ride.coefficient}"/></td>
-            <td>         </td>
-
+            <td><c:out value="${bet.getRide().bookmakerEmail}"/></td>
+            <td><c:out value="${bet.getRide().startDataTime}"/></td>
+            <td><c:out value="${bet.getRide().getResult()}"/></td>
+            <td><c:out value="${bet.getHorse().toString()}"/></td>
+            <td><c:out value="${bet.isPassed}"/></td>
+            <td><c:out value="${bet.getRide().coefficient}"/></td>
+            <td><c:out value="${bet.betSum}"/> USD</td>
+            <td><c:out value="${bet.totalSumm}"/>  </td>
 
         </tr>
     </c:forEach>

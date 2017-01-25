@@ -8,9 +8,10 @@ import java.util.Date;
 public class Bet implements Entity {
     private Integer betId;
     private Double totalSumm;
-    private boolean isPassed;
+    private Boolean isPassed;
     private Integer betSum;
     private Integer betType;
+
     private Horse horse;
     private Integer horseId;
     private Ride ride;
@@ -29,9 +30,10 @@ public class Bet implements Entity {
         this.horseId = horseId;
         this.rideId = rideId;
         this.userId = userId;
+        this.isPassed = false;
     }
 
-    public Bet( Double totalSumm, boolean isPassed, Integer betSum, String betTypeString, Integer horseId, Integer rideId) {
+    public Bet( Double totalSumm, Boolean isPassed, Integer betSum, String betTypeString, Integer horseId, Integer rideId) {
         this.totalSumm = totalSumm;
         this.isPassed = isPassed;
         this.betSum = betSum;
@@ -44,7 +46,7 @@ public class Bet implements Entity {
         return betSum;
     }
 
-    public boolean isPassed() {
+    public Boolean getIsPassed() {
         return isPassed;
     }
 
@@ -78,5 +80,20 @@ public class Bet implements Entity {
 
     public void setHorse(Horse horse) {
         this.horse = horse;
+    }
+    public Horse getHorse() {
+        return horse;
+    }
+
+    public Double getTotalSumm() {
+        return totalSumm;
+    }
+
+    public Boolean getPassed() {
+        return isPassed;
+    }
+
+    public String getBetTypeString() {
+        return betTypeString;
     }
 }

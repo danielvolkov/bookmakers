@@ -30,7 +30,7 @@ public class JdbcHorseDao implements HorseDao {
         try {
             PreparedStatement statement = connection.prepareStatement(SELECT_BY_ID);
             statement.setInt(1, id);
-            ResultSet resultSet =  statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             horse = getHorseFromResultSet(resultSet);
             statement.close();

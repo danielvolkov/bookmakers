@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class JdbcBetDao implements BetDao {
 
-    public static final String CREATE = "INSERT INTO bets ( ride_id, summ, bet_type_id, horse_id,user_id) " +
+    public static final String CREATE = "INSERT INTO bets ( ride_id, summ, bet_type_id, horse_id,client_id) " +
             "VALUES(?, ?, ?, ?,?)";
     public static final String FIND_BY_USER = "SELECT * FROM bets " +
             "JOIN rides ON bets.ride_id = rides.ride_id " +
@@ -100,7 +100,7 @@ public class JdbcBetDao implements BetDao {
         Integer rideId = resultSet.getInt(Attributes.RIDE_ID);
         Integer betSumm = resultSet.getInt(Attributes.BET_SUMM);
         Integer horse_id = resultSet.getInt(Attributes.HORSE_ID);
-        boolean isPassed = resultSet.getBoolean(Attributes.IS_PASSED);
+        Boolean isPassed = resultSet.getBoolean(Attributes.IS_PASSED);
         String betType = resultSet.getString(Attributes.BET_TYPE);
         return new Bet(total,isPassed,betSumm,betType,horse_id,rideId);
     }

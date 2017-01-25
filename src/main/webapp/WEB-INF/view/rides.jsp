@@ -74,8 +74,8 @@
         <tr>
             <td><c:out value="${ride.rideId}"/></td>
             <td><c:out value="${ride.startDataTime}"/></td>
-            <td>#<c:out value="${ride.winner}"/></td>
-            <td>#<c:out value="${ride.looser}"/></td>
+            <td>#<c:out value="${ride.winnerId}"/></td>
+            <td>#<c:out value="${ride.looserId}"/></td>
             <td><c:out value="${ride.finished}"/></td>
             <td><c:out value="${ride.bookmakerEmail}"/></td>
             <td><c:out value="${ride.maxSumm}"/> USD</td>
@@ -97,7 +97,7 @@
         </c:forEach>
         </tbody>
     </table>
-
+</div>
 </body>
 
 </html>

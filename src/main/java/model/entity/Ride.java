@@ -102,4 +102,15 @@ public class Ride implements Entity {
     public Integer getLooserId() {
         return looserId;
     }
+
+    public String getResult() {
+        if(winnerHorse!=null && looserHorse!=null) {
+            return "Winner: " + winnerHorse.toString() + "\n" +
+                    "Looser: " + looserHorse.toString();
+        }else {
+            return "";
+        }
+    }
+
+
 }
