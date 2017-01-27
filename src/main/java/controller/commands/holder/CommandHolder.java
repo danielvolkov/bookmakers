@@ -2,7 +2,7 @@ package controller.commands.holder;
 
 import controller.commands.Command;
 import exceptions.CommandNotFoundException;
-import util.UrlHolder;
+import util.UriHolder;
 
 import java.util.Map;
 
@@ -29,11 +29,11 @@ public class CommandHolder {
     }
 
     public Command getCommand(String method, String url) throws CommandNotFoundException {
-        Command command = null;
-        if(method.equals(UrlHolder.POST_METHOD)){
+        Command command;
+        if(method.equals(UriHolder.POST_METHOD)){
              command = getPostCommand(url);
         }
-        else if (method.equals(UrlHolder.GET_METHOD)){
+        else {
              command = getGetCommand(url);
         }
 

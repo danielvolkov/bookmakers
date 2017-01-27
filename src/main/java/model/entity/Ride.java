@@ -1,18 +1,18 @@
 package model.entity;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by daniel on 26/12/16.
  */
-public class Ride implements Entity {
+public class Ride {
     private Integer rideId;
     private Horse winnerHorse;
     private Horse looserHorse;
     private Integer winnerId;
+
+
+
     private Integer looserId;
     private Date startDataTime;
     private boolean finished;
@@ -101,6 +101,14 @@ public class Ride implements Entity {
 
     public Integer getLooserId() {
         return looserId;
+    }
+
+    public void setWinnerId(Integer winnerId) {
+        this.winnerId = winnerId;
+    }
+
+    public void setLooserId(Integer looserId) {
+        this.looserId = looserId;
     }
 
     public String getResult() {

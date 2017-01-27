@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by daniel on 1/21/17.
  */
-public class SignUpParser implements Parser {
+public class SignUpParser {
     private User user;
 
     public SignUpParser(HttpServletRequest request) {
@@ -21,7 +21,7 @@ public class SignUpParser implements Parser {
         user = new User(email, Encryptor.encrypt(password),name,role);
     }
 
-    @Override
+
     public User getEntity() {
 
         return user;

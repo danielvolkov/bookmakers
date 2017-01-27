@@ -17,6 +17,7 @@ import java.util.List;
  * Created by daniel on 1/24/17.
  */
 public class OpenBetCommand implements Command{
+    HorseService horseService = HorseServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User client = (User)request.getSession().getAttribute(Attributes.USER);
@@ -26,7 +27,6 @@ public class OpenBetCommand implements Command{
             request.getSession().setAttribute(Attributes.MAX_BET, request.getParameter(Attributes.MAX_BET));
             request.getSession().setAttribute(Attributes.COEF, request.getParameter(Attributes.COEF));
 
-            HorseService horseService = HorseServiceImpl.getInstance();
 
             try {
                 List<Horse> horses = horseService.getHorses();

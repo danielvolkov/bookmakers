@@ -1,17 +1,14 @@
 package model.entity;
 
-import java.util.Date;
-
 /**
  * Created by daniel on 26/12/16.
  */
-public class Bet implements Entity {
+public class Bet {
     private Integer betId;
     private Double totalSumm;
     private Boolean isPassed;
     private Integer betSum;
     private Integer betType;
-
     private Horse horse;
     private Integer horseId;
     private Ride ride;
@@ -33,13 +30,14 @@ public class Bet implements Entity {
         this.isPassed = false;
     }
 
-    public Bet( Double totalSumm, Boolean isPassed, Integer betSum, String betTypeString, Integer horseId, Integer rideId) {
+    public Bet( Double totalSumm, Boolean isPassed, Integer betSum, String betTypeString, Integer horseId, Integer rideId, Integer userId) {
         this.totalSumm = totalSumm;
         this.isPassed = isPassed;
         this.betSum = betSum;
         this.betTypeString = betTypeString;
         this.horseId = horseId;
         this.rideId = rideId;
+        this.userId = userId;
     }
 
     public Integer getBetSum() {
@@ -81,6 +79,7 @@ public class Bet implements Entity {
     public void setHorse(Horse horse) {
         this.horse = horse;
     }
+
     public Horse getHorse() {
         return horse;
     }
@@ -96,4 +95,13 @@ public class Bet implements Entity {
     public String getBetTypeString() {
         return betTypeString;
     }
+
+    public void setPassed(Boolean passed) {
+        isPassed = passed;
+    }
+
+    public void setTotalSumm(Double totalSumm) {
+        this.totalSumm = totalSumm;
+    }
+
 }

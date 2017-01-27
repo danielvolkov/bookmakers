@@ -28,5 +28,7 @@ public class UserUtil {
             result = 3;
         }
         return result;
+
+        //TODO enum
     }
 }

@@ -1,7 +1,6 @@
 package controller.parser;
 
 import model.entity.Bet;
-import model.entity.Entity;
 import model.entity.User;
 import util.Attributes;
 
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by daniel on 1/24/17.
  */
-public class BetParser implements Parser {
+public class BetParser {
     Bet bet;
 
     public BetParser(HttpServletRequest request) {
@@ -23,7 +22,7 @@ public class BetParser implements Parser {
         bet = new Bet(betSumm,betType,horseId,rideId,user.getUserId());
     }
 
-    @Override
+
     public Bet getEntity() {
         return bet;
     }

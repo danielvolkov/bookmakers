@@ -1,6 +1,7 @@
 package services;
 
 import model.entity.Bet;
+import model.entity.Ride;
 import model.entity.User;
 
 import java.util.List;
@@ -11,5 +12,5 @@ import java.util.List;
 public interface BetService {
     void makeBet(User user,Bet bet);
     List<Bet> findBetsByUser(User user) throws Exception;
-    void calculate();
+    void calculateResults(Ride ride);
 }

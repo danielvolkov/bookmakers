@@ -1,4 +1,4 @@
-<%@ page import="util.UrlHolder" %>
+<%@ page import="util.UriHolder" %>
 <%@ page import="util.Attributes" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
@@ -27,7 +27,7 @@
             </h1>
         </div>
 
-        <form class="center-block" method="post" action="<%=UrlHolder.MAKE_BET%>">
+        <form class="center-block" method="post" action="<%=UriHolder.MAKE_BET%>">
 
             <label class="label-warning"> </label>
 
@@ -62,7 +62,7 @@
 
             <%if ( successMsg != null) {%>
             <div class="text-center">
-            <a href="<%=UrlHolder.RIDES%>"><button type="submit" class="btn btn-lg btn-success"><%=successMsg%></button></a>
+            <a href="<%=UriHolder.RIDES%>"><button type="submit" class="btn btn-lg btn-success"><%=successMsg%></button></a>
             </div>
             <%}%>
     </div>

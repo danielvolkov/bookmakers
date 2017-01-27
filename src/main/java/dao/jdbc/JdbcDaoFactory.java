@@ -67,8 +67,7 @@ public class JdbcDaoFactory implements DaoFactory {
             DataSource dataSource = (DataSource) context.lookup(JDBC_SOURCE);
             return new JdbcDaoConnection(dataSource.getConnection());
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e);//TODO specific runtime exception add messagekey
         }
     }
 }

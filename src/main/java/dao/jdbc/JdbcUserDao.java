@@ -21,7 +21,7 @@ public class JdbcUserDao implements UserDao {
             "VALUES(?, ?, ?, ?, ?)";
 
     public static final String FIND_BY_EMAIL = "SELECT * FROM users JOIN roles ON users.role_id = roles.role_id WHERE email = ?";
-
+    public static final String FIND_BY_ID = "SELECT * FROM users JOIN roles ON users.role_id = roles.role_id WHERE user_id = ?";
     public static final String UPDATE_BALANCE = "UPDATE users SET balance = ? WHERE email = ?";
 
     private Connection connection;
@@ -32,28 +32,35 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public User find(int id) {
-        throw new UnsupportedOperationException();
+        User user = null;
+        try{
+            PreparedStatement statement = connection.prepareStatement(FIND_BY_ID);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet != null){
+                user = getUserFromResultSet(resultSet);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
-    public List<User> findAll() {
-
-        throw new UnsupportedOperationException();
+    public List<User> findAll() { throw  new UnsupportedOperationException();
     }
 
     @Override
     public void create(User user) {
-        try{
-            PreparedStatement statement =
-                    connection.prepareStatement(CREATE);
+        try(PreparedStatement statement = connection.prepareStatement(CREATE)){
             statement.setString(1, user.getName());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
             statement.setInt(4, user.getRoleInt());
             statement.setDouble(5,user.getBalance());
             statement.executeUpdate();
-            statement.close();
-
+            //TODO
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -64,8 +71,9 @@ public class JdbcUserDao implements UserDao {
     public void update(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement(UPDATE_BALANCE);
-            statement.setString(2, user.getEmail());
             statement.setDouble(1, user.getBalance());
+            statement.setString(2, user.getEmail());
+
             statement.executeUpdate();
 
         } catch (SQLException e) {

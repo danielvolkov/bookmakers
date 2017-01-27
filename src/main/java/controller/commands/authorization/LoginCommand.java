@@ -19,16 +19,17 @@ import java.io.IOException;
  * Created by daniel on 1/19/17.
  */
 public class LoginCommand implements Command {
+
+    UserService userService = UserServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-            User loginUser = new LoginParser(request).getEntity();
-            UserService userService = UserServiceImpl.getInstance();
+            User loginUser = new LoginParser(request).getEntity();//TODO
 
-            User existingUser;
+            User existingUser; //TODO
             try {
                 existingUser = userService.findUser(loginUser.getEmail());
-
+                //TODO in services
                 if (existingUser != null) {
                     String logPassword = loginUser.getPassword();
                     String existPassword = existingUser.getPassword();

@@ -60,6 +60,9 @@ public class Attributes {
     public static final String BET_TYPE = "type";
     public static final String CLIENT_ID = "client_id";
 
+    public static final String WINNER = "Winner";
+    public static final String LOOSER = "Looser";
+
 
 
 

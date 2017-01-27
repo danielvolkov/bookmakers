@@ -1,6 +1,5 @@
 package controller.parser;
 
-import model.entity.Entity;
 import model.entity.Ride;
 import model.entity.User;
 import util.Attributes;
@@ -12,7 +11,7 @@ import java.util.Date;
 /**
  * Created by daniel on 1/23/17.
  */
-public class RideParser implements Parser {
+public class RideParser  {
     Ride ride;
 
     public RideParser(User user, HttpServletRequest request) {
@@ -25,7 +24,7 @@ public class RideParser implements Parser {
 
     }
 
-    @Override
+
     public Ride getEntity() {
 
         return ride;

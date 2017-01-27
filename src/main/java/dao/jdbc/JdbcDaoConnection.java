@@ -53,22 +53,19 @@ public class JdbcDaoConnection implements DaoConnection{
             connection.rollback();
             connection.setAutoCommit(true);
         }catch (SQLException e){
-            e.printStackTrace();
             throw new RuntimeException();
         }
     }
 
     @Override
-    public void close() throws Exception {
+    public void close()  {
         try {
-            if(isTransactionBegin && !isTransactionCommited ){
+            if(isTransactionBegin && !isTransactionCommited){
                 rollback();
             }
             connection.close();
         } catch (SQLException e){
-            e.printStackTrace();
             throw new RuntimeException();
         }
-
     }
 }

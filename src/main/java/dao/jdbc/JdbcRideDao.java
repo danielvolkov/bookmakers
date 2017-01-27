@@ -20,7 +20,7 @@ public class JdbcRideDao implements RideDao {
 
     public static final String FIND_BY_ID = "SELECT * FROM rides JOIN users ON rides.bookmaker_id = users.user_id WHERE  ride_id = ?";
 
-    public static final String UPDATE_RIDE = "UPDATE rides SET is_finished = ? WHERE ride_id = ?";
+    public static final String UPDATE_RIDE = "UPDATE rides SET is_finished = ?, winner_id = ?, lose_id = ? WHERE ride_id = ?";
 
     public static final String FIND_ALL = "SELECT * FROM rides JOIN users ON rides.bookmaker_id = users.user_id";
 
@@ -90,7 +90,17 @@ public class JdbcRideDao implements RideDao {
 
     @Override
     public void update(Ride ride) {
-        throw  new UnsupportedOperationException();
+        try {
+            PreparedStatement statement = connection.prepareStatement(UPDATE_RIDE);
+            statement.setBoolean(1, ride.isFinished());
+            statement.setInt(2, ride.getWinnerId());
+            statement.setInt(3,ride.getLooserId());
+            statement.setInt(4,ride.getRideId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

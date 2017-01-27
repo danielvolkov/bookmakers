@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by daniel on 26/12/16.
  */
-public class User implements Entity {
+public class User {
     private Integer userId;
     private String email;
     private String password;
@@ -17,7 +17,8 @@ public class User implements Entity {
     private String role;
     private Set<Bet> betHistory;
 
-
+    //TODO builder
+    //TODO double to long
     public User() {
     }
 
@@ -93,4 +94,5 @@ public class User implements Entity {
     public Integer getUserId() {
         return userId;
     }
+    // TODO equals and hashcode toString
 }

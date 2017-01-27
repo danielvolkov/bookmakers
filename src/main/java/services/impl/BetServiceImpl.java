@@ -12,6 +12,7 @@ import model.entity.Horse;
 import model.entity.Ride;
 import model.entity.User;
 import services.BetService;
+import util.Attributes;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class BetServiceImpl implements BetService {
             BetDao betDao = daoFactory.createBetDao(daoConnection);
             UserDao userDao = daoFactory.createUserDao(daoConnection);
             RideDao rideDao = daoFactory.createRideDao(daoConnection);
-            if( (bet != null) ){
+            if( bet != null  ){
                 daoConnection.begin();
                 betDao.create(bet);
                 User existClient = userDao.findByEmail(client.getEmail());
@@ -63,9 +64,10 @@ public class BetServiceImpl implements BetService {
     @Override
     public List<Bet> findBetsByUser(User user) throws Exception {
         try(DaoConnection daoConnection = daoFactory.getDaoConnection()) {
-            daoConnection.begin();
+
             BetDao betDao = daoFactory.createBetDao(daoConnection);
             HorseDao horseDao = daoFactory.createHorseDao(daoConnection);
+            daoConnection.begin();
             List<Bet> bets = betDao.findByUser(user);
             for (Bet bet : bets ) {
 
@@ -84,10 +86,57 @@ public class BetServiceImpl implements BetService {
 
     }
 
-
-
     @Override
-    public void calculate() {
-        throw new UnsupportedOperationException();
+    public void calculateResults(Ride ride) {
+        try(DaoConnection daoConnection = daoFactory.getDaoConnection()) {
+            BetDao betDao = daoFactory.createBetDao(daoConnection);
+            UserDao userDao = daoFactory.createUserDao(daoConnection);
+            List<Bet> bets =  betDao.findByRideId(ride.getRideId());
+            for (Bet bet : bets ) {
+                Integer predictionHorseId =  getHorseIdFromRideByBetType(ride,bet);
+                if(isBetPassed(bet, predictionHorseId)){
+                    double totalSumm = bet.getBetSum()*ride.getCoefficient() ;
+                    bet.setTotalSumm( totalSumm );
+                    bet.setPassed(true);
+                    calculateMoney(ride,bet, userDao);
+                    betDao.update(bet);
+
+                }
+            }
+
+        }
+
     }
+
+    private boolean isBetPassed(Bet bet, Integer predictionHorseId){
+        boolean result = false;
+        if(predictionHorseId.equals(bet.getHorseId())){
+            result = true;
+        }
+        return result;
+    }
+
+    private Integer getHorseIdFromRideByBetType(Ride ride, Bet bet) {
+        Integer horseRideId;
+        if(bet.getBetTypeString().equals(Attributes.WINNER)){
+            horseRideId = ride.getWinnerId();
+        } else{
+            horseRideId = ride.getLooserId();
+        }
+        return horseRideId;
+    }
+
+    private void calculateMoney(Ride ride, Bet bet, UserDao userDao){
+
+        User bookmaker = userDao.findByEmail(ride.getBookmakerEmail());
+        bookmaker.deposite(bet.getTotalSumm()*(-1));
+        userDao.update(bookmaker);
+
+        User client = userDao.find(bet.getUserId());
+        client.deposite(bet.getTotalSumm());
+        userDao.update(client);
+
+    }
+
+
 }

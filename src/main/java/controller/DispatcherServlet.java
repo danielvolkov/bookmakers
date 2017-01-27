@@ -1,22 +1,16 @@
 package controller;
 
-import com.sun.net.httpserver.HttpServer;
 import controller.commands.Command;
 import controller.commands.holder.CommandHolder;
 import controller.commands.init.CommandHolderInit;
 import exceptions.CommandNotFoundException;
-import util.Pages;
-import util.UrlHolder;
 
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Created by daniel on 14/01/17.

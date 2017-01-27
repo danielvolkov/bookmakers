@@ -21,6 +21,7 @@ public class JdbcBetDao implements BetDao {
             "JOIN rides ON bets.ride_id = rides.ride_id " +
             "JOIN users ON rides.bookmaker_id = users.user_id "+
             "LEFT JOIN bet_type ON bets.bet_type_id = bet_type.bet_type_id WHERE client_id = ?";
+    public static final String FIND_BY_RIDE = "SELECT * FROM bets JOIN bet_type ON bets.bet_type_id = bet_type.bet_type_id  WHERE ride_id = ?";
 
 
 
@@ -70,9 +71,10 @@ public class JdbcBetDao implements BetDao {
     }
 
     @Override
-    public void calculate() {
+    public void calculate(Ride ride) {
 
     }
+
 
     @Override
     public List<Bet> findByUser(User user) {
@@ -94,15 +96,35 @@ public class JdbcBetDao implements BetDao {
 
         return bets;
     }
+
+    @Override
+    public List<Bet> findByRideId(Integer rideId) {
+        List<Bet> bets = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement(FIND_BY_RIDE);
+            statement.setInt(1,rideId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                Bet bet = getBetFromResultSet(resultSet);
+                bets.add(bet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bets;
+    }
+
     private Bet getBetFromResultSet(ResultSet resultSet) throws SQLException{
 
         Double total = resultSet.getDouble(Attributes.TOTAL_SUMM);
         Integer rideId = resultSet.getInt(Attributes.RIDE_ID);
         Integer betSumm = resultSet.getInt(Attributes.BET_SUMM);
-        Integer horse_id = resultSet.getInt(Attributes.HORSE_ID);
+        Integer horseId = resultSet.getInt(Attributes.HORSE_ID);
         Boolean isPassed = resultSet.getBoolean(Attributes.IS_PASSED);
         String betType = resultSet.getString(Attributes.BET_TYPE);
-        return new Bet(total,isPassed,betSumm,betType,horse_id,rideId);
+        Integer userId = resultSet.getInt(Attributes.CLIENT_ID);
+        return new Bet(total,isPassed,betSumm,betType,horseId,rideId,userId);
     }
 
 }

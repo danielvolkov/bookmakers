@@ -3,7 +3,7 @@ package util;
 /**
  * Created by daniel on 1/19/17.
  */
-public class UrlHolder {
+public class UriHolder {
     public static final String GET_METHOD = "GET";
     public static final String POST_METHOD = "POST";
 

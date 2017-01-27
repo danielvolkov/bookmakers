@@ -11,7 +11,7 @@ import java.util.List;
 public interface RideService {
     void create(Ride ride) throws Exception;
     void delete(Integer id);
-    void updateWithConfirm(Ride ride) throws Exception;
+    void updateWithConfirm(Integer rideId) throws Exception;
     List<Ride> findRides() throws Exception;
     Ride findRide(Integer rideId) throws Exception;
 }

@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="util.Attributes" %>
 <%@ page import="model.entity.User" %>
-<%@ page import="util.UrlHolder" %>
+<%@ page import="util.UriHolder" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.entity.Ride" %>
 <%@ page import="java.util.Iterator" %><%--
@@ -37,11 +37,11 @@
     String actionMessage = "";
 
     if(user.getRole().equals(Attributes.ADMIN)){
-        action = UrlHolder.END_RIDE;
+        action = UriHolder.END_RIDE;
         actionMessage = "Calculate Ride results";
     };
     if(user.getRole().equals(Attributes.CLIENT)){
-        action = UrlHolder.BET;
+        action = UriHolder.BET;
         actionMessage = "Make Bet";
 
     }

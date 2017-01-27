@@ -8,12 +8,15 @@ import model.entity.User;
 import services.UserService;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  * Created by daniel on 14/01/17.
  */
 public class UserServiceImpl implements UserService{
-    private DaoFactory daoFactory;
+
+
+    private DaoFactory daoFactory; //TODO setter
 
     private UserServiceImpl(DaoFactory daoFactory) {
         this.daoFactory = daoFactory;
@@ -30,16 +33,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void create(User user) {
+        Objects.requireNonNull(user);
         try(DaoConnection daoConnection = daoFactory.getDaoConnection()) {
             UserDao userDao = daoFactory.createUserDao(daoConnection);
-            if( user != null ){
-                daoConnection.begin();
-                userDao.create(user);
-                daoConnection.commit();
-            }
-
-        } catch (Exception e){
-            e.printStackTrace();
+            userDao.create(user);
         }
     }
 
@@ -68,6 +65,9 @@ public class UserServiceImpl implements UserService{
             return  userDao.findByEmail(email);
         }
 
+    }
+    public void setDaoFactory(DaoFactory daoFactory) {
+        this.daoFactory = daoFactory;
     }
 
 }

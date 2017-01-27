@@ -1,4 +1,4 @@
-<%@ page import="util.UrlHolder" %>
+<%@ page import="util.UriHolder" %>
 <%@ page import="util.Attributes" %><%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -10,7 +10,7 @@
 
 <div class="row">
     If dou you have avialabale rides, you can add time and waiting for bets
-    <form  class="form-inline" method="post" action="<%=UrlHolder.ADD_RIDE%>">
+    <form  class="form-inline" method="post" action="<%=UriHolder.ADD_RIDE%>">
         <div class="container">
             <div class="row">
                 <div class='col-sm-12'>
