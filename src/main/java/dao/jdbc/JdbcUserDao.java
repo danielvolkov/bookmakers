@@ -2,13 +2,12 @@ package dao.jdbc;
 
 import dao.interfaces.UserDao;
 import model.entity.User;
-import util.Attributes;
+import util.constants.Attributes;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -38,6 +37,7 @@ public class JdbcUserDao implements UserDao {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet != null){
+                resultSet.next();
                 user = getUserFromResultSet(resultSet);
             }
             statement.close();
@@ -58,7 +58,7 @@ public class JdbcUserDao implements UserDao {
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
             statement.setInt(4, user.getRoleInt());
-            statement.setDouble(5,user.getBalance());
+            statement.setLong(5,user.getBalance());
             statement.executeUpdate();
             //TODO
         } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class JdbcUserDao implements UserDao {
     public void update(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement(UPDATE_BALANCE);
-            statement.setDouble(1, user.getBalance());
+            statement.setLong(1, user.getBalance());
             statement.setString(2, user.getEmail());
 
             statement.executeUpdate();
@@ -95,6 +95,7 @@ public class JdbcUserDao implements UserDao {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet != null){
+                resultSet.next();
                 user = getUserFromResultSet(resultSet);
             }
             statement.close();
@@ -105,13 +106,13 @@ public class JdbcUserDao implements UserDao {
     }
 
     private User getUserFromResultSet(ResultSet resultSet) throws SQLException{
-        resultSet.next();
+
         Integer userId = resultSet.getInt(Attributes.USER_ID);
         String email = resultSet.getString(Attributes.EMAIL);
         String name = resultSet.getString(Attributes.NAME);
         String password = resultSet.getString(Attributes.PWD);
         String role = resultSet.getString(Attributes.ROLE);
-        double balance = resultSet.getDouble(Attributes.BALANCE);
-        return new User(userId,email, password, name, role, balance);
+        Long balance = resultSet.getLong(Attributes.BALANCE);
+        return new User(userId, email, password, name, role, balance);
     }
 }

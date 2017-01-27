@@ -1,5 +1,6 @@
-<%@ page import="util.Attributes" %>
+<%@ page import="util.constants.Attributes" %>
 <%@ page import="model.entity.User" %>
+<%@ page import="util.MoneyTypeConverter" %>
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -26,7 +27,7 @@
         <p class="lead">
             Your role is <strong><%=user.getRole()%></strong><br>
             Your email is <strong><%=user.getEmail()%></strong><br>
-            Your current balance is <strong><%=user.getBalance()%> USD </strong><br>
+            Your current balance is <strong><%=MoneyTypeConverter.longToDouble(user.getBalance())%> USD </strong><br>
         </p>
 
         <form class="form-inline" method="post" action="/deposite">

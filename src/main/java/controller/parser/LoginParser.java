@@ -2,7 +2,7 @@ package controller.parser;
 
 import controller.security.Encryptor;
 import model.entity.User;
-import util.Attributes;
+import util.constants.Attributes;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -20,4 +20,9 @@ public class DateUtil {
             throw new RuntimeException();
         }
     }
+    public static String dateParser(Date inputDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm a");
+        //formatter.parse(inputStringDate);
+        return formatter.format(inputDate);
+    }
 }

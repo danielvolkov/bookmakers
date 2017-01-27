@@ -1,5 +1,8 @@
-<%@ page import="util.UriHolder" %>
-<%@ page import="util.Attributes" %>
+<%@ page import="util.constants.UriHolder" %>
+<%@ page import="util.constants.Attributes" %>
+<%@ page import="util.MoneyTypeConverter" %>
+<%@ page import="model.entity.User" %>
+<%@ page import="model.entity.Ride" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -19,6 +22,7 @@
 <body>
 <jsp:include page="/WEB-INF/view/navbar.jsp"/>
 <% String successMsg = (String) request.getAttribute(Attributes.SUCCESS);%>
+<% Ride ride = (Ride) request.getSession().getAttribute(Attributes.RIDE);%>
 <div class="container default-c">
     <div class="col-md-4 col-md-offset-4 panel-default">
         <div class="text-center" style="margin:10%">
@@ -32,7 +36,7 @@
             <label class="label-warning"> </label>
 
             <div class="form-group">
-                <label>Choose type of Bet: (For all bets factor is <%=request.getSession().getAttribute(Attributes.COEF)%>)</label>
+                <label>Choose type of Bet: (For all bets factor is <%=ride.getCoefficient()%>)</label>
                 <select class="form-control" name="<%=Attributes.TYPE%>">
                     <option value="1">Winner</option>
                     <option value="2">Looser</option>
@@ -49,7 +53,7 @@
             </div>
 
             <div class="form-group">
-                <label>Enter Summ: (MAX SUMM IS <%=request.getSession().getAttribute(Attributes.MAX_BET)%> USD)</label>
+                <label>Enter Summ: (MAX SUMM IS <%=MoneyTypeConverter.longToDouble(ride.getMaxSumm())%> USD)</label>
                 <input type="text" class="form-control" name="<%=Attributes.SUMM%>">
             </div>
             <div class="text-center">

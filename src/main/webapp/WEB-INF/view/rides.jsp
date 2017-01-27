@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="util.Attributes" %>
+<%@ page import="util.constants.Attributes" %>
 <%@ page import="model.entity.User" %>
-<%@ page import="util.UriHolder" %>
+<%@ page import="util.constants.UriHolder" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.entity.Ride" %>
-<%@ page import="java.util.Iterator" %><%--
+<%@ page import="java.util.Iterator" %>
+<%@ page import="util.MoneyTypeConverter" %>
+<%--
   Created by IntelliJ IDEA.
   User: daniel
   Date: 1/22/17
@@ -72,27 +74,24 @@
         <tbody>
         <c:forEach  var="ride" items="${rides}">
         <tr>
-            <td><c:out value="${ride.rideId}"/></td>
-            <td><c:out value="${ride.startDataTime}"/></td>
-            <td>#<c:out value="${ride.winnerId}"/></td>
-            <td>#<c:out value="${ride.looserId}"/></td>
-            <td><c:out value="${ride.finished}"/></td>
-            <td><c:out value="${ride.bookmakerEmail}"/></td>
-            <td><c:out value="${ride.maxSumm}"/> USD</td>
-            <td><c:out value="${ride.coefficient}"/></td>
+            <td>${ride.rideId}</td>
+            <td>${ride.startDataTime}</td>
+            <td>#${ride.winnerId}</td>
+            <td>#${ride.looserId}</td>
+            <td>${ride.finished}</td>
+            <td>${ride.bookmakerEmail}</td>
+            <td>${MoneyTypeConverter.longToDouble(ride.getMaxSumm())} USD</td>
+            <td>${ride.coefficient}</td>
             <% if (!user.getRole().equals(Attributes.BOOKMAKER)){%>
             <td>
             <c:if test="${!ride.finished}">
                 <form  class="form-inline" method="post" action="<%=action%>">
                     <input class="hidden" value="<c:out value="${ride.rideId}"/>" name ="<%=Attributes.RIDE%>" >
-                    <input class="hidden" value="<c:out value="${ride.maxSumm}"/>" name ="<%=Attributes.MAX_BET%>" >
-                    <input class="hidden" value="<c:out value="${ride.coefficient}"/>" name ="<%=Attributes.COEF%>" >
                     <button type="submit" class="btn btn-success"><%=actionMessage%></button>
                 </form>
             </c:if>
             </td>
             <%}%>
-
         </tr>
         </c:forEach>
         </tbody>

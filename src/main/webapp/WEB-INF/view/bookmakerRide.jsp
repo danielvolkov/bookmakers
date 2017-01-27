@@ -1,5 +1,5 @@
-<%@ page import="util.UriHolder" %>
-<%@ page import="util.Attributes" %><%--
+<%@ page import="util.constants.UriHolder" %>
+<%@ page import="util.constants.Attributes" %><%--
   Created by IntelliJ IDEA.
   User: daniel
   Date: 1/24/17

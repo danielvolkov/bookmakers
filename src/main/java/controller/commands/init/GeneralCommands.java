@@ -5,7 +5,7 @@ import controller.commands.authorization.*;
 
 
 import controller.commands.user.*;
-import util.UriHolder;
+import util.constants.UriHolder;
 
 import java.util.HashMap;
 import java.util.Map;

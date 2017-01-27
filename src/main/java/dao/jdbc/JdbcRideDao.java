@@ -3,8 +3,7 @@ package dao.jdbc;
 import dao.interfaces.RideDao;
 import model.entity.Ride;
 
-import util.Attributes;
-import util.DateUtil;
+import util.constants.Attributes;
 
 import java.sql.*;
 import java.sql.Date;
@@ -75,10 +74,9 @@ public class JdbcRideDao implements RideDao {
                     connection.prepareStatement(CREATE);
 
             statement.setDate(1, new Date(ride.getStartDataTime().getTime()) );
-
             statement.setBoolean(2, ride.isFinished());
             statement.setInt(3, ride.getBookmakerId());
-            statement.setInt(4,ride.getMaxSumm());
+            statement.setLong(4,ride.getMaxSumm());
             statement.setDouble(5,ride.getCoefficient());
             statement.executeUpdate();
             statement.close();
@@ -121,7 +119,7 @@ public class JdbcRideDao implements RideDao {
         Integer winnerId = resultSet.getInt(Attributes.WINNER_ID);
         Integer loserId =  resultSet.getInt(Attributes.LOSE_ID);
         String bookmakerEmail = resultSet.getString(Attributes.EMAIL);
-        Integer maxSumm = resultSet.getInt(Attributes.MAX_BET);
+        Long maxSumm = resultSet.getLong(Attributes.MAX_BET);
         Double coeff =  resultSet.getDouble(Attributes.COEF);
 
         return new Ride(rideId, winnerId, loserId, startTime, isFinished, bookmakerEmail,maxSumm,coeff);

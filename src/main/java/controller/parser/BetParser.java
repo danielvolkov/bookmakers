@@ -1,8 +1,10 @@
 package controller.parser;
 
 import model.entity.Bet;
+import model.entity.Ride;
 import model.entity.User;
-import util.Attributes;
+import util.MoneyTypeConverter;
+import util.constants.Attributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,10 +15,10 @@ public class BetParser {
     Bet bet;
 
     public BetParser(HttpServletRequest request) {
-        Integer rideId = Integer.parseInt ((String) request.getSession()
-                .getAttribute(Attributes.RIDE));
+        Ride ride = (Ride) request.getSession().getAttribute(Attributes.RIDE);
+        Integer rideId = ride.getRideId();
         User user = (User) request.getSession().getAttribute(Attributes.USER);
-        Integer betSumm = Integer.parseInt(request.getParameter(Attributes.SUMM));
+        Long betSumm = MoneyTypeConverter.doubleToLong(Double.parseDouble(request.getParameter(Attributes.SUMM)));
         Integer horseId = Integer.parseInt(request.getParameter(Attributes.HORSE_ID));
         Integer betType = Integer.parseInt(request.getParameter(Attributes.TYPE));
         bet = new Bet(betSumm,betType,horseId,rideId,user.getUserId());

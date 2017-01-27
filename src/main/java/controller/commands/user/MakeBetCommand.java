@@ -3,19 +3,15 @@ package controller.commands.user;
 import controller.commands.Command;
 import controller.parser.BetParser;
 import model.entity.Bet;
-import model.entity.Horse;
 import model.entity.User;
 import services.BetService;
-import services.HorseService;
 import services.impl.BetServiceImpl;
-import services.impl.HorseServiceImpl;
-import util.Attributes;
-import util.Pages;
+import util.constants.Attributes;
+import util.constants.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by daniel on 1/24/17.

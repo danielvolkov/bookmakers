@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void updateBalance(User user,double summ) throws Exception {
+    public void updateBalance(User user,Long summ) throws Exception {
         try (DaoConnection daoConnection = daoFactory.getDaoConnection()) {
             UserDao userDao = daoFactory.createUserDao(daoConnection);
             daoConnection.begin();

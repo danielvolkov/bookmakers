@@ -2,14 +2,11 @@ package controller.commands.user;
 
 import controller.commands.Command;
 import model.entity.Bet;
-import model.entity.Ride;
 import model.entity.User;
 import services.BetService;
-import services.RideService;
 import services.impl.BetServiceImpl;
-import services.impl.RideServiceImpl;
-import util.Attributes;
-import util.Pages;
+import util.constants.Attributes;
+import util.constants.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -4,7 +4,7 @@ import dao.interfaces.BetDao;
 import model.entity.Bet;
 import model.entity.Ride;
 import model.entity.User;
-import util.Attributes;
+import util.constants.Attributes;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class JdbcBetDao implements BetDao {
             "LEFT JOIN bet_type ON bets.bet_type_id = bet_type.bet_type_id WHERE client_id = ?";
     public static final String FIND_BY_RIDE = "SELECT * FROM bets JOIN bet_type ON bets.bet_type_id = bet_type.bet_type_id  WHERE ride_id = ?";
 
-
+    public static final String UPDATE_BET = "UPDATE bets SET is_passed = ?, total_sum = ? WHERE bet_id = ?";
 
     private Connection connection;
 
@@ -48,7 +48,7 @@ public class JdbcBetDao implements BetDao {
             PreparedStatement statement =
                     connection.prepareStatement(CREATE);
             statement.setInt(1, bet.getRideId());
-            statement.setInt(2, bet.getBetSum());
+            statement.setLong(2, bet.getBetSum());
             statement.setInt(3, bet.getBetType());
             statement.setInt(4, bet.getHorseId());
             statement.setInt(5, bet.getUserId());
@@ -62,7 +62,16 @@ public class JdbcBetDao implements BetDao {
 
     @Override
     public void update(Bet bet) {
+        try(PreparedStatement statement =
+                    connection.prepareStatement(UPDATE_BET)){
+            statement.setBoolean(1, bet.getPassed());
+            statement.setDouble(2, bet.getTotalSumm());
+            statement.setInt(3, bet.getBetId());
+            statement.executeUpdate();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -70,10 +79,6 @@ public class JdbcBetDao implements BetDao {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public void calculate(Ride ride) {
-
-    }
 
 
     @Override
@@ -117,9 +122,9 @@ public class JdbcBetDao implements BetDao {
 
     private Bet getBetFromResultSet(ResultSet resultSet) throws SQLException{
 
-        Double total = resultSet.getDouble(Attributes.TOTAL_SUMM);
+        Long total = resultSet.getLong(Attributes.TOTAL_SUMM);
         Integer rideId = resultSet.getInt(Attributes.RIDE_ID);
-        Integer betSumm = resultSet.getInt(Attributes.BET_SUMM);
+        Long betSumm = resultSet.getLong(Attributes.BET_SUMM);
         Integer horseId = resultSet.getInt(Attributes.HORSE_ID);
         Boolean isPassed = resultSet.getBoolean(Attributes.IS_PASSED);
         String betType = resultSet.getString(Attributes.BET_TYPE);

@@ -4,8 +4,9 @@ import controller.commands.Command;
 import model.entity.User;
 import services.UserService;
 import services.impl.UserServiceImpl;
-import util.Attributes;
-import util.Pages;
+import util.MoneyTypeConverter;
+import util.constants.Attributes;
+import util.constants.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,8 @@ public class WithdrawCommand implements Command {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
         if (user != null){
             UserService userService = UserServiceImpl.getInstance();
-            double withdraw = Double.parseDouble(request.getParameter(Attributes.WITHDRAW));
+            Long withdraw = MoneyTypeConverter.doubleToLong(
+                    Double.parseDouble(request.getParameter(Attributes.WITHDRAW)));
             try {
                 userService.updateBalance(user,withdraw*(-1));
                 user = userService.findUser(user.getEmail());

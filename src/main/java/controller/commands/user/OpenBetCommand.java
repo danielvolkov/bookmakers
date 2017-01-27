@@ -2,11 +2,14 @@ package controller.commands.user;
 
 import controller.commands.Command;
 import model.entity.Horse;
+import model.entity.Ride;
 import model.entity.User;
 import services.HorseService;
+import services.RideService;
 import services.impl.HorseServiceImpl;
-import util.Attributes;
-import util.Pages;
+import services.impl.RideServiceImpl;
+import util.constants.Attributes;
+import util.constants.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,19 +21,19 @@ import java.util.List;
  */
 public class OpenBetCommand implements Command{
     HorseService horseService = HorseServiceImpl.getInstance();
+    RideService rideService = RideServiceImpl.getInstance();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User client = (User)request.getSession().getAttribute(Attributes.USER);
 
         if (client.getRole().equals(Attributes.CLIENT)){
-            request.getSession().setAttribute(Attributes.RIDE, request.getParameter(Attributes.RIDE));
-            request.getSession().setAttribute(Attributes.MAX_BET, request.getParameter(Attributes.MAX_BET));
-            request.getSession().setAttribute(Attributes.COEF, request.getParameter(Attributes.COEF));
-
-
+            Integer rideId = Integer.parseInt(request.getParameter(Attributes.RIDE));
             try {
+                Ride ride = rideService.findRide(rideId);
                 List<Horse> horses = horseService.getHorses();
                 request.getSession().setAttribute(Attributes.HORSES,horses);
+                request.getSession().setAttribute(Attributes.RIDE,ride);
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute(Attributes.ERROR, Attributes.DATABASE_ERROR);

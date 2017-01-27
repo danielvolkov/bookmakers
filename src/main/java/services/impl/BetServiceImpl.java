@@ -8,11 +8,11 @@ import dao.interfaces.RideDao;
 import dao.interfaces.UserDao;
 import dao.jdbc.JdbcDaoFactory;
 import model.entity.Bet;
-import model.entity.Horse;
 import model.entity.Ride;
 import model.entity.User;
 import services.BetService;
-import util.Attributes;
+import util.MoneyTypeConverter;
+import util.constants.Attributes;
 
 import java.util.List;
 
@@ -95,7 +95,8 @@ public class BetServiceImpl implements BetService {
             for (Bet bet : bets ) {
                 Integer predictionHorseId =  getHorseIdFromRideByBetType(ride,bet);
                 if(isBetPassed(bet, predictionHorseId)){
-                    double totalSumm = bet.getBetSum()*ride.getCoefficient() ;
+                    Long totalSumm = MoneyTypeConverter
+                            .doubleToLong(bet.getBetSum()*ride.getCoefficient()) ;
                     bet.setTotalSumm( totalSumm );
                     bet.setPassed(true);
                     calculateMoney(ride,bet, userDao);

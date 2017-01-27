@@ -13,7 +13,7 @@ public class User {
     private String email;
     private String password;
     private String name;
-    private double balance;
+    private Long balance;
     private String role;
     private Set<Bet> betHistory;
 
@@ -22,7 +22,7 @@ public class User {
     public User() {
     }
 
-    public User(Integer userId, String email, String password, String name, String role, double balance) {
+    public User(Integer userId, String email, String password, String name, String role, Long balance) {
         this.userId = userId;
         this.email = email;
         this.name = name;
@@ -36,7 +36,7 @@ public class User {
         this.password = password;
         this.name = name;
         this.role = role;
-        this.balance = 0;
+        this.balance = 0L;
     }
 
     public String getEmail() {
@@ -63,11 +63,11 @@ public class User {
         this.name = name;
     }
 
-    public double getBalance() {
+    public Long getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Long balance) {
         this.balance = balance;
     }
 
@@ -87,7 +87,7 @@ public class User {
         return role;
     }
 
-    public void deposite(double money){
+    public void deposite(Long money){
         balance +=money;
     }
 

@@ -5,9 +5,9 @@ package model.entity;
  */
 public class Bet {
     private Integer betId;
-    private Double totalSumm;
+    private Long totalSumm;
     private Boolean isPassed;
-    private Integer betSum;
+    private Long betSum;
     private Integer betType;
     private Horse horse;
     private Integer horseId;
@@ -21,7 +21,7 @@ public class Bet {
 
     private Integer userId;
 
-    public Bet(Integer betSum, Integer betType, Integer horseId, Integer rideId, Integer userId) {
+    public Bet(Long betSum, Integer betType, Integer horseId, Integer rideId, Integer userId) {
         this.betSum = betSum;
         this.betType = betType;
         this.horseId = horseId;
@@ -30,7 +30,7 @@ public class Bet {
         this.isPassed = false;
     }
 
-    public Bet( Double totalSumm, Boolean isPassed, Integer betSum, String betTypeString, Integer horseId, Integer rideId, Integer userId) {
+    public Bet( Long totalSumm, Boolean isPassed, Long betSum, String betTypeString, Integer horseId, Integer rideId, Integer userId) {
         this.totalSumm = totalSumm;
         this.isPassed = isPassed;
         this.betSum = betSum;
@@ -40,7 +40,7 @@ public class Bet {
         this.userId = userId;
     }
 
-    public Integer getBetSum() {
+    public Long getBetSum() {
         return betSum;
     }
 
@@ -84,7 +84,7 @@ public class Bet {
         return horse;
     }
 
-    public Double getTotalSumm() {
+    public Long getTotalSumm() {
         return totalSumm;
     }
 
@@ -100,7 +100,7 @@ public class Bet {
         isPassed = passed;
     }
 
-    public void setTotalSumm(Double totalSumm) {
+    public void setTotalSumm(Long totalSumm) {
         this.totalSumm = totalSumm;
     }
 

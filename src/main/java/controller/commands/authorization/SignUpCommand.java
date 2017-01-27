@@ -6,8 +6,8 @@ import controller.parser.SignUpParser;
 import model.entity.User;
 import services.UserService;
 import services.impl.UserServiceImpl;
-import util.Attributes;
-import util.Pages;
+import util.constants.Attributes;
+import util.constants.Pages;
 
 
 import javax.servlet.http.HttpServletRequest;

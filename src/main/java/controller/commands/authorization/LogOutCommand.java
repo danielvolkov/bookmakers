@@ -1,7 +1,7 @@
 package controller.commands.authorization;
 
 import controller.commands.Command;
-import util.Pages;
+import util.constants.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

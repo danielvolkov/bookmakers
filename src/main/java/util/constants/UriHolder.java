@@ -1,4 +1,4 @@
-package util;
+package util.constants;
 
 /**
  * Created by daniel on 1/19/17.

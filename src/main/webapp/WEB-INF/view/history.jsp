@@ -1,4 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="util.MoneyTypeConverter" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.entity.Ride" %>
+<%@ page import="model.entity.Horse" %>
+<%@ page import="model.entity.Bet" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.Date" %>
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -25,9 +33,9 @@
         <th>Ride datatime</th>
         <th>Result</th>
         <th>Predicton</th>
-        <th>Is passed?</th>
         <th>Factor</th>
         <th>Bet summ</th>
+        <th>Is passed?</th>
         <th>Total</th>
 
     </tr>
@@ -35,15 +43,14 @@
     <tbody>
     <c:forEach  var="bet" items="${bets}">
         <tr>
-            <td><c:out value="${bet.getRide().bookmakerEmail}"/></td>
-            <td><c:out value="${bet.getRide().startDataTime}"/></td>
-            <td><c:out value="${bet.getRide().getResult()}"/></td>
-            <td><c:out value="${bet.getHorse().toString()}"/></td>
-            <td><c:out value="${bet.isPassed}"/></td>
-            <td><c:out value="${bet.getRide().coefficient}"/></td>
-            <td><c:out value="${bet.betSum}"/> USD</td>
-            <td><c:out value="${bet.totalSumm}"/>  </td>
-
+            <td>${bet.getRide().bookmakerEmail}</td>
+            <td>${bet.getRide().startDataTime}</td>
+            <td>${bet.getRide().getResult()}</td>
+            <td>${bet.getHorse().toString()}</td>
+            <td>${bet.getRide().coefficient}</td>
+            <td>${MoneyTypeConverter.longToDouble(bet.betSum)} USD</td>
+            <td>${bet.isPassed}</td>
+            <td>${MoneyTypeConverter.longToDouble(bet.totalSumm)}  </td>
         </tr>
     </c:forEach>
     </tbody>

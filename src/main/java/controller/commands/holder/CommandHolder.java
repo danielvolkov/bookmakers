@@ -2,7 +2,7 @@ package controller.commands.holder;
 
 import controller.commands.Command;
 import exceptions.CommandNotFoundException;
-import util.UriHolder;
+import util.constants.UriHolder;
 
 import java.util.Map;
 

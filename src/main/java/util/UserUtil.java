@@ -1,6 +1,6 @@
 package util;
 
-import static util.Attributes.ADMIN;
+import util.constants.Attributes;
 
 /**
  * Created by daniel on 1/20/17.

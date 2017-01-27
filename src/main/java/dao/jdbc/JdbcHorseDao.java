@@ -2,7 +2,7 @@ package dao.jdbc;
 
 import dao.interfaces.HorseDao;
 import model.entity.Horse;
-import util.Attributes;
+import util.constants.Attributes;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

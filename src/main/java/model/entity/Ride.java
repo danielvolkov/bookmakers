@@ -11,17 +11,15 @@ public class Ride {
     private Horse looserHorse;
     private Integer winnerId;
 
-
-
     private Integer looserId;
     private Date startDataTime;
     private boolean finished;
     private String bookmakerEmail;
     private Integer bookmakerId;
-    private Integer maxSumm;
+    private Long maxSumm;
     private Double coefficient;
 
-    public Ride(Integer bookmakerId, Date dateTime, Integer maxSumm, Double coefficient){
+    public Ride(Integer bookmakerId, Date dateTime, Long maxSumm, Double coefficient){
         this.bookmakerId = bookmakerId;
         this.finished = false;
         this.startDataTime = dateTime;
@@ -30,7 +28,7 @@ public class Ride {
     }
 
     public Ride(Integer rideId, Integer winner, Integer looser,
-                Date startDataTime, boolean finished, String bookmakerEmail,Integer maxSumm ,Double coefficient) {
+                Date startDataTime, boolean finished, String bookmakerEmail,Long maxSumm ,Double coefficient) {
         this.rideId = rideId;
         this.winnerId = winner;
         this.looserId = looser;
@@ -79,7 +77,7 @@ public class Ride {
         return bookmakerId;
     }
 
-    public Integer getMaxSumm() {
+    public Long getMaxSumm() {
         return maxSumm;
     }
 
