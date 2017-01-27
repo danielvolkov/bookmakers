@@ -18,13 +18,10 @@ import java.io.IOException;
  * Created by daniel on 1/19/17.
  */
 public class SignUpCommand implements Command {
+    UserService userService = UserServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         User user = new SignUpParser(request).getEntity();
-
-        UserService userService = UserServiceImpl.getInstance();
-
         try {
             if(userService.findUser(user.getEmail()) == null){
                 userService.create(user);

@@ -18,12 +18,13 @@ import java.util.List;
  * Created by daniel on 1/23/17.
  */
 public class AddRideCommand implements Command {
+    RideService rideService = RideServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User bookmaker = (User) request.getSession().getAttribute(Attributes.USER);
         if (bookmaker != null){
             Ride ride =  new RideParser(bookmaker,request).getEntity();
-            RideService rideService = RideServiceImpl.getInstance();
+
             try {
                 rideService.create(ride);
                 List<Ride> rides = rideService.findRides();

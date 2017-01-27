@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletResponse;
  * Created by daniel on 1/21/17.
  */
 public class OpenCabinetCommand implements Command {
+    UserService userService = UserServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
         if ( user != null){
-            UserService userService = UserServiceImpl.getInstance();
+
             try {
                 user = userService.findUser(user.getEmail());
             } catch (Exception e) {

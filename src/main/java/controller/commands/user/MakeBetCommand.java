@@ -17,6 +17,7 @@ import java.io.IOException;
  * Created by daniel on 1/24/17.
  */
 public class MakeBetCommand implements Command {
+    BetService betService = BetServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User client = (User)request.getSession().getAttribute(Attributes.USER);
@@ -26,7 +27,7 @@ public class MakeBetCommand implements Command {
             Bet bet = new BetParser(request).getEntity();
 
             try {
-                BetService betService = BetServiceImpl.getInstance();
+
                 betService.makeBet(client,bet);
                 request.setAttribute(Attributes.SUCCESS, Attributes.SUCCESS_MSG);
             } catch (Exception e) {

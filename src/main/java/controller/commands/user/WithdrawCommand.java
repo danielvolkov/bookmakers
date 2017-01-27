@@ -16,11 +16,12 @@ import java.io.IOException;
  * Created by daniel on 1/22/17.
  */
 public class WithdrawCommand implements Command {
+    UserService userService = UserServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
         if (user != null){
-            UserService userService = UserServiceImpl.getInstance();
+
             Long withdraw = MoneyTypeConverter.doubleToLong(
                     Double.parseDouble(request.getParameter(Attributes.WITHDRAW)));
             try {

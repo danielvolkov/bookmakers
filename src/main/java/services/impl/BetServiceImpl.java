@@ -8,6 +8,7 @@ import dao.interfaces.RideDao;
 import dao.interfaces.UserDao;
 import dao.jdbc.JdbcDaoFactory;
 import model.entity.Bet;
+import model.entity.Horse;
 import model.entity.Ride;
 import model.entity.User;
 import services.BetService;
@@ -69,16 +70,17 @@ public class BetServiceImpl implements BetService {
             HorseDao horseDao = daoFactory.createHorseDao(daoConnection);
             daoConnection.begin();
             List<Bet> bets = betDao.findByUser(user);
-            for (Bet bet : bets ) {
-
-                bet.setHorse(horseDao.find(bet.getHorseId()));
-
+            for (int betId = 0; betId<bets.size(); betId++ ) {
+                Bet bet = bets.get(betId);
+                Horse horse = horseDao.find(bet.getHorseId());
+                bet.setHorse(horse);
                 Ride ride = bet.getRide();
                 if(ride.isFinished()) {
                     ride.setWinnerHorse(horseDao.find(ride.getWinnerId()));
                     ride.setLooserHorse(horseDao.find(ride.getLooserId()));
                 }
                 bet.setRide(ride);
+                bets.set(betId, bet);
             }
             daoConnection.commit();
             return betDao.findByUser(user);

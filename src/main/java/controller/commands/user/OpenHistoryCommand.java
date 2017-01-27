@@ -16,15 +16,18 @@ import java.util.List;
  * Created by daniel on 1/22/17.
  */
 public class OpenHistoryCommand implements Command {
+    BetService betService = BetServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
         User user = (User) request.getSession().getAttribute(Attributes.USER);
         if (user != null){
             //Ride ride =  new RideParser(user).getEntity();
-            BetService betService = BetServiceImpl.getInstance();
             try {
                 List<Bet> bets = betService.findBetsByUser(user);
+                for (Bet bet :bets ) {
+                    System.out.println(bet.getHorse());
+                }
                 request.getSession().setAttribute(Attributes.BETS,bets);
 
             } catch (Exception e) {
@@ -33,7 +36,6 @@ public class OpenHistoryCommand implements Command {
             }
             return Pages.HISTORY;
         }
-
         return Pages.LOGIN;
 
     }

@@ -16,12 +16,13 @@ import java.util.List;
  * Created by daniel on 1/22/17.
  */
 public class OpenRidesCommand implements Command {
+    RideService rideService = RideServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
         if (user != null){
             //Ride ride =  new RideParser(user).getEntity();
-            RideService rideService = RideServiceImpl.getInstance();
+
             try {
                 List<Ride> rides = rideService.findRides();
                 request.getSession().setAttribute(Attributes.RIDES,rides);

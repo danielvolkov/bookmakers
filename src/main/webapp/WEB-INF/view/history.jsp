@@ -6,7 +6,8 @@
 <%@ page import="model.entity.Bet" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="java.util.Date" %>
+<%@ page import="util.constants.Attributes" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -24,6 +25,7 @@
 </style>
 <body>
 <jsp:include page="/WEB-INF/view/navbar.jsp"/>
+<%List<Bet> bets = (List) request.getSession().getAttribute(Attributes.BETS);%>
 <h1>History</h1>
 <div class="container">
 <table class="table table-bordered">
@@ -41,18 +43,19 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach  var="bet" items="${bets}">
+
+        <% for (Bet bet : bets){%>
         <tr>
-            <td>${bet.getRide().bookmakerEmail}</td>
-            <td>${bet.getRide().startDataTime}</td>
-            <td>${bet.getRide().getResult()}</td>
-            <td>${bet.getHorse().toString()}</td>
-            <td>${bet.getRide().coefficient}</td>
-            <td>${MoneyTypeConverter.longToDouble(bet.betSum)} USD</td>
-            <td>${bet.isPassed}</td>
-            <td>${MoneyTypeConverter.longToDouble(bet.totalSumm)}  </td>
+            <td><%=bet.getRide().getBookmakerEmail()%></td>
+            <td><%=bet.getRide().getStartDataTime().toString()%></td>
+            <td><%=bet.getRide().getResult()%></td>
+            <td><%=bet.getHorse().toString()%></td>
+            <td><%=bet.getRide().getCoefficient()%></td>
+            <td><%=MoneyTypeConverter.longToDouble(bet.getBetSum())%> USD</td>
+            <td><%=bet.getPassed()%></td>
+            <td><%=MoneyTypeConverter.longToDouble(bet.getTotalSumm())%> </td>
         </tr>
-    </c:forEach>
+    <%}%>
     </tbody>
 </table>
 </div>
