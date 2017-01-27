@@ -25,9 +25,7 @@ public class OpenHistoryCommand implements Command {
             //Ride ride =  new RideParser(user).getEntity();
             try {
                 List<Bet> bets = betService.findBetsByUser(user);
-                for (Bet bet :bets ) {
-                    System.out.println(bet.getHorse());
-                }
+
                 request.getSession().setAttribute(Attributes.BETS,bets);
 
             } catch (Exception e) {

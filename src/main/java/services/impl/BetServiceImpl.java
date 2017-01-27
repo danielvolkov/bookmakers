@@ -70,8 +70,7 @@ public class BetServiceImpl implements BetService {
             HorseDao horseDao = daoFactory.createHorseDao(daoConnection);
             daoConnection.begin();
             List<Bet> bets = betDao.findByUser(user);
-            for (int betId = 0; betId<bets.size(); betId++ ) {
-                Bet bet = bets.get(betId);
+            for (Bet bet: bets ) {
                 Horse horse = horseDao.find(bet.getHorseId());
                 bet.setHorse(horse);
                 Ride ride = bet.getRide();
@@ -80,10 +79,9 @@ public class BetServiceImpl implements BetService {
                     ride.setLooserHorse(horseDao.find(ride.getLooserId()));
                 }
                 bet.setRide(ride);
-                bets.set(betId, bet);
             }
             daoConnection.commit();
-            return betDao.findByUser(user);
+            return bets;
         }
 
     }
