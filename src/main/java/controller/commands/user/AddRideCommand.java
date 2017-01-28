@@ -22,21 +22,19 @@ public class AddRideCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User bookmaker = (User) request.getSession().getAttribute(Attributes.USER);
-        if (bookmaker != null){
-            Ride ride =  new RideParser(bookmaker,request).getEntity();
 
-            try {
-                rideService.create(ride);
-                List<Ride> rides = rideService.findRides();
-                request.getSession().setAttribute(Attributes.RIDES,rides);
+        Ride ride =  new RideParser(bookmaker,request).getEntity();
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                request.getSession().setAttribute(Attributes.RIDES_ERROR, Attributes.DATABASE_ERROR);
-            }
-            return Pages.RIDES;
+        try {
+            rideService.create(ride);
+            List<Ride> rides = rideService.findRides();
+            request.getSession().setAttribute(Attributes.RIDES,rides);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.getSession().setAttribute(Attributes.RIDES_ERROR, Attributes.DATABASE_ERROR);
         }
+        return Pages.RIDES;
 
-        return Pages.LOGIN;
     }
 }

@@ -23,19 +23,18 @@ public class ConfirmRideResultsCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
-        if ( user != null) {
-            Integer rideId = Integer.parseInt(request.getParameter(Attributes.RIDE));
-            try {
-                rideService.updateWithConfirm(rideId);
-                List<Ride> rides = rideService.findRides();
-                request.getSession().setAttribute(Attributes.RIDES,rides);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        Integer rideId = Integer.parseInt(request.getParameter(Attributes.RIDE));
+        try {
+            rideService.updateWithConfirm(rideId);
+            List<Ride> rides = rideService.findRides();
+            request.getSession().setAttribute(Attributes.RIDES,rides);
 
-            return Pages.RIDES;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return Pages.LOGIN;
+
+        return Pages.RIDES;
+
     }
 }

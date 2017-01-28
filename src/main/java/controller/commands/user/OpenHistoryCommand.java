@@ -21,20 +21,17 @@ public class OpenHistoryCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
         User user = (User) request.getSession().getAttribute(Attributes.USER);
-        if (user != null){
-            //Ride ride =  new RideParser(user).getEntity();
-            try {
-                List<Bet> bets = betService.findBetsByUser(user);
+        try {
+            List<Bet> bets = betService.findBetsByUser(user);
 
-                request.getSession().setAttribute(Attributes.BETS,bets);
+            request.getSession().setAttribute(Attributes.BETS,bets);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                request.getSession().setAttribute(Attributes.ERROR, Attributes.DATABASE_ERROR);
-            }
-            return Pages.HISTORY;
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.getSession().setAttribute(Attributes.ERROR, Attributes.DATABASE_ERROR);
         }
-        return Pages.LOGIN;
+        return Pages.HISTORY;
+
 
     }
 }

@@ -20,22 +20,19 @@ public class WithdrawCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
-        if (user != null){
 
-            Long withdraw = MoneyTypeConverter.doubleToLong(
-                    Double.parseDouble(request.getParameter(Attributes.WITHDRAW)));
-            try {
-                userService.updateBalance(user,withdraw*(-1));
-                user = userService.findUser(user.getEmail());
-            } catch (Exception e) {
-                request.getSession().setAttribute(Attributes.CABINET_ERROR,Attributes.CABINET_MSG);
-                return Pages.CABINET;
-            }
-
-            request.getSession().setAttribute(Attributes.USER,user);
+        Long withdraw = MoneyTypeConverter.doubleToLong(
+                Double.parseDouble(request.getParameter(Attributes.WITHDRAW)));
+        try {
+            userService.updateBalance(user,withdraw*(-1));
+            user = userService.findUser(user.getEmail());
+        } catch (Exception e) {
+            request.getSession().setAttribute(Attributes.CABINET_ERROR,Attributes.CABINET_MSG);
             return Pages.CABINET;
         }
-        return Pages.LOGIN;
+
+        request.getSession().setAttribute(Attributes.USER,user);
+        return Pages.CABINET;
 
     }
 }

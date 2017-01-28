@@ -18,18 +18,15 @@ public class OpenCabinetCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
-        if ( user != null){
 
-            try {
-                user = userService.findUser(user.getEmail());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            request.getSession().setAttribute(Attributes.USER,user);
-            return Pages.CABINET;
+        try {
+            user = userService.findUser(user.getEmail());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return Pages.LOGIN;
+        request.getSession().setAttribute(Attributes.USER,user);
+        return Pages.CABINET;
+
     }
 }

@@ -23,9 +23,7 @@ public class MakeBetCommand implements Command {
         User client = (User)request.getSession().getAttribute(Attributes.USER);
 
         if (client.getRole().equals(Attributes.CLIENT)){
-
             Bet bet = new BetParser(request).getEntity();
-
             try {
 
                 betService.makeBet(client,bet);

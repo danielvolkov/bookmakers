@@ -20,21 +20,17 @@ public class OpenRidesCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
-        if (user != null){
-            //Ride ride =  new RideParser(user).getEntity();
 
-            try {
-                List<Ride> rides = rideService.findRides();
-                request.getSession().setAttribute(Attributes.RIDES,rides);
+        try {
+            List<Ride> rides = rideService.findRides();
+            request.getSession().setAttribute(Attributes.RIDES,rides);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                request.getSession().setAttribute(Attributes.RIDES_ERROR, Attributes.DATABASE_ERROR);
-            }
-            return Pages.RIDES;
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.getSession().setAttribute(Attributes.RIDES_ERROR, Attributes.DATABASE_ERROR);
         }
+        return Pages.RIDES;
 
-        return Pages.LOGIN;
 
     }
 }
