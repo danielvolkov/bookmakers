@@ -6,6 +6,7 @@
 <%@ page import="model.entity.Ride" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="util.MoneyTypeConverter" %>
+<%@ page import="util.DateUtil" %>
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -75,7 +76,7 @@
         <c:forEach  var="ride" items="${rides}">
         <tr>
             <td>${ride.rideId}</td>
-            <td>${ride.startDataTime}</td>
+            <td>${DateUtil.dateParser(ride.getStartDataTime())}</td>
             <td>#${ride.winnerId}</td>
             <td>#${ride.looserId}</td>
             <td>${ride.finished}</td>

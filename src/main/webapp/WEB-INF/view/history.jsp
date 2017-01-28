@@ -7,6 +7,7 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="util.constants.Attributes" %>
+<%@ page import="util.DateUtil" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -47,7 +48,7 @@
         <% for (Bet bet : bets){%>
         <tr>
             <td><%=bet.getRide().getBookmakerEmail()%></td>
-            <td><%=bet.getRide().getStartDataTime().toString()%></td>
+            <td><%=DateUtil.dateParser(bet.getRide().getStartDataTime())%></td>
             <td><%=bet.getRide().getResult()%></td>
             <td><%=bet.getHorse().toString()%></td>
             <td><%=bet.getRide().getCoefficient()%></td>
