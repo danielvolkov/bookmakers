@@ -44,10 +44,6 @@
                     <input type="password" class="form-control" name="password">
                 </div>
                 <div class="form-group">
-                    <label >Confirm the password:</label>
-                    <input type="password" class="form-control" name="confirm_password">
-                </div>
-                <div class="form-group">
                     <label>Choose your role:</label>
                     <select class="form-control" name="role">
                         <option>Client</option>
