@@ -4,12 +4,13 @@ import model.entity.Bet;
 import model.entity.Ride;
 import model.entity.User;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by daniel on 1/28/17.
  */
-public class Validator {
+ public interface Validator {
 
     public static final String EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -19,37 +20,13 @@ public class Validator {
 
     public static final String MONEY = "^.{1,500}$";
 
-    public static final String DATE = "^.{0,500}$";
+    public static final String FACTOR = "^.{1,10}$";
 
-    public static final String  FACTOR = "^.{0,100}$";
-
-
-    public Validator() {
-
+    default Boolean validateValue(String inputString, String stringPattern){
+        Pattern pattern = Pattern.compile(stringPattern);
+        Matcher matcher = pattern.matcher(inputString);
+        return  matcher.matches();
     }
 
-    public boolean validateSignUp(User user){
-        Pattern pattern = Pattern.compile(EMAIL);
 
-        pattern.matcher(user.getEmail());
-
-
-
-        return true;
-    }
-
-    public boolean validateLogin(User user){
-        return true;
-    }
-
-    public boolean validateRide(Ride ride) {
-        return true;
-    }
-
-    public boolean validateBet(Bet bet) {
-        return true;
-    }
-    public boolean validateMoney(User user) {
-        return true;
-    }
 }

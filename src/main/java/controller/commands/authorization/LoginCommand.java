@@ -9,6 +9,7 @@ import services.UserService;
 import services.impl.UserServiceImpl;
 import util.constants.Attributes;
 import util.constants.Pages;
+import util.validators.LoginValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,14 +26,14 @@ public class LoginCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
             User loginUser = new LoginParser(request).getEntity();//TODO
-
-            User existingUser; //TODO
+            User existingUser;
             try {
-
-                existingUser = userService.login(loginUser);
-                request.getSession().setAttribute(Attributes.USER, existingUser);
-                return Pages.CABINET;
-
+                LoginValidator loginValidator = new LoginValidator();
+                if(loginValidator.validate(loginUser)){
+                    existingUser = userService.login(loginUser);
+                    request.getSession().setAttribute(Attributes.USER, existingUser);
+                    return Pages.CABINET;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

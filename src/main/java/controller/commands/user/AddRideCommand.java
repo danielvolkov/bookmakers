@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by daniel on 1/23/17.
+ * @author  Daniil Volkov
  */
 public class AddRideCommand implements Command {
     RideService rideService = RideServiceImpl.getInstance();

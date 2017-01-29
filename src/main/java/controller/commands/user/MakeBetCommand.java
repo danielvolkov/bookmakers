@@ -9,6 +9,8 @@ import services.BetService;
 import services.impl.BetServiceImpl;
 import util.constants.Attributes;
 import util.constants.Pages;
+import util.validators.BetValidator;
+import util.validators.LoginValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,10 +27,12 @@ public class MakeBetCommand implements Command {
 
         if (client.getRole().equals(Roles.CLIENT)){
             Bet bet = new BetParser(request).getEntity();
+            BetValidator betValidator = new BetValidator();
             try {
-
-                betService.makeBet(client,bet);
-                request.setAttribute(Attributes.SUCCESS, Attributes.SUCCESS_MSG);
+                if(betValidator.validate(bet)) {
+                    betService.makeBet(client, bet);
+                    request.setAttribute(Attributes.SUCCESS, Attributes.SUCCESS_MSG);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute(Attributes.ERROR, Attributes.DATABASE_ERROR);

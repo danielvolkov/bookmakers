@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
- * Created by daniel on 1/23/17.
+ * @author  Daniil Volkov
  */
 public class RideParser  {
     private static final Logger logger = Logger.getLogger(RideParser.class);
     Ride ride;
 
-    public RideParser(User user, HttpServletRequest request) {
+    public RideParser(User bookmaker, HttpServletRequest request) {
 
         String dateString = request.getParameter(Attributes.DATE);
         Long maxSumm = MoneyTypeConverter.doubleToLong( Double.parseDouble(request.getParameter(Attributes.MAX_BET)));
         Double coeff = Double.parseDouble(request.getParameter(Attributes.COEF));
         Date date = DateUtil.dateParser(dateString);
-        this.ride = new Ride(user.getUserId(), date, maxSumm, coeff);
+        this.ride = new Ride(bookmaker.getUserId(), date, maxSumm, coeff);
     }
 
     public Ride getEntity() {

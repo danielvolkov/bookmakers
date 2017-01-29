@@ -12,7 +12,7 @@ import util.constants.Attributes;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by daniel on 1/21/17.
+ * @author  Daniil Volkov
  */
 public class SignUpParser {
     private static final Logger logger = Logger.getLogger(SignUpParser.class);
