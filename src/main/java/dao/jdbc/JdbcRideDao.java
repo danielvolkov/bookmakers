@@ -3,6 +3,7 @@ package dao.jdbc;
 import dao.interfaces.RideDao;
 import model.entity.Ride;
 
+import org.apache.log4j.Logger;
 import util.constants.Attributes;
 
 import java.sql.*;
@@ -13,6 +14,8 @@ import java.util.*;
  * Created by daniel on 07/01/17.
  */
 public class JdbcRideDao implements RideDao {
+
+    private static final Logger logger = Logger.getLogger(JdbcRideDao.class);
 
     public static final String CREATE = "INSERT INTO rides (start_time, is_finished, bookmaker_id,max_summ,coefficient) " +
             "VALUES(?, ?, ?, ?, ?)";

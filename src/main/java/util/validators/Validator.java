@@ -29,6 +29,11 @@ public class Validator {
     }
 
     public boolean validateSignUp(User user){
+        Pattern pattern = Pattern.compile(EMAIL);
+
+        pattern.matcher(user.getEmail());
+
+
 
         return true;
     }

@@ -8,6 +8,7 @@ import dao.interfaces.BetDao;
 import dao.interfaces.HorseDao;
 import dao.interfaces.RideDao;
 import dao.interfaces.UserDao;
+import org.apache.log4j.Logger;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -24,6 +25,8 @@ import java.util.Properties;
  * Created by daniel on 05/01/17.
  */
 public class JdbcDaoFactory implements DaoFactory {
+
+    private static final Logger logger = Logger.getLogger(JdbcDaoFactory.class);
 
 
     private static final String DB_URL = "url";

@@ -1,5 +1,7 @@
 package controller.security;
 
+import org.apache.log4j.Logger;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -7,6 +9,8 @@ import java.security.NoSuchAlgorithmException;
  * Created by daniel on 1/21/17.
  */
 public class Encryptor {
+
+    private static final Logger logger = Logger.getLogger(Encryptor.class);
 
     public static final String MD5 = "MD5";
     public static final int RADIX = 16;

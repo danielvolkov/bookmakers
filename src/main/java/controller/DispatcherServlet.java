@@ -4,6 +4,7 @@ import controller.commands.Command;
 import controller.commands.holder.CommandHolder;
 import controller.commands.init.CommandHolderInit;
 import exceptions.CommandNotFoundException;
+import org.apache.log4j.Logger;
 
 
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ import java.io.IOException;
  * Created by daniel on 14/01/17.
  */
 public class DispatcherServlet extends HttpServlet {
-
+    private static final Logger logger = Logger.getLogger(DispatcherServlet.class);
     private CommandHolder commandHolder;
 
     @Override

@@ -2,6 +2,7 @@ package dao.jdbc;
 
 import dao.interfaces.UserDao;
 import model.entity.User;
+import org.apache.log4j.Logger;
 import util.constants.Attributes;
 
 import java.sql.Connection;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class JdbcUserDao implements UserDao {
 
+    private static final Logger logger = Logger.getLogger(JdbcUserDao.class);
 
     public static final String CREATE= "INSERT INTO users (name, password, email, role_id,balance) " +
             "VALUES(?, ?, ?, ?, ?)";

@@ -4,6 +4,7 @@ import dao.interfaces.BetDao;
 import model.entity.Bet;
 import model.entity.Ride;
 import model.entity.User;
+import org.apache.log4j.Logger;
 import util.constants.Attributes;
 
 import java.sql.*;
@@ -14,6 +15,8 @@ import java.util.List;
  * Created by daniel on 07/01/17.
  */
 public class JdbcBetDao implements BetDao {
+
+    private static final Logger logger = Logger.getLogger(JdbcBetDao.class);
 
     public static final String CREATE = "INSERT INTO bets ( ride_id, summ, bet_type_id, horse_id,client_id) " +
             "VALUES(?, ?, ?, ?,?)";

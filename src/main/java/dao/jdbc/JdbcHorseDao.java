@@ -2,6 +2,7 @@ package dao.jdbc;
 
 import dao.interfaces.HorseDao;
 import model.entity.Horse;
+import org.apache.log4j.Logger;
 import util.constants.Attributes;
 
 import java.sql.Connection;
@@ -15,6 +16,8 @@ import java.util.List;
  * Created by daniel on 07/01/17.
  */
 public class JdbcHorseDao implements HorseDao {
+
+    private static final Logger logger = Logger.getLogger(JdbcHorseDao.class);
 
     public static final String SELECT_ALL ="SELECT * FROM horses";
     public static final String SELECT_BY_ID ="SELECT * FROM horses WHERE horse_id = ?";

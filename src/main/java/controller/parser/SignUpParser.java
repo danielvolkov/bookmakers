@@ -2,6 +2,7 @@ package controller.parser;
 
 import controller.security.Encryptor;
 import model.entity.User;
+import org.apache.log4j.Logger;
 import util.constants.Attributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by daniel on 1/21/17.
  */
 public class SignUpParser {
+    private static final Logger logger = Logger.getLogger(SignUpParser.class);
     private User user;
 
     public SignUpParser(HttpServletRequest request) {

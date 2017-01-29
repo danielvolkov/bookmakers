@@ -2,7 +2,9 @@ package controller.filters;
 
 
 import controller.commands.authorization.PageNotFoundCommand;
+import controller.security.Encryptor;
 import model.entity.User;
+import org.apache.log4j.Logger;
 import util.constants.Attributes;
 import util.constants.Pages;
 import util.constants.UriHolder;
@@ -15,6 +17,9 @@ import java.io.IOException;
  * Created by daniel on 1/28/17.
  */
 public class AuthenticationFilter implements Filter {
+
+    private static final Logger logger = Logger.getLogger(AuthenticationFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 

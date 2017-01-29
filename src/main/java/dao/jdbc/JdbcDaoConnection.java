@@ -2,6 +2,7 @@ package dao.jdbc;
 
 import dao.DaoConnection;
 import dao.factory.DaoFactory;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,6 +11,8 @@ import java.sql.SQLException;
  * Created by daniel on 13/01/17.
  */
 public class JdbcDaoConnection implements DaoConnection{
+
+    private static final Logger logger = Logger.getLogger(JdbcDaoConnection.class);
 
     private Connection connection;
     private boolean isTransactionCommited = false;

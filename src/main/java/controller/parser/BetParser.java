@@ -3,6 +3,7 @@ package controller.parser;
 import model.entity.Bet;
 import model.entity.Ride;
 import model.entity.User;
+import org.apache.log4j.Logger;
 import util.MoneyTypeConverter;
 import util.constants.Attributes;
 
@@ -12,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
  * Created by daniel on 1/24/17.
  */
 public class BetParser {
-    Bet bet;
+    private static final Logger logger = Logger.getLogger(BetParser.class);
+    private Bet bet;
 
     public BetParser(HttpServletRequest request) {
         Ride ride = (Ride) request.getSession().getAttribute(Attributes.RIDE);
