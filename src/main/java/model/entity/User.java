@@ -23,6 +23,7 @@ public class User {
 
 
     public User() {
+        this.balance = 0L;
     }
 
 

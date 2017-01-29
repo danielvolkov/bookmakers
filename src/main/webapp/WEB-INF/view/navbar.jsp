@@ -1,5 +1,6 @@
 <%@ page import="util.constants.Attributes" %>
-<%@ page import="model.entity.User" %><%--
+<%@ page import="model.entity.User" %>
+<%@ page import="model.entity.Roles" %><%--
   Created by IntelliJ IDEA.
   User: daniel
   Date: 1/20/17
@@ -15,11 +16,13 @@
                 <li><a href="/">Bookmaker`s</a></li>
 
             </ul>
-            <%if (user!=null){%>
+            <% if (user!=null){%>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 5%">
                 <li><a href="/cabinet">Cabinet</a></li>
                 <li><a href="/rides">Rides</a></li>
+                <% if (!user.getRole().equals(Roles.ADMIN)){%>
                 <li><a href="/history">Bet Histiry</a></li>
+                <%}%>
                 <li><a href="/logout">Log Out </a></li>
             </ul>
                 <%}%>
