@@ -1,9 +1,13 @@
 package controller.parser;
 
 import controller.security.Encryptor;
+import model.entity.Roles;
 import model.entity.User;
 import org.apache.log4j.Logger;
+import util.UserUtil;
 import util.constants.Attributes;
+
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,12 +19,12 @@ public class SignUpParser {
     private User user;
 
     public SignUpParser(HttpServletRequest request) {
-        String name = request.getParameter(Attributes.NAME);
-        String password = request.getParameter(Attributes.PWD);
-        String email = request.getParameter(Attributes.EMAIL);
-        String role = request.getParameter(Attributes.ROLE);
-
-        user = new User(email, Encryptor.encrypt(password),name,role);
+        user = new User();
+        user.setName(request.getParameter(Attributes.NAME));
+        user.setPassword(request.getParameter(Attributes.PWD));
+        user.setEmail(request.getParameter(Attributes.EMAIL));
+        Roles role = UserUtil.stringToEnumRole(request.getParameter(Attributes.ROLE));
+        user.setRole(role);
     }
 
 

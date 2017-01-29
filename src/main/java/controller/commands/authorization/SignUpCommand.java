@@ -23,10 +23,10 @@ public class SignUpCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = new SignUpParser(request).getEntity();
         try {
-            if(userService.findUser(user.getEmail()) == null){
+            //todo validators
                 userService.create(user);
                 return Pages.LOGIN;
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

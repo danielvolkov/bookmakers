@@ -1,5 +1,6 @@
 package services.impl;
 
+import controller.security.Encryptor;
 import dao.DaoConnection;
 import dao.factory.DaoFactory;
 import dao.interfaces.UserDao;
@@ -31,19 +32,35 @@ public class UserServiceImpl implements UserService{
         return LazyHolder.INSTANCE;
     }
 
+
     @Override
     public void create(User user) {
         Objects.requireNonNull(user);
         try(DaoConnection daoConnection = daoFactory.getDaoConnection()) {
             UserDao userDao = daoFactory.createUserDao(daoConnection);
+            user.setPassword(Encryptor.encrypt(user.getPassword()));
             userDao.create(user);
         }
     }
 
     @Override
-    public void delete(Integer id) {
-        throw new UnsupportedOperationException();
+    public User login(User loginUser) {
+        Objects.requireNonNull(loginUser);
+        try(DaoConnection daoConnection = daoFactory.getDaoConnection()) {
+            UserDao userDao = daoFactory.createUserDao(daoConnection);
+            User existUser = userDao.findByEmail(loginUser.getEmail());
+            if ( existUser != null){
+                String existPassword = existUser.getPassword();
+                String loginPassword = loginUser.getPassword();
+                if (existPassword.equals(loginPassword)){
+                    existUser.setPassword(null);
+                    return existUser;
+                }
+            }
+            throw new RuntimeException();
+        }
     }
+
 
     @Override
     public void updateBalance(User user,Long summ) throws Exception {
@@ -66,6 +83,7 @@ public class UserServiceImpl implements UserService{
         }
 
     }
+
     public void setDaoFactory(DaoFactory daoFactory) {
         this.daoFactory = daoFactory;
     }

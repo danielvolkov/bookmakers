@@ -18,15 +18,19 @@ public class JdbcBetDao implements BetDao {
 
     private static final Logger logger = Logger.getLogger(JdbcBetDao.class);
 
-    public static final String CREATE = "INSERT INTO bets ( ride_id, summ, bet_type_id, horse_id,client_id) " +
+    public static final String CREATE =
+            "INSERT INTO bets ( ride_id, summ, bet_type_id, horse_id,client_id) " +
             "VALUES(?, ?, ?, ?,?)";
-    public static final String FIND_BY_USER = "SELECT * FROM bets " +
+    public static final String FIND_BY_USER =
+            "SELECT * FROM bets " +
             "JOIN rides ON bets.ride_id = rides.ride_id " +
             "JOIN users ON rides.bookmaker_id = users.user_id "+
             "LEFT JOIN bet_type ON bets.bet_type_id = bet_type.bet_type_id WHERE client_id = ?";
-    public static final String FIND_BY_RIDE = "SELECT * FROM bets JOIN bet_type ON bets.bet_type_id = bet_type.bet_type_id  WHERE ride_id = ?";
+    public static final String FIND_BY_RIDE =
+            "SELECT * FROM bets JOIN bet_type ON bets.bet_type_id = bet_type.bet_type_id  WHERE ride_id = ?";
 
-    public static final String UPDATE_BET = "UPDATE bets SET is_passed = ?, total_sum = ? WHERE bet_id = ?";
+    public static final String UPDATE_BET =
+            "UPDATE bets SET is_passed = ?, total_summ = ? WHERE bet_id = ?";
 
     private Connection connection;
 
@@ -124,15 +128,16 @@ public class JdbcBetDao implements BetDao {
     }
 
     private Bet getBetFromResultSet(ResultSet resultSet) throws SQLException{
-
-        Long total = resultSet.getLong(Attributes.TOTAL_SUMM);
-        Integer rideId = resultSet.getInt(Attributes.RIDE_ID);
-        Long betSumm = resultSet.getLong(Attributes.BET_SUMM);
-        Integer horseId = resultSet.getInt(Attributes.HORSE_ID);
-        Boolean isPassed = resultSet.getBoolean(Attributes.IS_PASSED);
-        String betType = resultSet.getString(Attributes.BET_TYPE);
-        Integer userId = resultSet.getInt(Attributes.CLIENT_ID);
-        return new Bet(total,isPassed,betSumm,betType,horseId,rideId,userId);
+        Bet bet = new Bet();
+        bet.setBetId(resultSet.getInt(Attributes.BET_ID));
+        bet.setTotalSumm(resultSet.getLong(Attributes.TOTAL_SUMM));
+        bet.setRideId(resultSet.getInt(Attributes.RIDE_ID));
+        bet.setBetSum(resultSet.getLong(Attributes.BET_SUMM));
+        bet.setHorseId(resultSet.getInt(Attributes.HORSE_ID));
+        bet.setPassed(resultSet.getBoolean(Attributes.IS_PASSED));
+        bet.setBetTypeString(resultSet.getString(Attributes.BET_TYPE));
+        bet.setUserId(resultSet.getInt(Attributes.CLIENT_ID));
+        return bet;
     }
 
 }

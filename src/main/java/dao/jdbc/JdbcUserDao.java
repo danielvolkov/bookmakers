@@ -3,6 +3,7 @@ package dao.jdbc;
 import dao.interfaces.UserDao;
 import model.entity.User;
 import org.apache.log4j.Logger;
+import util.UserUtil;
 import util.constants.Attributes;
 
 import java.sql.Connection;
@@ -59,7 +60,7 @@ public class JdbcUserDao implements UserDao {
             statement.setString(1, user.getName());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
-            statement.setInt(4, user.getRoleInt());
+            statement.setInt(4, user.getRole().getRoleId());
             statement.setLong(5,user.getBalance());
             statement.executeUpdate();
             //TODO
@@ -108,13 +109,14 @@ public class JdbcUserDao implements UserDao {
     }
 
     private User getUserFromResultSet(ResultSet resultSet) throws SQLException{
-
-        Integer userId = resultSet.getInt(Attributes.USER_ID);
-        String email = resultSet.getString(Attributes.EMAIL);
-        String name = resultSet.getString(Attributes.NAME);
-        String password = resultSet.getString(Attributes.PWD);
+        User user = new User();
+        user.setUserId(resultSet.getInt(Attributes.USER_ID));
+        user.setEmail(resultSet.getString(Attributes.EMAIL));
+        user.setName(resultSet.getString(Attributes.NAME));
+        user.setPassword(resultSet.getString(Attributes.PWD));
         String role = resultSet.getString(Attributes.ROLE);
-        Long balance = resultSet.getLong(Attributes.BALANCE);
-        return new User(userId, email, password, name, role, balance);
+        user.setRole(UserUtil.stringToEnumRole(role));
+        user.setBalance(resultSet.getLong(Attributes.BALANCE));
+        return user;
     }
 }

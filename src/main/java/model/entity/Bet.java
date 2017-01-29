@@ -4,14 +4,19 @@ package model.entity;
  * Created by daniel on 26/12/16.
  */
 public class Bet {
+
     private Integer betId;
     private Long totalSumm;
     private Boolean isPassed;
+
+
+
     private Long betSum;
     private Integer betType;
     private Horse horse;
     private Integer horseId;
     private Ride ride;
+
     private Integer rideId;
     private String betTypeString;
 
@@ -20,6 +25,9 @@ public class Bet {
     }
 
     private Integer userId;
+
+    public Bet() {
+    }
 
     public Bet(Long betSum, Integer betType, Integer horseId, Integer rideId, Integer userId) {
         this.betSum = betSum;
@@ -103,5 +111,29 @@ public class Bet {
     public void setTotalSumm(Long totalSumm) {
         this.totalSumm = totalSumm;
     }
+    public void setBetId(Integer betId) {
+        this.betId = betId;
+    }
+    public void setRideId(Integer rideId) {
+        this.rideId = rideId;
+    }
+    public void setBetSum(Long betSum) {
+        this.betSum = betSum;
+    }
 
+    public void setBetType(Integer betType) {
+        this.betType = betType;
+    }
+
+    public void setHorseId(Integer horseId) {
+        this.horseId = horseId;
+    }
+
+    public void setBetTypeString(String betTypeString) {
+        this.betTypeString = betTypeString;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }

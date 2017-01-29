@@ -1,43 +1,30 @@
 package model.entity;
 
 
-import util.UserUtil;
-
 import java.util.Set;
 
 /**
  * Created by daniel on 26/12/16.
  */
 public class User {
+
     private Integer userId;
     private String email;
     private String password;
     private String name;
     private Long balance;
-    private String role;
+    private Roles role;
     private Set<Bet> betHistory;
 
-    //TODO builder
-    //TODO double to long
+
+    public static int CLIENT = 1;
+    public static int BOOKMAKER = 2;
+    public static int ADMIN = 3;
+
+
     public User() {
     }
 
-    public User(Integer userId, String email, String password, String name, String role, Long balance) {
-        this.userId = userId;
-        this.email = email;
-        this.name = name;
-        this.role = role;
-        this.balance = balance;
-        this.password = password;
-    }
-
-    public User(String email, String password, String name, String role) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.role = role;
-        this.balance = 0L;
-    }
 
     public String getEmail() {
         return email;
@@ -79,11 +66,12 @@ public class User {
         this.betHistory = betHistory;
     }
 
-    public int getRoleInt() {
-        return UserUtil.stringToIntRole(role);
+    public void setRole(Roles role) {
+        this.role = role;
     }
 
-    public String getRole() {
+
+    public Roles getRole() {
         return role;
     }
 
@@ -94,5 +82,11 @@ public class User {
     public Integer getUserId() {
         return userId;
     }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+
+
     // TODO equals and hashcode toString
 }

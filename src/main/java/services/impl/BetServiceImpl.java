@@ -100,6 +100,7 @@ public class BetServiceImpl implements BetService {
                     bet.setTotalSumm( totalSumm );
                     bet.setPassed(true);
                     calculateMoney(ride,bet, userDao);
+                    System.out.println(bet.getBetId());
                     betDao.update(bet);
 
                 }

@@ -22,6 +22,7 @@ public class Attributes {
     public static final String IS_FINISHED = "is_finished";
     public static final String BOOKMAKER_ID = "bookmaker_id";
     public static final String HORSE_ID = "horse_id";
+    public static final String BET_ID = "bet_id";
     public static final String COLOR = "color";
 
     public static final String RIDE = "ride";

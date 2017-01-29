@@ -3,6 +3,7 @@ package controller.commands.user;
 import controller.commands.Command;
 import controller.parser.BetParser;
 import model.entity.Bet;
+import model.entity.Roles;
 import model.entity.User;
 import services.BetService;
 import services.impl.BetServiceImpl;
@@ -22,7 +23,7 @@ public class MakeBetCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User client = (User)request.getSession().getAttribute(Attributes.USER);
 
-        if (client.getRole().equals(Attributes.CLIENT)){
+        if (client.getRole().equals(Roles.CLIENT)){
             Bet bet = new BetParser(request).getEntity();
             try {
 

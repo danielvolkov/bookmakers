@@ -3,6 +3,7 @@ package controller.commands.user;
 import controller.commands.Command;
 import model.entity.Horse;
 import model.entity.Ride;
+import model.entity.Roles;
 import model.entity.User;
 import services.HorseService;
 import services.RideService;
@@ -27,7 +28,7 @@ public class OpenBetCommand implements Command{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User client = (User)request.getSession().getAttribute(Attributes.USER);
 
-        if (client.getRole().equals(Attributes.CLIENT)){
+        if (client.getRole().equals(Roles.CLIENT)){
             Integer rideId = Integer.parseInt(request.getParameter(Attributes.RIDE));
             try {
                 Ride ride = rideService.findRide(rideId);

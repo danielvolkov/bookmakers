@@ -28,20 +28,10 @@ public class LoginCommand implements Command {
 
             User existingUser; //TODO
             try {
-                existingUser = userService.findUser(loginUser.getEmail());
-                //TODO in services
-                if (existingUser != null) {
-                    String logPassword = loginUser.getPassword();
-                    String existPassword = existingUser.getPassword();
 
-                    if (logPassword.equals(existPassword)) {
-                        HttpSession session = request.getSession();
-                        existingUser.setPassword(null);
-                        session.setAttribute(Attributes.USER, existingUser);
-
-                        return Pages.CABINET;
-                    }
-                }
+                existingUser = userService.login(loginUser);
+                request.getSession().setAttribute(Attributes.USER, existingUser);
+                return Pages.CABINET;
 
             } catch (Exception e) {
                 e.printStackTrace();

@@ -7,6 +7,7 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="util.MoneyTypeConverter" %>
 <%@ page import="util.DateUtil" %>
+<%@ page import="model.entity.Roles" %>
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -39,11 +40,11 @@
     String action = "";
     String actionMessage = "";
 
-    if(user.getRole().equals(Attributes.ADMIN)){
+    if(user.getRole().equals(Roles.ADMIN)){
         action = UriHolder.END_RIDE;
         actionMessage = "Calculate Ride results";
     };
-    if(user.getRole().equals(Attributes.CLIENT)){
+    if(user.getRole().equals(Roles.CLIENT)){
         action = UriHolder.BET;
         actionMessage = "Make Bet";
 
@@ -54,7 +55,7 @@
     <div class="text-center">
         <h1 >Rides</h1>
         <h3>Avialable rides for bet`s</h3>
-            <% if (user.getRole().equals(Attributes.BOOKMAKER)){%>
+            <% if (user.getRole().equals(Roles.BOOKMAKER)){%>
                 <jsp:include page="/WEB-INF/view/bookmakerRide.jsp"/>
             <%}%>
     </div>
@@ -83,7 +84,7 @@
             <td>${ride.bookmakerEmail}</td>
             <td>${MoneyTypeConverter.longToDouble(ride.getMaxSumm())} USD</td>
             <td>${ride.coefficient}</td>
-            <% if (!user.getRole().equals(Attributes.BOOKMAKER)){%>
+            <% if (!user.getRole().equals(Roles.BOOKMAKER)){%>
             <td>
             <c:if test="${!ride.finished}">
                 <form  class="form-inline" method="post" action="<%=action%>">

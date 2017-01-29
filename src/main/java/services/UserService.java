@@ -10,7 +10,7 @@ import java.sql.SQLException;
  */
 public interface UserService {
     void create(User user);
-    void delete(Integer id);
+    User login(User user);
     void updateBalance(User user,Long summ) throws Exception;
     User findUser(String email) throws Exception;
 }

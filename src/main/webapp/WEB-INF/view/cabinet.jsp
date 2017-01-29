@@ -25,7 +25,7 @@
         <h1>Cabiet</h1>
         <h3>Hello, <strong><%=user.getName()%></strong></h3>
         <p class="lead">
-            Your role is <strong><%=user.getRole()%></strong><br>
+            Your role is <strong><%=user.getRole().name()%></strong><br>
             Your email is <strong><%=user.getEmail()%></strong><br>
             Your current balance is <strong><%=MoneyTypeConverter.longToDouble(user.getBalance())%> USD </strong><br>
         </p>
