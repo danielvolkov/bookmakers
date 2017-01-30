@@ -5,7 +5,8 @@ import dao.DaoConnection;
 import dao.factory.DaoFactory;
 import dao.interfaces.UserDao;
 import dao.jdbc.JdbcDaoFactory;
-import exceptions.NoSuchMoneyException;
+
+import exceptions.NosuchMoneyException;
 import model.entity.User;
 import services.UserService;
 
@@ -84,7 +85,7 @@ public class UserServiceImpl implements UserService{
 
     }
 
-    public void withdrawMoney(User user,Long summ)  {
+    public void withdrawMoney(User user,Long summ) throws NosuchMoneyException {
         try (DaoConnection daoConnection = daoFactory.getDaoConnection()) {
             UserDao userDao = daoFactory.createUserDao(daoConnection);
             daoConnection.begin();
@@ -94,7 +95,7 @@ public class UserServiceImpl implements UserService{
                 existUser.deposite(summ*(-1));
                 userDao.update(existUser);
             }else {
-                throw new NoSuchMoneyException();
+                throw new NosuchMoneyException();
             }
 
             daoConnection.commit();
