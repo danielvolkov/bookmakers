@@ -9,8 +9,6 @@ public class Bet {
     private Long totalSumm;
     private Boolean isPassed;
 
-
-
     private Long betSum;
     private Integer betType;
     private Horse horse;

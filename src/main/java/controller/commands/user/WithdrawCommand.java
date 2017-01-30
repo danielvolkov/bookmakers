@@ -7,6 +7,7 @@ import services.impl.UserServiceImpl;
 import util.MoneyTypeConverter;
 import util.constants.Attributes;
 import util.constants.Pages;
+import util.validators.MoneyValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,12 +21,19 @@ public class WithdrawCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
+        MoneyValidator moneyValidator = new MoneyValidator();
+        String money = request.getParameter(Attributes.WITHDRAW);
 
-        Long withdraw = MoneyTypeConverter.doubleToLong(
-                Double.parseDouble(request.getParameter(Attributes.WITHDRAW)));
         try {
-            userService.updateBalance(user,withdraw*(-1));
-            user = userService.findUser(user.getEmail());
+            if(moneyValidator.validate(money)) {
+                Long withdraw = MoneyTypeConverter.doubleToLong(
+                        Double.parseDouble(money));
+                userService.withdrawMoney(user, withdraw );
+                user = userService.findUser(user.getEmail());
+                request.getSession().setAttribute(Attributes.CABINET_ERROR,null);
+            }else {
+                request.getSession().setAttribute(Attributes.CABINET_ERROR,Attributes.VALIDATION_MSG);
+            }
         } catch (Exception e) {
             request.getSession().setAttribute(Attributes.CABINET_ERROR,Attributes.CABINET_MSG);
             return Pages.CABINET;

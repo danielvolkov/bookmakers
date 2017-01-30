@@ -26,12 +26,14 @@ public class MakeBetCommand implements Command {
         User client = (User)request.getSession().getAttribute(Attributes.USER);
 
         if (client.getRole().equals(Roles.CLIENT)){
-            Bet bet = new BetParser(request).getEntity();
-            BetValidator betValidator = new BetValidator();
             try {
+                Bet bet = new BetParser(request).getEntity();
+                BetValidator betValidator = new BetValidator();
                 if(betValidator.validate(bet)) {
                     betService.makeBet(client, bet);
                     request.setAttribute(Attributes.SUCCESS, Attributes.SUCCESS_MSG);
+                } else {
+                    request.setAttribute(Attributes.ERROR, Attributes.VALIDATION_MSG);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -39,7 +41,6 @@ public class MakeBetCommand implements Command {
             }
             return Pages.BET;
         }
-
         return Pages.PAGE_NOT_FOUND;
 
     }

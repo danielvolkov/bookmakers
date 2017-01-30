@@ -24,7 +24,7 @@ public class OpenCabinetCommand implements Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        request.getSession().setAttribute(Attributes.CABINET_ERROR,null);
         request.getSession().setAttribute(Attributes.USER,user);
         return Pages.CABINET;
 

@@ -13,4 +13,5 @@ public interface UserService {
     User login(User user);
     void updateBalance(User user,Long summ) throws Exception;
     User findUser(String email) throws Exception;
+    void withdrawMoney(User user,Long summ);
 }

@@ -8,11 +8,7 @@ import model.entity.Ride;
  */
 public class BetValidator implements Validator {
     public Boolean validate(Bet bet){
-        if( validateValue(bet.getBetSum().toString(),MONEY) ){
-            return true;
-        } else {
-            return false;
-        }
+        return validateValue(bet.getBetSum().toString(),MONEY);
 
     }
 }

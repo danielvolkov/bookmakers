@@ -60,9 +60,9 @@ public class RideServiceImpl implements RideService {
             daoConnection.begin();
             Ride existingRide = rideDao.find(rideId);
             if(!existingRide.isFinished()){
-              Ride newRide = generateResults(existingRide);
-              rideDao.update(newRide);
-              calculateBets(newRide);
+                Ride newRide = generateResults(existingRide);
+                rideDao.update(newRide);
+                calculateBets(newRide);
             }
 
             daoConnection.commit();

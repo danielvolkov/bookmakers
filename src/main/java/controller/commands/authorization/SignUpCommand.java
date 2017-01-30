@@ -23,12 +23,15 @@ public class SignUpCommand implements Command {
     UserService userService = UserServiceImpl.getInstance();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User user = new SignUpParser(request).getEntity();
-        SignupValidator signupValidator = new SignupValidator();
+        User newUser;
         try {
-            if(signupValidator.validate(user)) {
-                userService.create(user);
+            newUser = new SignUpParser(request).getEntity();
+            SignupValidator signupValidator = new SignupValidator();
+            if(signupValidator.validate(newUser)) {
+                userService.create(newUser);
                 return Pages.LOGIN;
+            } else {
+                request.getSession().setAttribute(Attributes.SIGNUP_ERROR, Attributes.VALIDATION_MSG);
             }
         } catch (Exception e) {
             e.printStackTrace();

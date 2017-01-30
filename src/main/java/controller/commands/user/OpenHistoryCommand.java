@@ -23,7 +23,6 @@ public class OpenHistoryCommand implements Command {
         User user = (User) request.getSession().getAttribute(Attributes.USER);
         try {
             List<Bet> bets = betService.findBetsByUser(user);
-
             request.getSession().setAttribute(Attributes.BETS,bets);
 
         } catch (Exception e) {

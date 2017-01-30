@@ -28,7 +28,7 @@ public class ConfirmRideResultsCommand implements Command {
         try {
             rideService.updateWithConfirm(rideId);
             List<Ride> rides = rideService.findRides();
-            request.getSession().setAttribute(Attributes.RIDES,rides);
+            request.getSession().setAttribute(Attributes.RIDES, rides);
 
         } catch (Exception e) {
             e.printStackTrace();

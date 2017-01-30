@@ -42,6 +42,7 @@ public class Attributes {
     public static final String CABINET_MSG=  "error! try again";
     public static final String DATABASE_ERROR = "can not read database";
     public static final String SUCCESS_MSG = "Success!!! Go back to Rides";
+    public static final String VALIDATION_MSG = "VALIDATION ERROR, check your input`s";
 
 
     public static final String DEPOSITE = "deposite";

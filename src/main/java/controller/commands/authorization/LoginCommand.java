@@ -25,9 +25,10 @@ public class LoginCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-            User loginUser = new LoginParser(request).getEntity();//TODO
+            User loginUser;
             User existingUser;
             try {
+                loginUser = new LoginParser(request).getEntity();
                 LoginValidator loginValidator = new LoginValidator();
                 if(loginValidator.validate(loginUser)){
                     existingUser = userService.login(loginUser);

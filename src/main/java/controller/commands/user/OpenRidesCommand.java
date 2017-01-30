@@ -24,7 +24,7 @@ public class OpenRidesCommand implements Command {
         try {
             List<Ride> rides = rideService.findRides();
             request.getSession().setAttribute(Attributes.RIDES,rides);
-
+            request.getSession().setAttribute(Attributes.ERROR, null);
         } catch (Exception e) {
             e.printStackTrace();
             request.getSession().setAttribute(Attributes.RIDES_ERROR, Attributes.DATABASE_ERROR);

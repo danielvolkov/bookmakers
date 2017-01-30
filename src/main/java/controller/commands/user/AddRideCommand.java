@@ -8,6 +8,7 @@ import services.RideService;
 import services.impl.RideServiceImpl;
 import util.constants.Attributes;
 import util.constants.Pages;
+import util.validators.RideValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,16 +24,21 @@ public class AddRideCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User bookmaker = (User) request.getSession().getAttribute(Attributes.USER);
 
-        Ride ride =  new RideParser(bookmaker,request).getEntity();
-
+        Ride ride;
         try {
-            rideService.create(ride);
-            List<Ride> rides = rideService.findRides();
-            request.getSession().setAttribute(Attributes.RIDES,rides);
+            ride =  new RideParser(bookmaker,request).getEntity();
+            RideValidator rideValidator = new RideValidator();
+            if (rideValidator.validate(ride)) {
+                rideService.create(ride);
+                List<Ride> rides = rideService.findRides();
+                request.getSession().setAttribute(Attributes.RIDES, rides);
+            } else {
+                request.getSession().setAttribute(Attributes.ERROR, Attributes.VALIDATION_MSG);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.getSession().setAttribute(Attributes.RIDES_ERROR, Attributes.DATABASE_ERROR);
+            request.getSession().setAttribute(Attributes.ERROR, Attributes.DATABASE_ERROR);
         }
         return Pages.RIDES;
 

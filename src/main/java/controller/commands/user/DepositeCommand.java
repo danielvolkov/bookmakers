@@ -7,6 +7,7 @@ import services.impl.UserServiceImpl;
 import util.MoneyTypeConverter;
 import util.constants.Attributes;
 import util.constants.Pages;
+import util.validators.MoneyValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,12 +22,19 @@ public class DepositeCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         User user = (User) request.getSession().getAttribute(Attributes.USER);
+        MoneyValidator moneyValidator = new MoneyValidator();
+        String money = request.getParameter(Attributes.DEPOSITE);
 
-        Long deposite = MoneyTypeConverter.doubleToLong(
-                Double.parseDouble(request.getParameter(Attributes.DEPOSITE)));
         try {
-            userService.updateBalance(user, deposite);
-            user = userService.findUser(user.getEmail());
+            if(moneyValidator.validate(money)) {
+                Long deposite = MoneyTypeConverter.doubleToLong(
+                        Double.parseDouble(money));
+                userService.updateBalance(user, deposite);
+                user = userService.findUser(user.getEmail());
+                request.getSession().setAttribute(Attributes.CABINET_ERROR,null);
+            }else {
+                request.getSession().setAttribute(Attributes.CABINET_ERROR,Attributes.VALIDATION_MSG);
+            }
         } catch (Exception e) {
             request.getSession().setAttribute(Attributes.CABINET_ERROR,Attributes.CABINET_MSG);
             return Pages.CABINET;

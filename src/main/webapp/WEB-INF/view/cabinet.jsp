@@ -22,7 +22,7 @@
 <% User user = (User) request.getSession().getAttribute(Attributes.USER);%>
 <div class="col-md-6 col-md-offset-3 " >
     <div class="jumbotron " style="padding: 5%">
-        <h1>Cabiet</h1>
+        <h1>Cabinet</h1>
         <h3>Hello, <strong><%=user.getName()%></strong></h3>
         <p class="lead">
             Your role is <strong><%=user.getRole().name()%></strong><br>
@@ -45,6 +45,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit withdraw summ</button>
         </form>
+        <label class="label-warning"> ${cabinetError}</label>
 
     </div>
 </div>

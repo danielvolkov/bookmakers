@@ -95,8 +95,7 @@ public class BetServiceImpl implements BetService {
             for (Bet bet : bets ) {
                 Integer predictionHorseId =  getHorseIdFromRideByBetType(ride,bet);
                 if(isBetPassed(bet, predictionHorseId)){
-                    Long totalSumm = MoneyTypeConverter
-                            .doubleToLong(bet.getBetSum()*ride.getCoefficient()) ;
+                    Long totalSumm = (long) (bet.getBetSum()*ride.getCoefficient()) ;
                     bet.setTotalSumm( totalSumm );
                     bet.setPassed(true);
                     calculateMoney(ride,bet, userDao);

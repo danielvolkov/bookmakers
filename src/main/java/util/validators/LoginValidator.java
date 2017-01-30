@@ -7,11 +7,8 @@ import model.entity.User;
  */
 public class LoginValidator implements Validator {
     public Boolean validate(User user){
-        if(validateValue(user.getEmail(),EMAIL) &&
-                validateValue(user.getPassword(),PASSWORD)){
-            return true;
-        } else {
-            return false;
-        }
+        return validateValue(user.getEmail(),EMAIL) &&
+                validateValue(user.getPassword(),PASSWORD);
+
     }
 }

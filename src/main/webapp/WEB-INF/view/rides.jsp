@@ -58,6 +58,7 @@
             <% if (user.getRole().equals(Roles.BOOKMAKER)){%>
                 <jsp:include page="/WEB-INF/view/bookmakerRide.jsp"/>
             <%}%>
+        <label class="label-warning"> ${Error}</label>
     </div>
     <table class="table table-bordered">
         <thead>
