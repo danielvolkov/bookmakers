@@ -27,24 +27,6 @@ public class Bet {
     public Bet() {
     }
 
-    public Bet(Long betSum, Integer betType, Integer horseId, Integer rideId, Integer userId) {
-        this.betSum = betSum;
-        this.betType = betType;
-        this.horseId = horseId;
-        this.rideId = rideId;
-        this.userId = userId;
-        this.isPassed = false;
-    }
-
-    public Bet( Long totalSumm, Boolean isPassed, Long betSum, String betTypeString, Integer horseId, Integer rideId, Integer userId) {
-        this.totalSumm = totalSumm;
-        this.isPassed = isPassed;
-        this.betSum = betSum;
-        this.betTypeString = betTypeString;
-        this.horseId = horseId;
-        this.rideId = rideId;
-        this.userId = userId;
-    }
 
     public Long getBetSum() {
         return betSum;
@@ -100,10 +82,6 @@ public class Bet {
 
     public String getBetTypeString() {
         return betTypeString;
-    }
-
-    public void setPassed(Boolean passed) {
-        isPassed = passed;
     }
 
     public void setTotalSumm(Long totalSumm) {

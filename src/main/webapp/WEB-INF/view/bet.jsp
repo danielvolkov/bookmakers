@@ -54,6 +54,7 @@
 
             <div class="form-group">
                 <label>Enter Summ: (MAX SUMM IS <%=MoneyTypeConverter.longToDouble(ride.getMaxSumm())%> USD)</label>
+                <label class="label-warning">${Error}</label>
                 <input type="text" class="form-control" name="<%=Attributes.SUMM%>">
             </div>
             <div class="text-center">

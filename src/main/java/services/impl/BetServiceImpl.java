@@ -7,15 +7,18 @@ import dao.interfaces.HorseDao;
 import dao.interfaces.RideDao;
 import dao.interfaces.UserDao;
 import dao.jdbc.JdbcDaoFactory;
+import exceptions.MaxBetException;
+
+import exceptions.NosuchMoneyException;
 import model.entity.Bet;
 import model.entity.Horse;
 import model.entity.Ride;
 import model.entity.User;
 import services.BetService;
-import util.MoneyTypeConverter;
 import util.constants.Attributes;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by daniel on 14/01/17.
@@ -38,23 +41,30 @@ public class BetServiceImpl implements BetService {
 
 
     @Override
-    public void makeBet(User client, Bet bet) {
+    public void makeBet(User client, Bet bet) throws NosuchMoneyException, MaxBetException {
+        Objects.requireNonNull(bet);
         try(DaoConnection daoConnection = daoFactory.getDaoConnection()) {
             BetDao betDao = daoFactory.createBetDao(daoConnection);
             UserDao userDao = daoFactory.createUserDao(daoConnection);
             RideDao rideDao = daoFactory.createRideDao(daoConnection);
-            if( bet != null  ){
-                daoConnection.begin();
-                betDao.create(bet);
-                User existClient = userDao.findByEmail(client.getEmail());
+            daoConnection.begin();
+            User existClient = userDao.findByEmail(client.getEmail());
+            if( existClient.getBalance() >= bet.getBetSum() ) {
                 Ride ride = rideDao.find(bet.getRideId());
-                User bookmaker = userDao.findByEmail(ride.getBookmakerEmail());
-                existClient.deposite(bet.getBetSum()*(-1));
-                bookmaker.deposite(bet.getBetSum());
-                userDao.update(bookmaker);
-                userDao.update(existClient);
-                daoConnection.commit();
+                if( ride.getMaxSumm() >= bet.getBetSum()) {
+                    betDao.create(bet);
+                    User bookmaker = userDao.findByEmail(ride.getBookmakerEmail());
+                    existClient.deposite(bet.getBetSum() * (-1));
+                    bookmaker.deposite(bet.getBetSum());
+                    userDao.update(bookmaker);
+                    userDao.update(existClient);
+                } else {
+                    throw new MaxBetException();
+                }
+            }else {
+                throw new NosuchMoneyException();
             }
+            daoConnection.commit();
 
         } catch (Exception e){
             e.printStackTrace();

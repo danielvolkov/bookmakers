@@ -27,7 +27,6 @@ public class SignUpParser {
         user.setRole(role);
     }
 
-
     public User getEntity() {
 
         return user;

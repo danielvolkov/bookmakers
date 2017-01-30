@@ -116,15 +116,16 @@ public class JdbcRideDao implements RideDao {
 
 
     public static Ride getRideFromResultSet(ResultSet resultSet) throws SQLException {
-        Integer rideId = resultSet.getInt(Attributes.RIDE_ID);
-        Date startTime = resultSet.getDate(Attributes.START_TIME);
-        boolean isFinished = resultSet.getBoolean(Attributes.IS_FINISHED);
-        Integer winnerId = resultSet.getInt(Attributes.WINNER_ID);
-        Integer loserId =  resultSet.getInt(Attributes.LOSE_ID);
-        String bookmakerEmail = resultSet.getString(Attributes.EMAIL);
-        Long maxSumm = resultSet.getLong(Attributes.MAX_BET);
-        Double coeff =  resultSet.getDouble(Attributes.COEF);
 
-        return new Ride(rideId, winnerId, loserId, startTime, isFinished, bookmakerEmail,maxSumm,coeff);
+        Ride ride = new Ride();
+        ride.setRideId(resultSet.getInt(Attributes.RIDE_ID));
+        ride.setStartDataTime(resultSet.getDate(Attributes.START_TIME));
+        ride.setFinished(resultSet.getBoolean(Attributes.IS_FINISHED));
+        ride.setWinnerId(resultSet.getInt(Attributes.WINNER_ID));
+        ride.setLooserId(resultSet.getInt(Attributes.LOSE_ID));
+        ride.setBookmakerEmail(resultSet.getString(Attributes.EMAIL));
+        ride.setMaxSumm(resultSet.getLong(Attributes.MAX_BET));
+        ride.setCoefficient(resultSet.getDouble(Attributes.COEF));
+        return ride;
     }
 }

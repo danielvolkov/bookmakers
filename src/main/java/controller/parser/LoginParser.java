@@ -23,7 +23,6 @@ public class LoginParser  {
         user.setPassword(Encryptor.encrypt(password));
     }
 
-
     public User getEntity() {
         return user;
     }

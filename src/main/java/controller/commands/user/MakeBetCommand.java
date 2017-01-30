@@ -2,6 +2,9 @@ package controller.commands.user;
 
 import controller.commands.Command;
 import controller.parser.BetParser;
+import exceptions.MaxBetException;
+
+import exceptions.NosuchMoneyException;
 import model.entity.Bet;
 import model.entity.Roles;
 import model.entity.User;
@@ -10,7 +13,6 @@ import services.impl.BetServiceImpl;
 import util.constants.Attributes;
 import util.constants.Pages;
 import util.validators.BetValidator;
-import util.validators.LoginValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,8 +37,11 @@ public class MakeBetCommand implements Command {
                 } else {
                     request.setAttribute(Attributes.ERROR, Attributes.VALIDATION_MSG);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            }catch (MaxBetException e) {
+                request.setAttribute(Attributes.ERROR, Attributes.MAX_BET_MSG);
+            }catch (NosuchMoneyException e) {
+                request.setAttribute(Attributes.ERROR, Attributes.NO_MONEY);
+            }catch (Exception e) {
                 request.setAttribute(Attributes.ERROR, Attributes.DATABASE_ERROR);
             }
             return Pages.BET;

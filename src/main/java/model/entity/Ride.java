@@ -10,36 +10,18 @@ public class Ride {
     private Horse winnerHorse;
     private Horse looserHorse;
     private Integer winnerId;
-
     private Integer looserId;
     private Date startDataTime;
     private boolean finished;
     private String bookmakerEmail;
+
     private Integer bookmakerId;
     private Long maxSumm;
     private Double coefficient;
 
-    public Ride(Integer bookmakerId, Date dateTime, Long maxSumm, Double coefficient){
-        this.bookmakerId = bookmakerId;
-        this.finished = false;
-        this.startDataTime = dateTime;
-        this.maxSumm = maxSumm;
-        this.coefficient = coefficient;
+    public Ride(){
+
     }
-
-    public Ride(Integer rideId, Integer winner, Integer looser,
-                Date startDataTime, boolean finished, String bookmakerEmail,Long maxSumm ,Double coefficient) {
-        this.rideId = rideId;
-        this.winnerId = winner;
-        this.looserId = looser;
-        this.startDataTime = startDataTime;
-        this.finished = finished;
-        this.bookmakerEmail = bookmakerEmail;
-        this.maxSumm = maxSumm;
-        this.coefficient = coefficient;
-    }
-
-
 
     public void setBookmakerEmail(String bookmakerEmail) {
         this.bookmakerEmail = bookmakerEmail;
@@ -108,6 +90,20 @@ public class Ride {
     public void setLooserId(Integer looserId) {
         this.looserId = looserId;
     }
+
+
+    public void setBookmakerId(Integer bookmakerId) {
+        this.bookmakerId = bookmakerId;
+    }
+
+    public void setMaxSumm(Long maxSumm) {
+        this.maxSumm = maxSumm;
+    }
+
+    public void setCoefficient(Double coefficient) {
+        this.coefficient = coefficient;
+    }
+
 
     public String getResult() {
         if(winnerHorse!=null && looserHorse!=null) {

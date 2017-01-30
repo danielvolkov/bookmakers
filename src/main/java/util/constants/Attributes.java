@@ -5,9 +5,7 @@ package util.constants;
  */
 public class Attributes {
     public static final String USER = "User";
-    public static final String CLIENT = "Client";
-    public static final String BOOKMAKER = "Bookmaker";
-    public static final String ADMIN = "Admin";
+
     public static final String USER_ID = "user_id";
     public static final String NAME = "name";
     public static final String PWD = "password";
@@ -20,7 +18,7 @@ public class Attributes {
     public static final String WINNER_ID = "winner_id";
     public static final String LOSE_ID = "lose_id";
     public static final String IS_FINISHED = "is_finished";
-    public static final String BOOKMAKER_ID = "bookmaker_id";
+
     public static final String HORSE_ID = "horse_id";
     public static final String BET_ID = "bet_id";
     public static final String COLOR = "color";
@@ -43,6 +41,8 @@ public class Attributes {
     public static final String DATABASE_ERROR = "can not read database";
     public static final String SUCCESS_MSG = "Success!!! Go back to Rides";
     public static final String VALIDATION_MSG = "VALIDATION ERROR, check your input`s";
+    public static final String NO_MONEY = "unfortunately you dont have so much money";
+    public static final String MAX_BET_MSG = "your bet sum is more than max bet summ";
 
 
     public static final String DEPOSITE = "deposite";
@@ -62,9 +62,8 @@ public class Attributes {
     public static final String BET_TYPE = "type";
     public static final String CLIENT_ID = "client_id";
 
-    public static final String WINNER = "Winner";
-    public static final String LOOSER = "Looser";
 
+    public static final String WINNER = "Winner";
 
     public static final String UTF_8 = "UTF-8" ;
 }

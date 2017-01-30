@@ -5,11 +5,10 @@ import dao.DaoConnection;
 import dao.factory.DaoFactory;
 import dao.interfaces.UserDao;
 import dao.jdbc.JdbcDaoFactory;
-import exceptions.NosuchMoneyException;
+import exceptions.NoSuchMoneyException;
 import model.entity.User;
 import services.UserService;
 
-import java.sql.SQLException;
 import java.util.Objects;
 
 /**
@@ -95,7 +94,7 @@ public class UserServiceImpl implements UserService{
                 existUser.deposite(summ*(-1));
                 userDao.update(existUser);
             }else {
-                throw new NosuchMoneyException();
+                throw new NoSuchMoneyException();
             }
 
             daoConnection.commit();

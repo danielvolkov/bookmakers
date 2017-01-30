@@ -8,7 +8,7 @@ import util.constants.Attributes;
 import util.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+
 
 /**
  * @author  Daniil Volkov
@@ -18,12 +18,14 @@ public class RideParser  {
     Ride ride;
 
     public RideParser(User bookmaker, HttpServletRequest request) {
-
+        ride = new Ride();
         String dateString = request.getParameter(Attributes.DATE);
-        Long maxSumm = MoneyTypeConverter.doubleToLong( Double.parseDouble(request.getParameter(Attributes.MAX_BET)));
-        Double coeff = Double.parseDouble(request.getParameter(Attributes.COEF));
-        Date date = DateUtil.dateParser(dateString);
-        this.ride = new Ride(bookmaker.getUserId(), date, maxSumm, coeff);
+        ride.setBookmakerId(bookmaker.getUserId());
+        ride.setMaxSumm(MoneyTypeConverter
+                .doubleToLong(Double.parseDouble(request.getParameter(Attributes.MAX_BET))));
+        ride.setCoefficient(Double.parseDouble(request.getParameter(Attributes.COEF)));
+        ride.setStartDataTime(DateUtil.dateParser(dateString));
+        ride.setFinished(false);
     }
 
     public Ride getEntity() {

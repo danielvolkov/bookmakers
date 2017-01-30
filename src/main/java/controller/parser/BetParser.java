@@ -17,13 +17,16 @@ public class BetParser {
     private Bet bet;
 
     public BetParser(HttpServletRequest request) {
+        bet = new Bet();
         Ride ride = (Ride) request.getSession().getAttribute(Attributes.RIDE);
-        Integer rideId = ride.getRideId();
+        bet.setRideId( ride.getRideId());
         User user = (User) request.getSession().getAttribute(Attributes.USER);
-        Long betSumm = MoneyTypeConverter.doubleToLong(Double.parseDouble(request.getParameter(Attributes.SUMM)));
-        Integer horseId = Integer.parseInt(request.getParameter(Attributes.HORSE_ID));
-        Integer betType = Integer.parseInt(request.getParameter(Attributes.TYPE));
-        bet = new Bet(betSumm,betType,horseId,rideId,user.getUserId());
+        bet.setUserId(user.getUserId());
+        bet.setBetSum(MoneyTypeConverter
+                .doubleToLong(Double.parseDouble(request.getParameter(Attributes.SUMM))));
+        bet.setHorseId(Integer.parseInt(request.getParameter(Attributes.HORSE_ID)));
+        bet.setBetType(Integer.parseInt(request.getParameter(Attributes.TYPE)));
+        bet.setPassed(false);
     }
 
 
