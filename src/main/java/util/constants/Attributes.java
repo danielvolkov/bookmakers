@@ -70,4 +70,10 @@ public class Attributes {
     public static final String RU = "ru";
     public static final String UA = "ua";
 
+
+    public static final String LANG = "lang";
+    public static final String URL_PARAM = "urlParam";
+    public static final String LOCALE = "locale";
+    public static final String BUNDLE_FILE = "bundle_file" ;
+    public static final String USER_LOCALE = "javax.servlet.jsp.jstl.fmt.locale.session";
 }

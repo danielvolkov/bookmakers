@@ -1,4 +1,6 @@
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="controller.i18n.LocaleHolder" %>
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -16,6 +18,9 @@
     <%@include file="/bootstrap.css" %>
 </style>
 <body>
+<fmt:requestEncoding value="UTF-8" />
+<fmt:setLocale value="${sessionScope[Attributes.LOCALE]}" />
+<fmt:setBundle basename="bookmakers" var="msg"/>
 <jsp:include page="/WEB-INF/view/navbar.jsp"/>
 <div class="container default-c">
     <div class="col-md-4 col-md-offset-4 panel-default">

@@ -25,6 +25,8 @@ public class UriHolder {
     public static final String HISTORY = "/history";
 
 
-
-
+    public static final String QUESTION_SYMBOL ="?" ;
+    public static final String AND_SYMBOL = "&";
+    public static final String EQUAL_SYMBOL = "=";
+    public static final String LANG_GET = "lang=" ;
 }
