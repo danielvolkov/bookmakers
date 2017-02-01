@@ -9,7 +9,7 @@
 <html>
 <head>
     <fmt:requestEncoding value="UTF-8" />
-    <fmt:setLocale value="${Attributes.LOCALE}" />
+    <fmt:setLocale value="${sessionScope[Attributes.LOCALE]}" />
     <fmt:setBundle basename="bookmakers" var="msg"/>
     <jsp:include page="/WEB-INF/view/navbar.jsp"/>
     <title><fmt:message key="login.title" bundle="${msg}"/></title>
@@ -24,6 +24,7 @@
        <div class="text-center" style="margin:10%">
             <h1>
                 <fmt:message key="login.title" bundle="${msg}"/>
+
             </h1>
        </div>
         <div class="panel panel-primary">

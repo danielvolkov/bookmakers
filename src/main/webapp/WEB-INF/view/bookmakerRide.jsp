@@ -6,7 +6,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <fmt:requestEncoding value="UTF-8" />
-<fmt:setLocale value="${Attributes.LOCALE}" />
+<fmt:setLocale value="${sessionScope[Attributes.LOCALE]}" />
 <fmt:setBundle basename="bookmakers" var="msg"/>
 <div class="row">
     <fmt:message key="msg.bk.rides" bundle="${msg}"/>

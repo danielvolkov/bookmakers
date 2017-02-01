@@ -7,7 +7,7 @@
 <html>
 <head>
     <fmt:requestEncoding value="UTF-8" />
-    <fmt:setLocale value="${Attributes.LOCALE}" />
+    <fmt:setLocale value="${sessionScope[Attributes.LOCALE]}" />
     <fmt:setBundle basename="bookmakers" var="msg"/>
     <title><fmt:message key="msg.404" bundle="${msg}"/></title>
 </head>

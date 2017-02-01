@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <fmt:requestEncoding value="UTF-8" />
-<fmt:setLocale value="${Attributes.LOCALE}" />
+<fmt:setLocale value="$${sessionScope[Attributes.LOCALE]}" />
 <fmt:setBundle basename="bookmakers" var="msg"/>
 <%  User user = (User) request.getSession().getAttribute(Attributes.USER);%>
     <nav class="navbar  navbar-static-top navbar-inverse bg-inverse">

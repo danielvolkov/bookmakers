@@ -17,7 +17,7 @@
 <head>
     <jsp:include page="/WEB-INF/view/navbar.jsp"/>
     <fmt:requestEncoding value="UTF-8" />
-    <fmt:setLocale value="${Attributes.LOCALE}" />
+    <fmt:setLocale value="${sessionScope[Attributes.LOCALE]}" />
     <fmt:setBundle basename="bookmakers" var="msg"/>
     <title><fmt:message key="history" bundle="${msg}"/></title>
 </head>
