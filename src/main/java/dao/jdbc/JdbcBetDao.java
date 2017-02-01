@@ -51,18 +51,15 @@ public class JdbcBetDao implements BetDao {
 
     @Override
     public void create(Bet bet) {
-        try {
-            PreparedStatement statement =
-                    connection.prepareStatement(CREATE);
+        try (PreparedStatement statement =
+                    connection.prepareStatement(CREATE)){
             statement.setInt(1, bet.getRideId());
             statement.setLong(2, bet.getBetSum());
             statement.setInt(3, bet.getBetType());
             statement.setInt(4, bet.getHorseId());
             statement.setInt(5, bet.getUserId());
             statement.executeUpdate();
-            statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException();
         }
     }
@@ -75,9 +72,8 @@ public class JdbcBetDao implements BetDao {
             statement.setDouble(2, bet.getTotalSumm());
             statement.setInt(3, bet.getBetId());
             statement.executeUpdate();
-
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -91,8 +87,7 @@ public class JdbcBetDao implements BetDao {
     @Override
     public List<Bet> findByUser(User user) {
         List<Bet> bets = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(FIND_BY_USER);
+        try (PreparedStatement statement = connection.prepareStatement(FIND_BY_USER)){
             statement.setInt(1,user.getUserId());
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -100,20 +95,16 @@ public class JdbcBetDao implements BetDao {
                 bet.setRide(JdbcRideDao.getRideFromResultSet(resultSet));
                 bets.add(bet);
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException();
         }
-
         return bets;
     }
 
     @Override
     public List<Bet> findByRideId(Integer rideId) {
         List<Bet> bets = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(FIND_BY_RIDE);
+        try ( PreparedStatement statement = connection.prepareStatement(FIND_BY_RIDE)){
             statement.setInt(1,rideId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -121,9 +112,7 @@ public class JdbcBetDao implements BetDao {
                 bets.add(bet);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
-
         return bets;
     }
 

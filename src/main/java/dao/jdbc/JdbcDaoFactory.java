@@ -28,7 +28,6 @@ public class JdbcDaoFactory implements DaoFactory {
 
     private static final Logger logger = Logger.getLogger(JdbcDaoFactory.class);
 
-
     private static final String DB_URL = "url";
     private static final String JDBC_SOURCE= "java:comp/env/jdbc/bookmaker";
 

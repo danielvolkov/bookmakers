@@ -18,7 +18,7 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService{
 
 
-    private DaoFactory daoFactory; //TODO setter
+    private DaoFactory daoFactory;
 
     private UserServiceImpl(DaoFactory daoFactory) {
         this.daoFactory = daoFactory;
@@ -39,8 +39,10 @@ public class UserServiceImpl implements UserService{
         Objects.requireNonNull(user);
         try(DaoConnection daoConnection = daoFactory.getDaoConnection()) {
             UserDao userDao = daoFactory.createUserDao(daoConnection);
+            daoConnection.begin();
             user.setPassword(Encryptor.encrypt(user.getPassword()));
             userDao.create(user);
+            daoConnection.commit();
         }
     }
 

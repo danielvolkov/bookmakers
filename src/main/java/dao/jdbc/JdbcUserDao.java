@@ -35,17 +35,14 @@ public class JdbcUserDao implements UserDao {
     @Override
     public User find(int id) {
         User user = null;
-        try{
-            PreparedStatement statement = connection.prepareStatement(FIND_BY_ID);
+        try(PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)){
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet != null){
                 resultSet.next();
                 user = getUserFromResultSet(resultSet);
             }
-            statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return user;
     }
@@ -65,22 +62,16 @@ public class JdbcUserDao implements UserDao {
             statement.executeUpdate();
             //TODO
         } catch (SQLException e) {
-            e.printStackTrace();
         }
-
     }
 
     @Override
     public void update(User user) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(UPDATE_BALANCE);
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_BALANCE)){
             statement.setLong(1, user.getBalance());
             statement.setString(2, user.getEmail());
-
             statement.executeUpdate();
-
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -93,17 +84,14 @@ public class JdbcUserDao implements UserDao {
     @Override
     public User findByEmail(String email) {
         User user = null;
-        try{
-            PreparedStatement statement = connection.prepareStatement(FIND_BY_EMAIL);
+        try(PreparedStatement statement = connection.prepareStatement(FIND_BY_EMAIL)){
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet != null){
                 resultSet.next();
                 user = getUserFromResultSet(resultSet);
             }
-            statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return user;
     }

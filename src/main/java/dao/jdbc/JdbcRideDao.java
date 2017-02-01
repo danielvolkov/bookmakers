@@ -5,6 +5,7 @@ import model.entity.Ride;
 
 import org.apache.log4j.Logger;
 import util.constants.Attributes;
+import util.constants.LoggingMessages;
 
 import java.sql.*;
 import java.sql.Date;
@@ -36,16 +37,13 @@ public class JdbcRideDao implements RideDao {
     @Override
     public Ride find(int id) {
         Ride ride;
-        try {
-            PreparedStatement statement = connection.prepareStatement(FIND_BY_ID);
+        try (PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)){
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             ride = getRideFromResultSet(resultSet);
-            statement.close();
 
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException();
         }
 
@@ -55,52 +53,42 @@ public class JdbcRideDao implements RideDao {
     @Override
     public List<Ride> findAll() {
         List<Ride> rides = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(FIND_ALL);
+        try ( PreparedStatement statement = connection.prepareStatement(FIND_ALL)){
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                rides.add(getRideFromResultSet(resultSet));
             }
-            statement.close();
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.info(LoggingMessages.ERROR_FIND_ALL);
         }
-
         return rides;
     }
 
     @Override
     public void create(Ride ride) {
-        try {
-            PreparedStatement statement =
-                    connection.prepareStatement(CREATE);
-
+        try ( PreparedStatement statement =
+                    connection.prepareStatement(CREATE)){
             statement.setDate(1, new Date(ride.getStartDataTime().getTime()) );
             statement.setBoolean(2, ride.isFinished());
             statement.setInt(3, ride.getBookmakerId());
             statement.setLong(4,ride.getMaxSumm());
             statement.setDouble(5,ride.getCoefficient());
             statement.executeUpdate();
-            statement.close();
 
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
     @Override
     public void update(Ride ride) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(UPDATE_RIDE);
+        try ( PreparedStatement statement = connection.prepareStatement(UPDATE_RIDE)){
             statement.setBoolean(1, ride.isFinished());
             statement.setInt(2, ride.getWinnerId());
             statement.setInt(3,ride.getLooserId());
             statement.setInt(4,ride.getRideId());
             statement.executeUpdate();
-
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
     }
 

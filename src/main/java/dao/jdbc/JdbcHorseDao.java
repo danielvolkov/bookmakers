@@ -30,15 +30,12 @@ public class JdbcHorseDao implements HorseDao {
     @Override
     public Horse find(int id) {
         Horse horse;
-        try {
-            PreparedStatement statement = connection.prepareStatement(SELECT_BY_ID);
+        try ( PreparedStatement statement = connection.prepareStatement(SELECT_BY_ID)){
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             horse = getHorseFromResultSet(resultSet);
-            statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException();
         }
         return horse;
@@ -47,15 +44,12 @@ public class JdbcHorseDao implements HorseDao {
     @Override
     public List<Horse> findAll() {
         List<Horse> horses = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
+        try ( PreparedStatement statement = connection.prepareStatement(SELECT_ALL)){
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 horses.add(getHorseFromResultSet(resultSet));
             }
-            statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException();
         }
         return horses;

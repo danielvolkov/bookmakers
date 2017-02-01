@@ -64,9 +64,7 @@ public class RideServiceImpl implements RideService {
                 rideDao.update(newRide);
                 calculateBets(newRide);
             }
-
             daoConnection.commit();
-            return;
         }
     }
 
@@ -99,6 +97,5 @@ public class RideServiceImpl implements RideService {
         BetService betService = BetServiceImpl.getInstance();
         betService.calculateResults(ride);
     }
-
 
 }
