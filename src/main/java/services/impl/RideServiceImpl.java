@@ -14,6 +14,7 @@ import services.RideService;
 import util.RideRandomUtil;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by daniel on 14/01/17.
@@ -38,13 +39,12 @@ public class RideServiceImpl implements RideService {
 
     @Override
     public void create(Ride ride) {
+        Objects.requireNonNull(ride);
         try (DaoConnection daoConnection = daoFactory.getDaoConnection()) {
             RideDao rideDao = daoFactory.createRideDao(daoConnection);
-            if (ride != null) {
-                daoConnection.begin();
-                rideDao.create(ride);
-                daoConnection.commit();
-            }
+            daoConnection.begin();
+            rideDao.create(ride);
+            daoConnection.commit();
         }
     }
 
