@@ -20,10 +20,11 @@
                 <li><a href="/"><fmt:message key="logo" bundle="${msg}"/></a></li>
 
 
-                <c:forEach items="${LocaleHolder.SUPPORTED}" var="locale"> |
-                        <a href="${urlParam}${locale.language}">
-                            <div class="btn"><img src="<c:url value="/img/${locale.language}.png"/>"/> </div>
+                <c:forEach items="${LocaleHolder.SUPPORTED}" var="locale">
+                        <li><a href="${urlParam}${locale.language}">
+                            ${locale.language.toUpperCase()}
                         </a>
+                        </li>
                 </c:forEach>
             </ul>
 
