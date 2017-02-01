@@ -4,6 +4,7 @@ import controller.i18n.LocaleHolder;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import util.constants.Attributes;
+import util.constants.LoggingMessages;
 import util.constants.UriHolder;
 
 import javax.servlet.*;
@@ -39,7 +40,7 @@ public class LocalFilter implements Filter {
         HttpSession session = req.getSession();
         Locale locale = localeHolder.getCurrentLocale();
         if(req.getParameter(Attributes.LANG) != null) {
-            //logger.info(LoggingMessagesHolder.INFO_SET_LOCALE);
+            logger.info(LoggingMessages.INFO_SET_LOCALE);
             for (Locale loc : LocaleHolder.SUPPORTED) {
                 if (loc.getLanguage().equals(req.getParameter(Attributes.LANG))) {
                     localeHolder.setCurrentLocale(loc);
