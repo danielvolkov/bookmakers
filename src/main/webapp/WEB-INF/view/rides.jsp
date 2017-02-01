@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="controller.i18n.LocaleHolder" %>
 <%@ page import="util.constants.Attributes" %>
 <%@ page import="model.entity.User" %>
 <%@ page import="util.constants.UriHolder" %>
@@ -8,13 +10,9 @@
 <%@ page import="util.MoneyTypeConverter" %>
 <%@ page import="util.DateUtil" %>
 <%@ page import="model.entity.Roles" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: daniel
-  Date: 1/22/17
-  Time: 4:42 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.util.ResourceBundle" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
@@ -28,33 +26,38 @@
 
 <html>
 <head>
-    <title>Rides</title>
+    <jsp:include page="/WEB-INF/view/navbar.jsp"/>
+    <fmt:requestEncoding value="UTF-8" />
+    <fmt:setLocale value="${Attributes.LOCALE}" />
+    <fmt:setBundle basename="bookmakers" var="msg"/>
+    <title><fmt:message key="rides" bundle="${msg}"/></title>
 </head>
 <style>
     <%@include file="/bootstrap.css" %>
 </style>
 <body>
-<jsp:include page="/WEB-INF/view/navbar.jsp"/>
 
 <%  User user = (User) request.getSession().getAttribute(Attributes.USER);
     String action = "";
     String actionMessage = "";
+    ResourceBundle messages = ResourceBundle
+            .getBundle("bookmakers", (Locale) request.getSession().getAttribute(Attributes.LOCALE));
 
     if(user.getRole().equals(Roles.ADMIN)){
         action = UriHolder.END_RIDE;
-        actionMessage = "Calculate Ride results";
+        actionMessage = messages.getString("btn.admin");
     };
     if(user.getRole().equals(Roles.CLIENT)){
         action = UriHolder.BET;
-        actionMessage = "Make Bet";
+        actionMessage = messages.getString("btn.client");
 
     }
 
 %>
 <div class="container">
     <div class="text-center">
-        <h1 >Rides</h1>
-        <h3>Avialable rides for bet`s</h3>
+        <h1 ><fmt:message key="rides" bundle="${msg}"/></h1>
+        <h3><fmt:message key="msg.rides" bundle="${msg}"/></h3>
             <% if (user.getRole().equals(Roles.BOOKMAKER)){%>
                 <jsp:include page="/WEB-INF/view/bookmakerRide.jsp"/>
             <%}%>
@@ -63,14 +66,14 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Ride Id</th>
-            <th>Start Time</th>
-            <th>Winner</th>
-            <th>Looser</th>
-            <th>Is finished?</th>
-            <th>Bookmaker`s Email</th>
-            <th>Max bet</th>
-            <th>Factor</th>
+            <th><fmt:message key="rideid" bundle="${msg}"/></th>
+            <th><fmt:message key="start.date" bundle="${msg}"/></th>
+            <th><fmt:message key="winner" bundle="${msg}"/></th>
+            <th><fmt:message key="last" bundle="${msg}"/></th>
+            <th><fmt:message key="finished" bundle="${msg}"/></th>
+            <th><fmt:message key="bk.email" bundle="${msg}"/></th>
+            <th><fmt:message key="max.bet" bundle="${msg}"/></th>
+            <th><fmt:message key="factor" bundle="${msg}"/></th>
 
         </tr>
         </thead>

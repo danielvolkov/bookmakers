@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import="controller.i18n.LocaleHolder" %>
 <%@ page import="util.MoneyTypeConverter" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.entity.Ride" %>
@@ -8,39 +10,36 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="util.constants.Attributes" %>
 <%@ page import="util.DateUtil" %>
+<%@ page import="java.util.Locale" %>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: daniel
-  Date: 1/22/17
-  Time: 4:42 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>History</title>
+    <jsp:include page="/WEB-INF/view/navbar.jsp"/>
+    <fmt:requestEncoding value="UTF-8" />
+    <fmt:setLocale value="${Attributes.LOCALE}" />
+    <fmt:setBundle basename="bookmakers" var="msg"/>
+    <title><fmt:message key="history" bundle="${msg}"/></title>
 </head>
 <style>
     <%@include file="/bootstrap.css" %>
 </style>
 <body>
-<jsp:include page="/WEB-INF/view/navbar.jsp"/>
+
 <%List<Bet> bets = (List) request.getSession().getAttribute(Attributes.BETS);%>
-<h1>History</h1>
+<h1><fmt:message key="history" bundle="${msg}"/></h1>
 <div class="container">
 <table class="table table-bordered">
     <thead>
     <tr>
-        <th>Bookmaker`s email</th>
-        <th>Ride datatime</th>
-        <th>Result</th>
-        <th>Predicton</th>
-        <th>Factor</th>
-        <th>Bet summ</th>
-        <th>Is passed?</th>
-        <th>Total</th>
-
+        <th><fmt:message key="bk.email" bundle="${msg}"/></th>
+        <th><fmt:message key="start.date" bundle="${msg}"/></th>
+        <th><fmt:message key="msg.result" bundle="${msg}"/></th>
+        <th><fmt:message key="msg.prediction" bundle="${msg}"/></th>
+        <th><fmt:message key="factor" bundle="${msg}"/></th>
+        <th><fmt:message key="msg.bet.summ" bundle="${msg}"/></th>
+        <th><fmt:message key="msg.passed" bundle="${msg}"/></th>
+        <th><fmt:message key="msg.total" bundle="${msg}"/></th>
     </tr>
     </thead>
     <tbody>
