@@ -7,7 +7,7 @@ import model.entity.User;
  */
 public class SignupValidator implements Validator {
 
-    public Boolean validate(User user){
+    public Boolean isValid(User user){
         return validateValue(user.getEmail(),EMAIL) &&
                 validateValue(user.getName(),NAME) &&
                 validateValue(user.getPassword(),PASSWORD);

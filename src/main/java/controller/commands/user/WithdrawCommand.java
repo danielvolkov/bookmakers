@@ -25,7 +25,7 @@ public class WithdrawCommand implements Command {
         String money = request.getParameter(Attributes.WITHDRAW);
 
         try {
-            if(moneyValidator.validate(money)) {
+            if(moneyValidator.isValid(money)) {
                 Long withdraw = MoneyTypeConverter.doubleToLong(
                         Double.parseDouble(money));
                 userService.withdrawMoney(user, withdraw );

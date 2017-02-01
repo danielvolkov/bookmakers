@@ -13,7 +13,6 @@ import util.validators.LoginValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -30,7 +29,7 @@ public class LoginCommand implements Command {
             try {
                 loginUser = new LoginParser(request).getEntity();
                 LoginValidator loginValidator = new LoginValidator();
-                if(loginValidator.validate(loginUser)){
+                if(loginValidator.isValid(loginUser)){
                     existingUser = userService.login(loginUser);
                     request.getSession().setAttribute(Attributes.USER, existingUser);
                     return Pages.CABINET;

@@ -1,7 +1,6 @@
 package dao.jdbc;
 
 import dao.DaoConnection;
-import dao.factory.DaoFactory;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;

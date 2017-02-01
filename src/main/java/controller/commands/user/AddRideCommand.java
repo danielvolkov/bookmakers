@@ -28,7 +28,7 @@ public class AddRideCommand implements Command {
         try {
             ride =  new RideParser(bookmaker,request).getEntity();
             RideValidator rideValidator = new RideValidator();
-            if (rideValidator.validate(ride)) {
+            if (rideValidator.isValid(ride)) {
                 rideService.create(ride);
                 List<Ride> rides = rideService.findRides();
                 request.getSession().setAttribute(Attributes.RIDES, rides);

@@ -2,7 +2,7 @@ package services.impl;
 
 import controller.security.Encryptor;
 import dao.DaoConnection;
-import dao.factory.DaoFactory;
+import dao.DaoFactory;
 import dao.interfaces.UserDao;
 import dao.jdbc.JdbcDaoFactory;
 

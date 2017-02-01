@@ -1,9 +1,7 @@
 package dao.jdbc;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import dao.DaoConnection;
-import dao.factory.DaoFactory;
+import dao.DaoFactory;
 import dao.interfaces.BetDao;
 import dao.interfaces.HorseDao;
 import dao.interfaces.RideDao;
@@ -11,15 +9,7 @@ import dao.interfaces.UserDao;
 import org.apache.log4j.Logger;
 
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.ConnectionPoolDataSource;
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Properties;
 
 /**
  * Created by daniel on 05/01/17.

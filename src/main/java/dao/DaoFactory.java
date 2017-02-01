@@ -1,4 +1,4 @@
-package dao.factory;
+package dao;
 
 import dao.DaoConnection;
 import dao.interfaces.BetDao;

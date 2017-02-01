@@ -31,7 +31,7 @@ public class MakeBetCommand implements Command {
             try {
                 Bet bet = new BetParser(request).getEntity();
                 BetValidator betValidator = new BetValidator();
-                if(betValidator.validate(bet)) {
+                if(betValidator.isValid(bet)) {
                     betService.makeBet(client, bet);
                     request.setAttribute(Attributes.SUCCESS, Attributes.SUCCESS_MSG);
                 } else {

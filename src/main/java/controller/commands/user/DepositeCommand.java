@@ -26,7 +26,7 @@ public class DepositeCommand implements Command {
         String money = request.getParameter(Attributes.DEPOSITE);
 
         try {
-            if(moneyValidator.validate(money)) {
+            if(moneyValidator.isValid(money)) {
                 Long deposite = MoneyTypeConverter.doubleToLong(
                         Double.parseDouble(money));
                 userService.updateBalance(user, deposite);

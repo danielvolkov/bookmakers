@@ -1,7 +1,7 @@
 package services.impl;
 
 import dao.DaoConnection;
-import dao.factory.DaoFactory;
+import dao.DaoFactory;
 import dao.interfaces.HorseDao;
 import dao.jdbc.JdbcDaoFactory;
 import model.entity.Horse;

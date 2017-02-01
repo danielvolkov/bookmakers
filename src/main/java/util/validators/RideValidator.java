@@ -8,7 +8,7 @@ import model.entity.User;
  */
 public class RideValidator implements Validator {
 
-    public Boolean validate(Ride ride){
+    public Boolean isValid(Ride ride){
         return validateValue(ride.getMaxSumm().toString(),MONEY) &&
                 validateValue(ride.getCoefficient().toString(),FACTOR);
 

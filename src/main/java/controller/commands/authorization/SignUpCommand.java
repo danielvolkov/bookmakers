@@ -9,7 +9,6 @@ import services.impl.UserServiceImpl;
 import util.constants.Attributes;
 import util.constants.Pages;
 import util.validators.SignupValidator;
-import util.validators.Validator;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +26,7 @@ public class SignUpCommand implements Command {
         try {
             newUser = new SignUpParser(request).getEntity();
             SignupValidator signupValidator = new SignupValidator();
-            if(signupValidator.validate(newUser)) {
+            if(signupValidator.isValid(newUser)) {
                 userService.create(newUser);
                 return Pages.LOGIN;
             } else {

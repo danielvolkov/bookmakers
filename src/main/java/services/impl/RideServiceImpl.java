@@ -1,14 +1,10 @@
 package services.impl;
 
 import dao.DaoConnection;
-import dao.factory.DaoFactory;
-import dao.interfaces.BetDao;
+import dao.DaoFactory;
 import dao.interfaces.RideDao;
-import dao.interfaces.UserDao;
 import dao.jdbc.JdbcDaoFactory;
-import model.entity.Bet;
 import model.entity.Ride;
-import model.entity.User;
 import services.BetService;
 import services.RideService;
 import util.RideRandomUtil;
