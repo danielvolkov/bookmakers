@@ -1,16 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="util.constants.Attributes" %>
+<%@ page import="model.entity.User" %>
+<%@ page import="util.MoneyTypeConverter" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page import="controller.i18n.LocaleHolder" %>
 <%@ page import="java.util.Locale" %>
-
-<%--
-  Created by IntelliJ IDEA.
-  User: daniel
-  Date: 17/01/17
-  Time: 01:35
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <jsp:include page="/WEB-INF/view/navbar.jsp"/>

@@ -1,8 +1,10 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="util.constants.Attributes" %>
+<%@ page import="model.entity.User" %>
+<%@ page import="util.MoneyTypeConverter" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page import="controller.i18n.LocaleHolder" %>
 <%@ page import="java.util.Locale" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
