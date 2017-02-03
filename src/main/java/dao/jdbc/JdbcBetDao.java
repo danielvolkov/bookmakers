@@ -6,6 +6,7 @@ import model.entity.Ride;
 import model.entity.User;
 import org.apache.log4j.Logger;
 import util.constants.Attributes;
+import util.constants.LoggingMessages;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -59,7 +60,9 @@ public class JdbcBetDao implements BetDao {
             statement.setInt(4, bet.getHorseId());
             statement.setInt(5, bet.getUserId());
             statement.executeUpdate();
+            logger.info(LoggingMessages.SUCCESSFUL_CREATE);
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_CREATE);
             throw new RuntimeException();
         }
     }
@@ -72,8 +75,9 @@ public class JdbcBetDao implements BetDao {
             statement.setDouble(2, bet.getTotalSumm());
             statement.setInt(3, bet.getBetId());
             statement.executeUpdate();
+            logger.info(LoggingMessages.SUCCESSFUL_UPDATE);
         } catch (SQLException e) {
-
+            logger.error(LoggingMessages.ERROR_UPDATE);
         }
     }
 
@@ -96,8 +100,10 @@ public class JdbcBetDao implements BetDao {
                 bets.add(bet);
             }
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_FIND_BY_USER);
             throw new RuntimeException();
         }
+        logger.info(LoggingMessages.SUCCESSFUL_FIND_BY_USER);
         return bets;
     }
 
@@ -112,7 +118,10 @@ public class JdbcBetDao implements BetDao {
                 bets.add(bet);
             }
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_FIND_BY_RIDE);
+            throw new RuntimeException();
         }
+        logger.info(LoggingMessages.SUCCESSFUL_FIND_BY_RIDE);
         return bets;
     }
 

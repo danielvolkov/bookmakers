@@ -40,7 +40,8 @@ public class UserServiceImpl implements UserService{
         try(DaoConnection daoConnection = daoFactory.getDaoConnection()) {
             UserDao userDao = daoFactory.createUserDao(daoConnection);
             daoConnection.begin();
-            user.setPassword(Encryptor.encrypt(user.getPassword()));
+            Encryptor encryptor = new Encryptor();
+            user.setPassword(encryptor.encrypt(user.getPassword()));
             userDao.create(user);
             daoConnection.commit();
         }

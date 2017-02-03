@@ -4,6 +4,7 @@ import dao.interfaces.HorseDao;
 import model.entity.Horse;
 import org.apache.log4j.Logger;
 import util.constants.Attributes;
+import util.constants.LoggingMessages;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,8 +37,10 @@ public class JdbcHorseDao implements HorseDao {
             resultSet.next();
             horse = getHorseFromResultSet(resultSet);
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_FIND);
             throw new RuntimeException();
         }
+        logger.info(LoggingMessages.SUCCESSFUL_FIND);
         return horse;
     }
 
@@ -50,8 +53,10 @@ public class JdbcHorseDao implements HorseDao {
                 horses.add(getHorseFromResultSet(resultSet));
             }
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_FIND_ALL);
             throw new RuntimeException();
         }
+        logger.info(LoggingMessages.SUCCESSFUL_FIND_ALL);
         return horses;
     }
 

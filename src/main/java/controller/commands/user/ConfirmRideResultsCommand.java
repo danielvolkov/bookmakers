@@ -31,7 +31,7 @@ public class ConfirmRideResultsCommand implements Command {
             request.getSession().setAttribute(Attributes.RIDES, rides);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            request.getSession().setAttribute(Attributes.ERROR, Attributes.RIDES_ERROR);
         }
 
         return Pages.RIDES;

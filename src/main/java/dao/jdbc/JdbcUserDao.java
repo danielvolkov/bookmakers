@@ -5,6 +5,7 @@ import model.entity.User;
 import org.apache.log4j.Logger;
 import util.UserUtil;
 import util.constants.Attributes;
+import util.constants.LoggingMessages;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,7 +44,9 @@ public class JdbcUserDao implements UserDao {
                 user = getUserFromResultSet(resultSet);
             }
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_FIND);
         }
+        logger.info(LoggingMessages.SUCCESSFUL_FIND);
         return user;
     }
 
@@ -60,8 +63,9 @@ public class JdbcUserDao implements UserDao {
             statement.setInt(4, user.getRole().getRoleId());
             statement.setLong(5,user.getBalance());
             statement.executeUpdate();
-            //TODO
+            logger.info(LoggingMessages.SUCCESSFUL_CREATE);
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_CREATE);
         }
     }
 
@@ -71,7 +75,9 @@ public class JdbcUserDao implements UserDao {
             statement.setLong(1, user.getBalance());
             statement.setString(2, user.getEmail());
             statement.executeUpdate();
+            logger.info(LoggingMessages.SUCCESSFUL_UPDATE);
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_UPDATE);
         }
     }
 
@@ -92,7 +98,9 @@ public class JdbcUserDao implements UserDao {
                 user = getUserFromResultSet(resultSet);
             }
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_FIND_BY_EMAIL);
         }
+        logger.info(LoggingMessages.SUCCESSFUL_FIND_BY_EMAIL);
         return user;
     }
 

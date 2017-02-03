@@ -13,6 +13,7 @@ import util.validators.LoginValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -20,7 +21,19 @@ import java.io.IOException;
  */
 public class LoginCommand implements Command {
 
-    UserService userService = UserServiceImpl.getInstance();
+    private UserService userService = UserServiceImpl.getInstance();
+    private LoginParser loginParser;
+    private LoginValidator loginValidator;
+
+    public LoginCommand() {
+
+    }
+    //for mocking
+    public LoginCommand(LoginParser loginParser, LoginValidator loginValidator) {
+        this.loginParser = loginParser;
+        this.loginValidator = loginValidator;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -31,11 +44,12 @@ public class LoginCommand implements Command {
                 LoginValidator loginValidator = new LoginValidator();
                 if(loginValidator.isValid(loginUser)){
                     existingUser = userService.login(loginUser);
-                    request.getSession().setAttribute(Attributes.USER, existingUser);
+                    HttpSession sesson = request.getSession();
+                    sesson.setAttribute(Attributes.USER, existingUser);
                     return Pages.CABINET;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+
             }
 
         request.getSession().setAttribute(Attributes.LOGIN_ERROR,Attributes.LOGIN_MSG);

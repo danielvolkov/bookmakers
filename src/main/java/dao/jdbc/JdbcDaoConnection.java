@@ -2,6 +2,7 @@ package dao.jdbc;
 
 import dao.DaoConnection;
 import org.apache.log4j.Logger;
+import util.constants.LoggingMessages;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -31,7 +32,7 @@ public class JdbcDaoConnection implements DaoConnection{
             isTransactionBegin = true;
             connection.setAutoCommit(false);
         }catch (SQLException e){
-            e.printStackTrace();
+            logger.error(LoggingMessages.ERROR_BEGIN_TRANSACTION);
             throw new RuntimeException();
         }
     }
@@ -43,7 +44,7 @@ public class JdbcDaoConnection implements DaoConnection{
             connection.setAutoCommit(true);
             isTransactionCommited = true;
         }catch (SQLException e ){
-            e.printStackTrace();
+            logger.error(LoggingMessages.ERROR_COMMIT);
             throw new RuntimeException();
         }
     }

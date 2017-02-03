@@ -44,9 +44,10 @@ public class JdbcRideDao implements RideDao {
             ride = getRideFromResultSet(resultSet);
 
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_FIND);
             throw new RuntimeException();
         }
-
+        logger.info(LoggingMessages.SUCCESSFUL_FIND);
         return ride;
     }
 
@@ -59,8 +60,9 @@ public class JdbcRideDao implements RideDao {
                rides.add(getRideFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            logger.info(LoggingMessages.ERROR_FIND_ALL);
+            logger.error(LoggingMessages.ERROR_FIND_ALL);
         }
+        logger.info(LoggingMessages.SUCCESSFUL_FIND_ALL);
         return rides;
     }
 
@@ -74,8 +76,10 @@ public class JdbcRideDao implements RideDao {
             statement.setLong(4,ride.getMaxSumm());
             statement.setDouble(5,ride.getCoefficient());
             statement.executeUpdate();
-
+            logger.info(LoggingMessages.SUCCESSFUL_CREATE);
         } catch (SQLException e) {
+            logger.error(LoggingMessages.ERROR_CREATE);
+            throw new RuntimeException();
         }
     }
 
@@ -87,8 +91,9 @@ public class JdbcRideDao implements RideDao {
             statement.setInt(3,ride.getLooserId());
             statement.setInt(4,ride.getRideId());
             statement.executeUpdate();
+            logger.info(LoggingMessages.SUCCESSFUL_UPDATE);
         } catch (SQLException e) {
-
+            logger.error(LoggingMessages.ERROR_UPDATE);
         }
     }
 
@@ -99,12 +104,10 @@ public class JdbcRideDao implements RideDao {
 
     @Override
     public List<Ride> findFinishedRides(boolean status) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
-
     public static Ride getRideFromResultSet(ResultSet resultSet) throws SQLException {
-
         Ride ride = new Ride();
         ride.setRideId(resultSet.getInt(Attributes.RIDE_ID));
         ride.setStartDataTime(resultSet.getDate(Attributes.START_TIME));

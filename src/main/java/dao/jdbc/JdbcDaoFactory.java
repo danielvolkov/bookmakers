@@ -7,6 +7,7 @@ import dao.interfaces.HorseDao;
 import dao.interfaces.RideDao;
 import dao.interfaces.UserDao;
 import org.apache.log4j.Logger;
+import util.constants.LoggingMessages;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -59,6 +60,7 @@ public class JdbcDaoFactory implements DaoFactory {
             DataSource dataSource = (DataSource) context.lookup(JDBC_SOURCE);
             return new JdbcDaoConnection(dataSource.getConnection());
         } catch (Exception e) {
+            logger.error(LoggingMessages.ERROR_CONNECTION);
             throw new RuntimeException(e);//TODO specific runtime exception add messagekey
         }
     }

@@ -18,7 +18,8 @@ import java.io.IOException;
  */
 public class DispatcherServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(DispatcherServlet.class);
-    private CommandHolder commandHolder;
+
+    public CommandHolder commandHolder;
 
     @Override
     public void init() throws ServletException {
@@ -48,5 +49,6 @@ public class DispatcherServlet extends HttpServlet {
             request.getRequestDispatcher(view).forward(request, response);
 
     }
+
 
 }

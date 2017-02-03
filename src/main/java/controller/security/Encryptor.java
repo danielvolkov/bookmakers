@@ -17,7 +17,7 @@ public class Encryptor {
     public static final int SUFFIX = 0xff;
     public static final int PREFIX = 0x100;
 
-    public static String encrypt(String inputPassword){
+    public String encrypt(String inputPassword){
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(MD5);
             messageDigest.update(inputPassword.getBytes());
